@@ -1,13 +1,13 @@
 # Bradley N. Miller, David L. Ranum
 # Introduction to Data Structures and Algorithms in Python
 # Copyright 2005
-# 
+#
 
 class BinaryTree:
     """
     A recursive implementation of Binary Tree
     Using links and Nodes approach.
-    """    
+    """
     def __init__(self,rootObj):
         self.key = rootObj
         self.leftChild = None
@@ -20,7 +20,7 @@ class BinaryTree:
             t = BinaryTree(newNode)
             t.left = self.leftChild
             self.leftChild = t
-    
+
     def insertRight(self,newNode):
         if self.rightChild == None:
             self.rightChild = BinaryTree(newNode)
@@ -101,7 +101,7 @@ def printexp(tree):
     print(tree.getRootVal(), end=' ')
     if tree.rightChild:
         printexp(tree.getRightChild())
-        print(')', end=' ') 
+        print(')', end=' ')
 
 def printexp(tree):
     sVal = ""
@@ -129,17 +129,18 @@ def height(tree):
     else:
         return 1 + max(height(tree.leftChild),height(tree.rightChild))
 
-t = BinaryTree(7)
-t.insertLeft(3)
-t.insertRight(9)
-inorder(t)
-import operator
-x = BinaryTree('*')
-x.insertLeft('+')
-l = x.getLeftChild()
-l.insertLeft(4)
-l.insertRight(5)
-x.insertRight(7)
-print(printexp(x))
-print(postordereval(x))
-print(height(x))
+if __name__ == '__main__':
+    t = BinaryTree(7)
+    t.insertLeft(3)
+    t.insertRight(9)
+    inorder(t)
+    import operator
+    x = BinaryTree('*')
+    x.insertLeft('+')
+    l = x.getLeftChild()
+    l.insertLeft(4)
+    l.insertRight(5)
+    x.insertRight(7)
+    print(printexp(x))
+    print(postordereval(x))
+    print(height(x))
