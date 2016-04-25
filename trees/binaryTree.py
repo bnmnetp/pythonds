@@ -7,27 +7,37 @@ class BinaryTree:
     """
     A recursive implementation of Binary Tree
     Using links and Nodes approach.
+
+    Modified to allow for trees to be constructed from other trees rather than always creating
+    a new tree in the insertLeft or insertRight
     """
+
     def __init__(self,rootObj):
         self.key = rootObj
         self.leftChild = None
         self.rightChild = None
 
     def insertLeft(self,newNode):
-        if self.leftChild == None:
-            self.leftChild = BinaryTree(newNode)
+
+        if isinstance(newNode, BinaryTree):
+            t = newNode
         else:
             t = BinaryTree(newNode)
+
+        if self.leftChild is not None:
             t.left = self.leftChild
-            self.leftChild = t
+
+        self.leftChild = t
 
     def insertRight(self,newNode):
-        if self.rightChild == None:
-            self.rightChild = BinaryTree(newNode)
+        if isinstance(newNode,BinaryTree):
+            t = newNode
         else:
             t = BinaryTree(newNode)
+
+        if self.rightChild is not None:
             t.right = self.rightChild
-            self.rightChild = t
+        self.rightChild = t
 
     def isLeaf(self):
         return ((not self.leftChild) and (not self.rightChild))
