@@ -3,6 +3,8 @@
 # Copyright 2005
 #
 
+from __future__ import print_function
+
 class BinaryTree:
     """
     A recursive implementation of Binary Tree
