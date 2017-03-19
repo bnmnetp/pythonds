@@ -19,3 +19,7 @@ class Queue:
 
     def size(self):
         return len(self.items)
+
+    def peek(self):
+        for item in self.items:
+            print item
