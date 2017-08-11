@@ -190,7 +190,11 @@ class BinarySearchTree:
         '''Get tree root'''
         return self._root
 
-    root = property(get_root)
+    def set_root(self, node):
+        '''Set tree root'''
+        self._root = node
+
+    root = property(get_root, set_root)
 
     def get(self, key):
         '''Retrieve a value by the key'''
