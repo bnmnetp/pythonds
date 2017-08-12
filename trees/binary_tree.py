@@ -31,6 +31,8 @@ class BinaryTree:
         '''Set root key value'''
         self._key = key
 
+    root = property(get_root_val, set_root_val)
+
     def get_child_left(self):
         '''Get left child'''
         return self._child_left
@@ -39,6 +41,8 @@ class BinaryTree:
         '''Set left child'''
         self._child_left = node
 
+    child_left = property(get_child_left, set_child_left)
+
     def get_child_right(self):
         '''Get right child'''
         return self._child_right
@@ -46,6 +50,8 @@ class BinaryTree:
     def set_child_right(self, node):
         '''Set right child'''
         self._child_right = node
+
+    child_right = property(get_child_right, set_child_right)
 
     def is_leaf(self):
         '''Check if a node is leaf'''
@@ -114,14 +120,14 @@ class BinaryTree:
                       '-': operator.sub,
                       '*': operator.mul,
                       '/': operator.truediv}
-        res1 = None
-        res2 = None
+        result_1 = None
+        result_2 = None
         if self._child_left:
-            res1 = self._child_left.postorder_eval()  # \label{peleft}
+            result_1 = self._child_left.postorder_eval()
         if self._child_right:
-            res2 = self._child_right.postorder_eval()  # \label{peright}
-        if res1 and res2:
-            return operations[self._key](res1, res2)  # \label{peeval}
+            result_2 = self._child_right.postorder_eval()
+        if result_1 and result_2:
+            return operations[self._key](result_1, result_2)
         else:
             return self._key
 
@@ -143,19 +149,19 @@ class BinaryTree:
 
     def __len__(self):
         '''Size of a tree'''
-        return self.count_nodes()
+        return self.size()
 
-    def count_nodes(self):
+    def size(self):
         '''Count nodes in a tree'''
         if not self._key:
             return 0
         if self._child_left:
-            children_left = self._child_left.count_nodes()
+            children_left = self._child_left.size()
         else:
             children_left = 0
 
         if self._child_right:
-            children_right = self._child_right.count_nodes()
+            children_right = self._child_right.size()
         else:
             children_right = 0
 

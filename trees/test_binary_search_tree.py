@@ -354,7 +354,7 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
             self.bst.delete(5)
         self.bst.delete(10)
         with self.assertRaises(KeyError):
-             self.bst.delete(10)
+            self.bst.delete(10)
 
     def tearDown(self):
         '''Tearing down'''

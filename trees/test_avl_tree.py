@@ -14,65 +14,65 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
     '''Testing the Binary Tree module'''
     def setUp(self):
         '''Setting up'''
-        self.bst = AVLTree()
+        self._avl_tree = AVLTree()
 
     def test_auto_1(self):
         '''Testing case 1'''
-        self.bst.put(30, 'a')
-        self.bst.put(50, 'b')
-        self.bst.put(40, 'c')
-        assert self.bst.root.key == 40
+        self._avl_tree.put(30, 'a')
+        self._avl_tree.put(50, 'b')
+        self._avl_tree.put(40, 'c')
+        self.assertEqual(self._avl_tree.root.key, 40)
 
     def test_auto_2(self):
         '''Testing case 2'''
-        self.bst.put(50, 'a')
-        self.bst.put(30, 'b')
-        self.bst.put(40, 'c')
-        assert self.bst.root.key == 40
+        self._avl_tree.put(50, 'a')
+        self._avl_tree.put(30, 'b')
+        self._avl_tree.put(40, 'c')
+        self.assertEqual(self._avl_tree.root.key, 40)
 
     def test_auto_3(self):
         '''Testing case 3'''
-        self.bst.put(50, 'a')
-        self.bst.put(30, 'b')
-        self.bst.put(70, 'c')
-        self.bst.put(80, 'c')
-        self.bst.put(60, 'd')
-        self.bst.put(90, 'e')
-        assert self.bst.root.key == 70
+        self._avl_tree.put(50, 'a')
+        self._avl_tree.put(30, 'b')
+        self._avl_tree.put(70, 'c')
+        self._avl_tree.put(80, 'c')
+        self._avl_tree.put(60, 'd')
+        self._avl_tree.put(90, 'e')
+        self.assertEqual(self._avl_tree.root.key, 70)
 
     def test_auto_4(self):
         '''Testing case 4'''
-        self.bst.put(40, 'a')
-        self.bst.put(30, 'b')
-        self.bst.put(50, 'c')
-        self.bst.put(45, 'd')
-        self.bst.put(60, 'e')
-        self.bst.put(43, 'f')
-        assert self.bst.root.key == 45
-        assert self.bst.root.leftChild.key == 40
-        assert self.bst.root.rightChild.key == 50
-        assert self.bst.root.balance_factor == 0
-        assert self.bst.root.leftChild.balance_factor == 0
-        assert self.bst.root.rightChild.balance_factor == -1
+        self._avl_tree.put(40, 'a')
+        self._avl_tree.put(30, 'b')
+        self._avl_tree.put(50, 'c')
+        self._avl_tree.put(45, 'd')
+        self._avl_tree.put(60, 'e')
+        self._avl_tree.put(43, 'f')
+        self.assertEqual(self._avl_tree.root.key, 45)
+        self.assertEqual(self._avl_tree.root.leftChild.key, 40)
+        self.assertEqual(self._avl_tree.root.rightChild.key, 50)
+        self.assertEqual(self._avl_tree.root.balance_factor, 0)
+        self.assertEqual(self._avl_tree.root.leftChild.balance_factor, 0)
+        self.assertEqual(self._avl_tree.root.rightChild.balance_factor, -1)
 
     def test_auto_5(self):
         '''Testing case 5'''
-        self.bst.put(40, 'a')
-        self.bst.put(30, 'b')
-        self.bst.put(50, 'c')
-        self.bst.put(10, 'd')
-        self.bst.put(35, 'e')
-        self.bst.put(37, 'f')
-        assert self.bst.root.key == 35
-        assert self.bst.root.leftChild.key == 30
-        assert self.bst.root.rightChild.key == 40
-        assert self.bst.root.balance_factor == 0
-        assert self.bst.root.leftChild.balance_factor == 1
-        assert self.bst.root.rightChild.balance_factor == 0
+        self._avl_tree.put(40, 'a')
+        self._avl_tree.put(30, 'b')
+        self._avl_tree.put(50, 'c')
+        self._avl_tree.put(10, 'd')
+        self._avl_tree.put(35, 'e')
+        self._avl_tree.put(37, 'f')
+        self.assertEqual(self._avl_tree.root.key, 35)
+        self.assertEqual(self._avl_tree.root.leftChild.key, 30)
+        self.assertEqual(self._avl_tree.root.rightChild.key, 40)
+        self.assertEqual(self._avl_tree.root.balance_factor, 0)
+        self.assertEqual(self._avl_tree.root.leftChild.balance_factor, 1)
+        self.assertEqual(self._avl_tree.root.rightChild.balance_factor, 0)
 
     def tearDown(self):
         '''Tearing down'''
-        pass
+        del self._avl_tree
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

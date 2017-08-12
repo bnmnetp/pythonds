@@ -17,23 +17,23 @@ class TestBinaryHeapMethods(unittest.TestCase):
 
     def setUp(self):
         '''Setting up'''
-        self.__heap = BinaryHeap()
-        self.__heap.insert((5, 'a'))
-        self.__heap.insert((9, 'd'))
-        self.__heap.insert((1, 'x'))
-        self.__heap.insert((2, 'y'))
-        self.__heap.insert((3, 'z'))
+        self._heap = BinaryHeap()
+        self._heap.insert((5, 'a'))
+        self._heap.insert((9, 'd'))
+        self._heap.insert((1, 'x'))
+        self._heap.insert((2, 'y'))
+        self._heap.insert((3, 'z'))
 
     def test_insert(self):
         '''Test insert() method'''
-        self.assertEqual(len(self.__heap), 5)
+        self.assertEqual(len(self._heap), 5)
 
     def test_delete(self):
         '''Test delete() method'''
-        self.assertEqual(self.__heap.delete()[1], 'x')
-        self.assertEqual(self.__heap.delete()[1], 'y')
-        self.assertEqual(self.__heap.delete()[1], 'z')
-        self.assertEqual(self.__heap.delete()[1], 'a')
+        self.assertEqual(self._heap.delete()[1], 'x')
+        self.assertEqual(self._heap.delete()[1], 'y')
+        self.assertEqual(self._heap.delete()[1], 'z')
+        self.assertEqual(self._heap.delete()[1], 'a')
 
     def test_is_empty(self):
         '''Test is_empty() method'''

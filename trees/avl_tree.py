@@ -28,16 +28,12 @@ class AVLTreeNode(BinaryTreeNode):
 
 class AVLTree(BinarySearchTree):
     '''AVL tree implementation'''
-    def __init__(self):
-        '''Create AVL Tree'''
-        super().__init__()
-
     def put(self, key, value):
         """Add new node"""
-        if self.root:
-            self._put(key, value, self.root)
+        if self._root:
+            self._put(key, value, self._root)
         else:
-            self.root = AVLTreeNode(key, value, 0)
+            self._root = AVLTreeNode(key, value, 0)
         self._size = self._size + 1
 
     def _put(self, key, value, current_node):
@@ -96,7 +92,7 @@ class AVLTree(BinarySearchTree):
             new_root.child_left.parent = rotation_root
         new_root.parent = rotation_root.parent
         if rotation_root.is_root():
-            self.root = new_root
+            self._root = new_root
         else:
             if rotation_root.is_child_left():
                 rotation_root.parent.child_left = new_root
@@ -115,7 +111,7 @@ class AVLTree(BinarySearchTree):
             new_root.child_right.parent = rotation_root
         new_root.parent = rotation_root.parent
         if rotation_root.is_root():
-            self.root = new_root
+            self._root = new_root
         else:
             if rotation_root.is_child_right():
                 rotation_root.parent.child_right = new_root
