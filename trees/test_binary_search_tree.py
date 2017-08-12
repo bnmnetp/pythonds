@@ -356,6 +356,19 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         with self.assertRaises(KeyError):
             self.bst.delete(10)
 
+    def test_clear(self):
+        '''Testing clear() method'''
+        self.bst.put(50, 'a')
+        self.bst.put(10, 'b')
+        self.bst.put(70, 'c')
+        self.bst.put(30, 'd')
+        self.bst.put(85, 'd')
+        self.bst.put(15, 'e')
+        self.bst.put(45, 'f')
+        self.assertEqual(len(self.bst), 7)
+        self.bst.clear()
+        self.assertEqual(len(self.bst), 0)
+
     def tearDown(self):
         '''Tearing down'''
         pass

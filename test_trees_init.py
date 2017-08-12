@@ -1,5 +1,5 @@
 '''
-Testing the basic __init__ file
+Testing the trees __init__ file
 Roman Yasinovskyy, 2017
 '''
 

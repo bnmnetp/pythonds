@@ -267,7 +267,7 @@ class BinarySearchTree:
             raise KeyError('Error, key not in tree')
 
     def delete_key(self, key):
-        '''Remove a node by its key (alias)'''
+        '''Remove a node by its key (alias function)'''
         self.delete(key)
 
     def _delete(self, current_node):
@@ -340,3 +340,8 @@ class BinarySearchTree:
             print(tree.key, end=' ')
             self._preorder(tree.child_left)
             self._preorder(tree.child_right)
+
+    def clear(self):
+        '''Remove all nodes'''
+        while self._root:
+            self.delete(self._root.key)
