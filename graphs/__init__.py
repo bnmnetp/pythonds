@@ -1,5 +1,7 @@
+'''
+pythonds.graphs import statement
+'''
+from .adjacency_graph import Graph
+from .adjacency_graph import Vertex
 
-
-from .adjGraph import Graph
-from .adjGraph import Vertex
-from .priorityQueue import PriorityQueue
+__all__ = ["Graph"]

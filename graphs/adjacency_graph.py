@@ -99,24 +99,3 @@ class Vertex:
     
     def getId(self):
         return self.id
-
-class adjGraphTests(unittest.TestCase):
-    def setUp(self):
-        self.tGraph = Graph()
-        
-    def testMakeGraph(self):
-        gFile = open("test.dat")
-        for line in gFile:
-            fVertex, tVertex = line.split('|')
-            fVertex = int(fVertex)
-            tVertex = int(tVertex)
-            self.tGraph.addEdge(fVertex,tVertex)
-        for i in self.tGraph:
-            adj = i.getAdj()
-            for k in adj:
-                print(i, k)
-
-        
-if __name__ == '__main__':
-    unittest.main()
-              
