@@ -19,18 +19,10 @@ class TestAdjacencyGraphMethods(unittest.TestCase):
         '''Setting up'''
         self._graph = Graph()
 
-    def testMakeGraph(self):
+    def test_makeGraph(self):
         '''Testing_make_graph'''
-        gFile = open("test.dat")
-        for line in gFile:
-            fVertex, tVertex = line.split('|')
-            fVertex = int(fVertex)
-            tVertex = int(tVertex)
-            self._graph.addEdge(fVertex,tVertex)
-        for i in self._graph:
-            adj = i.getAdj()
-            for k in adj:
-                print(i, k)
+        self._graph.read_file("graphs/data_adjacency_graph.txt")
+        self.assertEqual(self._graph.size(), 7)
 
     def tearDown(self):
         '''Tearing down'''
