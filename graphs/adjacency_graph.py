@@ -27,7 +27,7 @@ class Graph:
         return key in self._vertices
 
     def add_edge(self, from_vertex, to_vertex, weight=0):
-        '''Add a new, weighted, directed edge to the graph that connects two vertices'''
+        '''Add a weighted and directed edge to the graph'''
         if from_vertex not in self._vertices:
             self.set_vertex(from_vertex)
         if to_vertex not in self._vertices:
@@ -50,16 +50,6 @@ class Graph:
         '''Graph's size'''
         return len(self._vertices)
 
-    def read_file(self, filename):
-        '''Read the graph from a file'''
-        with open(filename, 'r') as input_file:
-            for raw_line in input_file:
-                line = raw_line.split()
-                if len(line) == 1:
-                    src = line[0]
-                elif len(line) == 2:
-                    self.add_edge(src, line[0], int(line[1]))
-
 
 class Vertex:
     '''Graph vertex class'''
@@ -76,6 +66,8 @@ class Vertex:
     def get_key(self):
         '''Get vertex key'''
         return self._key
+
+    key = property(get_key)
 
     def get_neighbor(self, other):
         """Get one adjacent node (neighbor)"""
@@ -143,6 +135,6 @@ class Vertex:
         return str(self._key) + \
                 ":color " + self._color + \
                 ":discovery_time " + str(self._discovery_time) + \
-                ":_closing_time " + str(self._closing_time) + \
-                ":_distance " + str(self._distance) + \
-                ":_previous \n\t[" + str(self._previous)+ "]\n"
+                ":closing_time " + str(self._closing_time) + \
+                ":distance " + str(self._distance) + \
+                ":previous \n\t[" + str(self._previous) + "]\n"
