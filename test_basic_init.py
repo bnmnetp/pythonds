@@ -13,21 +13,21 @@ class TestBasicsInit(unittest.TestCase):
 
     def setUp(self):
         '''Setting up'''
-        self.__stack = Stack()
-        self.__queue = Queue()
-        self.__deque = Deque()
+        self._stack = Stack()
+        self._queue = Queue()
+        self._deque = Deque()
 
     def test_is_empty(self):
         '''Testing is_empty() method'''
-        self.assertTrue(self.__stack.is_empty())
-        self.assertTrue(self.__queue.is_empty())
-        self.assertTrue(self.__deque.is_empty())
+        self.assertTrue(self._stack.is_empty())
+        self.assertTrue(self._queue.is_empty())
+        self.assertTrue(self._deque.is_empty())
 
     def tearDown(self):
         '''Tearing down'''
-        del self.__stack
-        del self.__queue
-        del self.__deque
+        del self._stack
+        del self._queue
+        del self._deque
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)
