@@ -2,7 +2,7 @@
 Testing the Stack module
 Roman Yasinovskyy, 2017
 '''
-
+#!/usr/bin/env python3
 import unittest
 import stack
 
