@@ -1,6 +1,6 @@
 '''
 Bradley N. Miller, David L. Ranum
-Introduction to Data Structures and Algorithms in Python
+Problem Solving with Algorithms and Data Structures using Python
 Copyright 2005, 2010
 Updated by Roman Yasinovskyy, 2017
 '''
@@ -25,8 +25,6 @@ class BinaryTreeNode:
         self._child_left = node
 
     child_left = property(get_child_left, set_child_left)
-    left_child = property(get_child_left, set_child_left)
-    leftChild = property(get_child_left, set_child_left)
 
     def get_child_right(self):
         '''Return the node's right child'''
@@ -37,8 +35,6 @@ class BinaryTreeNode:
         self._child_right = node
 
     child_right = property(get_child_right, set_child_right)
-    right_child = property(get_child_right, set_child_right)
-    rightChild = property(get_child_right, set_child_right)
 
     def get_parent(self):
         '''Return the node's parent'''
@@ -170,7 +166,7 @@ class BinarySearchTree:
         '''Tree size'''
         return self._size
 
-    def length(self):
+    def size(self):
         '''Tree size'''
         return self._size
 
@@ -265,10 +261,6 @@ class BinarySearchTree:
             self._size = self._size - 1
         else:
             raise KeyError('Error, key not in tree')
-
-    def delete_key(self, key):
-        '''Remove a node by its key (alias function)'''
-        self.delete(key)
 
     def _delete(self, current_node):
         '''Remove a node by its key (helper function)'''

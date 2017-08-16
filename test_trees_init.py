@@ -3,9 +3,10 @@ Testing the trees __init__ file
 Roman Yasinovskyy, 2017
 '''
 
+#!/usr/bin/python3
+
 import unittest
-from trees import *
-#from pythonds.trees import *
+from trees import BinaryHeap, BinaryTree, BinarySearchTree, AVLTree
 
 
 class TestTreesInit(unittest.TestCase):
@@ -25,12 +26,5 @@ class TestTreesInit(unittest.TestCase):
         self.assertEqual(len(self._binary_search_tree), 0)
         self.assertEqual(len(self._avl_tree), 0)
 
-    def tearDown(self):
-        '''Tearing down'''
-        del self._binary_tree
-        del self._binary_heap
-        del self._binary_search_tree
-        del self._avl_tree
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

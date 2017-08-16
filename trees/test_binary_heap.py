@@ -1,9 +1,9 @@
 '''
-Testing the BinaryTree module
+Testing the Binary Heap module
 Roman Yasinovskyy, 2017
 '''
 
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import unittest
 from unittest.mock import patch
@@ -66,9 +66,5 @@ class TestBinaryHeapMethods(unittest.TestCase):
             print(test_heap)
         self.assertEqual(output.getvalue().strip(), '[2, 3, 6, 5, 9]')
 
-    def tearDown(self):
-        '''Tearing down'''
-        pass
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

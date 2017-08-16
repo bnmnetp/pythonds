@@ -1,10 +1,9 @@
 '''
-Testing the PriorityQueue module
+Testing the Priority Queue module
 Roman Yasinovskyy, 2017
-See https://stackoverflow.com/a/31281467 for testing output
 '''
 
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import unittest
 from unittest.mock import patch
@@ -34,9 +33,5 @@ class TestPriorityQueueMethods(unittest.TestCase):
         self._priority_queue.change_priority(1, 'd')
         self.assertEqual(self._priority_queue.delete(), (1, 'd'))
 
-    def tearDown(self):
-        '''Tearing down'''
-        del self._priority_queue
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

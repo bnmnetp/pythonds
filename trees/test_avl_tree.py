@@ -1,10 +1,9 @@
 '''
-Testing the BinaryTree module
+Testing the Binary Tree module
 Roman Yasinovskyy, 2017
-See https://stackoverflow.com/a/31281467 for testing output
 '''
 
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import unittest
 from avl_tree import AVLTree
@@ -15,6 +14,18 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
     def setUp(self):
         '''Setting up'''
         self._avl_tree = AVLTree()
+
+    def test_init(self):
+        '''Testing __init__() method'''
+        self.assertIsNone(self._avl_tree.root)
+        self._avl_tree.put(30, 'a')
+        self.assertIsNotNone(self._avl_tree.root)
+
+    def test_len(self):
+        '''Testing __len__() method'''
+        self.assertEqual(self._avl_tree.size(), 0)
+        self._avl_tree.put(30, 'a')
+        self.assertEqual(len(self._avl_tree), 1)
 
     def test_auto_1(self):
         '''Testing case 1'''
@@ -49,11 +60,11 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self._avl_tree.put(60, 'e')
         self._avl_tree.put(43, 'f')
         self.assertEqual(self._avl_tree.root.key, 45)
-        self.assertEqual(self._avl_tree.root.leftChild.key, 40)
-        self.assertEqual(self._avl_tree.root.rightChild.key, 50)
+        self.assertEqual(self._avl_tree.root.child_left.key, 40)
+        self.assertEqual(self._avl_tree.root.child_right.key, 50)
         self.assertEqual(self._avl_tree.root.balance_factor, 0)
-        self.assertEqual(self._avl_tree.root.leftChild.balance_factor, 0)
-        self.assertEqual(self._avl_tree.root.rightChild.balance_factor, -1)
+        self.assertEqual(self._avl_tree.root.child_left.balance_factor, 0)
+        self.assertEqual(self._avl_tree.root.child_right.balance_factor, -1)
 
     def test_auto_5(self):
         '''Testing case 5'''
@@ -64,15 +75,11 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self._avl_tree.put(35, 'e')
         self._avl_tree.put(37, 'f')
         self.assertEqual(self._avl_tree.root.key, 35)
-        self.assertEqual(self._avl_tree.root.leftChild.key, 30)
-        self.assertEqual(self._avl_tree.root.rightChild.key, 40)
+        self.assertEqual(self._avl_tree.root.child_left.key, 30)
+        self.assertEqual(self._avl_tree.root.child_right.key, 40)
         self.assertEqual(self._avl_tree.root.balance_factor, 0)
-        self.assertEqual(self._avl_tree.root.leftChild.balance_factor, 1)
-        self.assertEqual(self._avl_tree.root.rightChild.balance_factor, 0)
-
-    def tearDown(self):
-        '''Tearing down'''
-        del self._avl_tree
+        self.assertEqual(self._avl_tree.root.child_left.balance_factor, 1)
+        self.assertEqual(self._avl_tree.root.child_right.balance_factor, 0)
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

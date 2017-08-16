@@ -1,10 +1,9 @@
 '''
-Testing the BinarySearchTree module
+Testing the Binary Search Tree module
 Roman Yasinovskyy, 2017
-See https://stackoverflow.com/a/31281467 for testing output
 '''
 
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import unittest
 from unittest.mock import patch
@@ -66,7 +65,7 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(85, 'd')
         self.bst.put(15, 'e')
         self.bst.put(45, 'f')
-        self.assertEqual(self.bst.length(), 7)
+        self.assertEqual(self.bst.size(), 7)
         self.assertEqual(len(self.bst), 7)
 
     def test_preorder(self):
@@ -228,23 +227,23 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
                 random_list.append(nrand)
                 i += 1
         # print(random_list)
-        for n in random_list:
-            self.bst.put(n, n)
+        for number in random_list:
+            self.bst.put(number, number)
         sorted_list = random_list[:]
         sorted_list.sort()
         random.shuffle(random_list)
-        for n in random_list:
+        for number in random_list:
             min_node = self.bst.root.find_min()
             if min_node:
                 self.assertEqual(min_node.key, sorted_list[0])
             root_pos = sorted_list.index(self.bst.root.key)
             successor = self.bst.root.find_successor()
             if successor:
-                self.assertEqual(successor.key, sorted_list[root_pos+1])
+                self.assertEqual(successor.key, sorted_list[root_pos + 1])
             else:
                 self.assertFalse(self.bst.root.child_right)
-            self.bst.delete(n)
-            sorted_list.remove(n)
+            self.bst.delete(number)
+            sorted_list.remove(number)
 
         self.assertFalse(self.bst.root)
 
@@ -369,9 +368,5 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.clear()
         self.assertEqual(len(self.bst), 0)
 
-    def tearDown(self):
-        '''Tearing down'''
-        pass
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

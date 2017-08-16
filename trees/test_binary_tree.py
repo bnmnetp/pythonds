@@ -1,10 +1,9 @@
 '''
-Testing the BinaryTree module
+Testing the Binary Tree module
 Roman Yasinovskyy, 2017
-See https://stackoverflow.com/a/31281467 for testing output
 '''
 
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import unittest
 from unittest.mock import patch
@@ -134,9 +133,5 @@ class TestBinaryTreeMethods(unittest.TestCase):
 
         self.assertEqual(self._tree.postorder_eval(), 42)
 
-    def tearDown(self):
-        '''Tearing down'''
-        del self._tree
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

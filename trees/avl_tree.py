@@ -1,6 +1,6 @@
 '''
 Bradley N. Miller, David L. Ranum
-Introduction to Data Structures and Algorithms in Python
+Problem Solving with Algorithms and Data Structures using Python
 Copyright 2005, 2010
 Updated by Roman Yasinovskyy, 2017
 '''
@@ -28,8 +28,12 @@ class AVLTreeNode(BinaryTreeNode):
 
 class AVLTree(BinarySearchTree):
     '''AVL tree implementation'''
+    def __init__(self):
+        '''Create a new AVL tree'''
+        BinarySearchTree.__init__(self)
+
     def put(self, key, value):
-        """Add new node"""
+        '''Add new node'''
         if self._root:
             self._put(key, value, self._root)
         else:
