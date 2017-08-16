@@ -1,6 +1,6 @@
 '''
 Bradley N. Miller, David L. Ranum
-Introduction to Data Structures and Algorithms in Python
+Problem Solving with Algorithms and Data Structures using Python
 Copyright 2005
 Updated by Roman Yasinovskyy, 2017
 '''

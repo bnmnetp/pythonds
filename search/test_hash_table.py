@@ -3,7 +3,7 @@ Testing the Hash Table module
 Roman Yasinovskyy, 2017
 '''
 
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import random
 import unittest
@@ -66,9 +66,5 @@ class TestHashMapMethods(unittest.TestCase):
             self._hash_table[item[0]] = item[1]
         self.assertRaises(KeyError, self._hash_table.get, *[1])
 
-    def tearDown(self):
-        '''Tearing down'''
-        pass
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()
