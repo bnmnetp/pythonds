@@ -4,7 +4,7 @@ Roman Yasinovskyy, 2017
 '''
 
 import unittest
-from search import HashTable
+from searching import HashTable
 
 
 class TestSearchInit(unittest.TestCase):
