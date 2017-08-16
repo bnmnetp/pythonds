@@ -76,3 +76,7 @@ class BinaryHeap:
     def __str__(self):
         '''Heap as a string'''
         return str(self._heap)
+
+    def __contains__(self, item):
+        '''__contains__in method override'''
+        return item in self._heap

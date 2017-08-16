@@ -1,7 +1,6 @@
 '''
 Testing the BinaryTree module
 Roman Yasinovskyy, 2017
-See https://stackoverflow.com/a/31281467 for testing output
 '''
 
 #!/usr/bin/env python3
@@ -23,6 +22,11 @@ class TestBinaryHeapMethods(unittest.TestCase):
         self._heap.insert((1, 'x'))
         self._heap.insert((2, 'y'))
         self._heap.insert((3, 'z'))
+
+    def test_contains(self):
+        '''Testing __contains__ method'''
+        self.assertTrue((5, 'a') in self._heap)
+        self.assertFalse((65, 'b') in self._heap)
 
     def test_insert(self):
         '''Test insert() method'''
