@@ -1,6 +1,6 @@
 '''
 Bradley N. Miller, David L. Ranum
-Introduction to Data Structures and Algorithms in Python
+Problem Solving with Algorithms and Data Structures using Python
 Copyright 2005
 Updated by Roman Yasinovskyy, 2017
 '''
@@ -20,8 +20,7 @@ class Fraction:
     def __init__(self, new_numer, new_denom):
         try:
             common = gcd(new_numer, new_denom)
-        except TypeError as type_err:
-            print(type_err)
+        except TypeError:
             raise
         self._numer = new_numer // common
         self._denom = new_denom // common

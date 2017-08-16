@@ -3,7 +3,7 @@ Testing the OOP module
 Roman Yasinovskyy, 2017
 '''
 
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import unittest
 from unittest.mock import patch
@@ -56,17 +56,20 @@ class TestOOPMethods(unittest.TestCase):
         '''Testing __add__ method'''
         self.assertEqual(self.frac1 + self.frac2, Fraction(1, 1))
 
-    @unittest.expectedFailure  # Remove this decorator once __sub__ is implemented
+    # Remove this decorator once __sub__ is implemented
+    @unittest.expectedFailure
     def test_fractions_sub(self):
         '''Testing __sub__ method'''
         self.assertEqual(self.frac1 - self.frac2, Fraction(-1, 3))
 
-    @unittest.expectedFailure  # Remove this decorator once __mult__ is implemented
+    # Remove this decorator once __mult__ is implemented
+    @unittest.expectedFailure
     def test_fractions_mult(self):
         '''Testing __mult__ method'''
         self.assertEqual(self.frac1 * self.frac2, Fraction(2, 9))
 
-    @unittest.expectedFailure  # Remove this decorator once __truediv__ is implemented
+    # Remove this decorator once __truediv__ is implemented
+    @unittest.expectedFailure
     def test_fractions_truediv(self):
         '''Testing __truediv__ method'''
         self.assertEqual(self.frac1 / self.frac2, Fraction(1, 2))
@@ -84,4 +87,4 @@ class TestOOPMethods(unittest.TestCase):
         self.assertEqual(output.getvalue().strip(), 'Fraction(3, 2)')
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()
