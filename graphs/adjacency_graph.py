@@ -32,11 +32,11 @@ class Vertex:
     key = property(get_key)
 
     def get_neighbor(self, other):
-        """Get one adjacent node (neighbor)"""
+        '''Get the distance (edge weight) to an adjacent node (neighbor)'''
         return self._neighbors.get(other, None)
 
     def set_neighbor(self, other, weight=0):
-        '''Add neighbor'''
+        '''Set the distance (add an edge) to an adjacent node (neighbor)'''
         self._neighbors[other] = weight
 
     def get_neighbors(self):
@@ -106,6 +106,7 @@ class Graph:
     '''Graph as an adjacency matrix'''
     def __init__(self):
         self._vertices = {}
+        self._edges = {}
         self._time = 0
 
     def __iter__(self):
@@ -139,30 +140,35 @@ class Graph:
         if to_vertex not in self._vertices:
             self.set_vertex(to_vertex)
         self._vertices[from_vertex].set_neighbor(self._vertices[to_vertex], weight)
+        self._edges[(from_vertex, to_vertex)] = weight
 
     def get_vertices(self):
         '''Return the list of all vertices in the graph'''
         return self._vertices.keys()
 
+    def get_edges(self):
+        '''Return the list of all edges in the graph'''
+        return self._edges.keys()
+
     def reset_distances(self):
         '''Reset distances to test Dijkstra's'''
         for vertex in self:
-            vertex.set_distance(sys.maxsize)
+            vertex.distance = sys.maxsize
 
     def bfs(self, start):
         '''Breadth First Search'''
-        start.set_distance(0)
-        start.set_previous(None)
+        start.distance = 0
+        start.previous = None
         vert_queue = [start]
         while vert_queue:
             current_vert = vert_queue.pop(0)
             for neigh in current_vert.get_neighbors():
-                if neigh.get_color() == 'white':
-                    neigh.set_color('gray')
-                    neigh.set_distance(current_vert.get_distance() + 1)
-                    neigh.set_previous(current_vert)
+                if neigh.color == 'white':
+                    neigh.color = 'gray'
+                    neigh.distance = current_vert.distance + 1
+                    neigh.previous = current_vert
                     vert_queue.append(neigh)
-            current_vert.set_color('black')
+            current_vert.color = 'black'
 
     def dfs(self):
         '''Depth First search'''
@@ -188,12 +194,12 @@ class Graph:
         path = []
         current = self.get_vertex(dst)
         while current:
-            path.insert(0, current)
+            path.append(current)
             current = current.get_previous()
         print('Path from {} to {} ({}): {}'.format(self.get_vertex(src).get_key(),
                                                    self.get_vertex(dst).get_key(),
                                                    self.get_vertex(dst).get_distance(),
-                                                   ' '.join(v.get_key() for v in path)))
+                                                   ' '.join(v.get_key() for v in reversed(path))))
 
     def dijkstra(self, start):
         '''Dijkstra's shortest path algorithm'''
@@ -203,15 +209,27 @@ class Graph:
         while not_yet_visited:
             current_vertex = heapq.heappop(not_yet_visited)[1]
             for next_vertex in current_vertex.get_neighbors():
-                new_distance = current_vertex.get_distance() + current_vertex.get_neighbor(next_vertex)
-                if new_distance < next_vertex.get_distance():
-                    next_vertex.set_distance(new_distance)
-                    next_vertex.set_previous(current_vertex)
+                new_distance = current_vertex.distance + current_vertex.get_neighbor(next_vertex)
+                if new_distance < next_vertex.distance:
+                    next_vertex.distance = new_distance
+                    next_vertex.previous = current_vertex
                     found = False
                     for vertex in not_yet_visited:
-                        if vertex[1].get_key() == next_vertex.get_key():
-                            vertex[0] = next_vertex.get_distance()
+                        if vertex[1].key == next_vertex.key:
+                            vertex[0] = next_vertex.distance
                             heapq.heapify(not_yet_visited)
                             found = True
                     if not found:
-                        heapq.heappush(not_yet_visited, [next_vertex.get_distance(), next_vertex])
+                        heapq.heappush(not_yet_visited, [next_vertex.distance, next_vertex])
+
+    def bellman_ford(self, start):
+        '''Bellman-Ford shortest path algorithm'''
+        start.distance = 0
+        for _ in range(len(self._vertices)):
+            for edge in self._edges:
+                if self.get_vertex(edge[0]).distance + self._edges[edge] < self.get_vertex(edge[1]).distance:
+                    self.get_vertex(edge[1]).distance = self.get_vertex(edge[0]).distance + self._edges[edge]
+                    self.get_vertex(edge[1]).previous = self.get_vertex(edge[0])
+        for edge in self._edges:
+            if self.get_vertex(edge[0]).distance + self._edges[edge] < self.get_vertex(edge[1]).distance:
+                raise ValueError('Graph contains a negative-weight cycle')
