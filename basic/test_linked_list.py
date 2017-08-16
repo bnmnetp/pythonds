@@ -3,7 +3,7 @@ Testing the Linked List module
 Roman Yasinovskyy, 2017
 '''
 
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import random
 import unittest
@@ -45,7 +45,8 @@ class TestLinkedListMethods(unittest.TestCase):
             test_lst.insert(0, item)
         self.assertEqual(str(self._list_ordered), str(sorted(test_lst)))
 
-    @unittest.expectedFailure  # Remove this decorator once __remove_ is implemented
+    # Remove this decorator once remove() is implemented
+    @unittest.expectedFailure
     def test_ordered_list_remove(self):
         '''Testing ordered list remove method'''
         test_lst = []
@@ -64,15 +65,17 @@ class TestLinkedListMethods(unittest.TestCase):
         test_lst.remove(test_lst[-1])
         self.assertEqual(str(self._list_ordered), str(sorted(test_lst)))
 
-    @unittest.expectedFailure  # Remove this decorator once __remove__ is implemented
-    def test_unordered_list_remove_err(self):
+    # Remove this decorator once remove() is implemented
+    @unittest.expectedFailure
+    def test_ordered_list_remove_err(self):
         '''Testing ordered list remove method exception'''
         for _ in range(10):
             self._list_ordered.add(random.randint(1, 10))
         with self.assertRaises(ValueError):
             self._list_ordered.remove(42)
 
-    @unittest.expectedFailure  # Remove this decorator once __search__ is implemented
+    # Remove this decorator once search() is implemented
+    @unittest.expectedFailure
     def test_ordered_list_search(self):
         '''Testing ordered list search method'''
         test_lst = []
@@ -139,9 +142,5 @@ class TestLinkedListMethods(unittest.TestCase):
             print(self._list_unordered)
         self.assertEqual(output.getvalue().strip(), '[hello, 42]')
 
-    def tearDown(self):
-        '''Tearing down'''
-        pass
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

@@ -3,8 +3,10 @@ Testing the Deque module
 Roman Yasinovskyy, 2017
 '''
 
+#!/usr/bin/python3
+
 import unittest
-import deque
+from deque import Deque
 
 
 class TestDequeMethods(unittest.TestCase):
@@ -12,7 +14,7 @@ class TestDequeMethods(unittest.TestCase):
 
     def setUp(self):
         '''Setting up'''
-        self._deque = deque.Deque()
+        self._deque = Deque()
 
     def test_is_empty(self):
         '''Testing is_empty() method'''
@@ -48,9 +50,5 @@ class TestDequeMethods(unittest.TestCase):
         self.assertEqual(self._deque.remove_rear(), 42)
         self.assertTrue(self._deque.is_empty())
 
-    def tearDown(self):
-        '''Tearing down'''
-        del self._deque
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

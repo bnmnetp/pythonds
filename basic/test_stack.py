@@ -2,9 +2,11 @@
 Testing the Stack module
 Roman Yasinovskyy, 2017
 '''
-#!/usr/bin/env python3
+
+#!/usr/bin/python3
+
 import unittest
-import stack
+from stack import Stack
 
 
 class TestStackMethods(unittest.TestCase):
@@ -12,7 +14,7 @@ class TestStackMethods(unittest.TestCase):
 
     def setUp(self):
         '''Setting up'''
-        self._stack = stack.Stack()
+        self._stack = Stack()
 
     def test_is_empty(self):
         '''Testing is_empty() method'''
@@ -43,9 +45,5 @@ class TestStackMethods(unittest.TestCase):
         self.assertEqual(self._stack.peek(), 42)
         self.assertEqual(self._stack.size(), 1)
 
-    def tearDown(self):
-        '''Tearing down'''
-        del self._stack
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

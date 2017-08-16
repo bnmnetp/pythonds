@@ -3,8 +3,10 @@ Testing the Queue module
 Roman Yasinovskyy, 2017
 '''
 
+#!/usr/bin/python3
+
 import unittest
-import queue
+from queue import Queue
 
 
 class TestQueueMethods(unittest.TestCase):
@@ -12,7 +14,7 @@ class TestQueueMethods(unittest.TestCase):
 
     def setUp(self):
         '''Setting up'''
-        self._queue = queue.Queue()
+        self._queue = Queue()
 
     def test_is_empty(self):
         '''Testing is_empty() method'''
@@ -37,9 +39,5 @@ class TestQueueMethods(unittest.TestCase):
         self.assertEqual(self._queue.dequeue(), 42)
         self.assertTrue(self._queue.is_empty())
 
-    def tearDown(self):
-        '''Tearing down'''
-        del self._queue
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

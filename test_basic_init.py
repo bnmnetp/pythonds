@@ -3,9 +3,10 @@ Testing the basic __init__ file
 Roman Yasinovskyy, 2017
 '''
 
+#!/usr/bin/python3
+
 import unittest
-from basic import *
-#from pythonds.basic import *
+from basic import Deque, OrderedList, Queue, Stack, UnorderedList
 
 
 class TestBasicsInit(unittest.TestCase):
@@ -27,13 +28,5 @@ class TestBasicsInit(unittest.TestCase):
         self.assertTrue(self._olist.is_empty())
         self.assertTrue(self._ulist.is_empty())
 
-    def tearDown(self):
-        '''Tearing down'''
-        del self._stack
-        del self._queue
-        del self._deque
-        del self._olist
-        del self._ulist
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()
