@@ -150,10 +150,10 @@ class Graph:
         '''Return the list of all edges in the graph'''
         return self._edges.keys()
 
-    def reset_distances(self):
+    def reset_distances(self, default_distance=sys.maxsize):
         '''Reset distances to test Dijkstra's'''
         for vertex in self:
-            vertex.distance = sys.maxsize
+            vertex.distance = default_distance
 
     def bfs(self, start):
         '''Breadth First Search'''
@@ -173,21 +173,21 @@ class Graph:
     def dfs(self):
         '''Depth First search'''
         for vertex in self:
-            if vertex.get_color() == 'white':
+            if vertex.color == 'white':
                 self.dfs_visit(vertex)
 
     def dfs_visit(self, start):
         '''DFS helper function'''
-        start.set_color('gray')
+        start.color = 'gray'
         self._time = self._time + 1
-        start.set_discovery_time(self._time)
+        start.discovery_time = self._time
         for next_vertex in start.get_neighbors():
-            if next_vertex.get_color() == 'white':
+            if next_vertex.color == 'white':
                 next_vertex.set_previous(start)
                 self.dfs_visit(next_vertex)
-        start.set_color('black')
+        start.color = 'black'
         self._time = self._time + 1
-        start.set_closing_time(self._time)
+        start.closing_time = self._time
 
     def traverse(self, src, dst):
         '''Traverse a graph'''
@@ -195,16 +195,16 @@ class Graph:
         current = self.get_vertex(dst)
         while current:
             path.append(current)
-            current = current.get_previous()
-        print('Path from {} to {} ({}): {}'.format(self.get_vertex(src).get_key(),
-                                                   self.get_vertex(dst).get_key(),
-                                                   self.get_vertex(dst).get_distance(),
-                                                   ' '.join(v.get_key() for v in reversed(path))))
+            current = current.previous
+        print('Path from {} to {} ({}): {}'.format(self.get_vertex(src).key,
+                                                   self.get_vertex(dst).key,
+                                                   self.get_vertex(dst).distance,
+                                                   ' '.join(vertex.key for vertex in reversed(path))))
 
     def dijkstra(self, start):
         '''Dijkstra's shortest path algorithm'''
-        start.set_distance(0)
-        not_yet_visited = [[start.get_distance(), start]]
+        start.distance = 0
+        not_yet_visited = [[start.distance, start]]
         heapq.heapify(not_yet_visited)
         while not_yet_visited:
             current_vertex = heapq.heappop(not_yet_visited)[1]
@@ -233,3 +233,21 @@ class Graph:
         for edge in self._edges:
             if self.get_vertex(edge[0]).distance + self._edges[edge] < self.get_vertex(edge[1]).distance:
                 raise ValueError('Graph contains a negative-weight cycle')
+
+    def prim(self, start):
+        '''Prim's spanning tree algorithm'''
+        start.distance = 0
+        not_in_a_tree = [[vertex.distance, vertex] for vertex in self]
+        heapq.heapify(not_in_a_tree)
+        while not_in_a_tree:
+            current_vertex = heapq.heappop(not_in_a_tree)[1]
+            for next_vertex in current_vertex.get_neighbors():
+                new_distance = current_vertex.get_neighbor(next_vertex)
+                if any(item[1] == next_vertex for item in not_in_a_tree) and new_distance < next_vertex.distance:
+                    next_vertex.previous = current_vertex
+                    next_vertex.distance = new_distance
+                    for item in not_in_a_tree:
+                        if item[1] == next_vertex:
+                            item[0] = new_distance
+                            heapq.heapify(not_in_a_tree)
+                            break

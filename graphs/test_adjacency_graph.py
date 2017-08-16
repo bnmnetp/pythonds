@@ -102,6 +102,22 @@ class TestAdjacencyGraphMethods(unittest.TestCase):
         with self.assertRaises(ValueError):
             self._graph.bellman_ford(self._graph.get_vertex(start_vertex))
 
+    def test_prim(self):
+        '''Testing Prim's spanning tree algorithm'''
+        expected_result_from_t = {'u': ('t', 2),
+                                  'v': ('u', 3),
+                                  'w': ('u', 3),
+                                  'x': ('v', 3),
+                                  'y': ('x', 6),
+                                  'z': ('x', 8)
+                                 }
+        self._graph.reset_distances(255)
+        start_vertex = 't'
+        self._graph.prim(self._graph.get_vertex(start_vertex))
+        for vertex in self._graph.get_vertices() - {start_vertex}:
+            self.assertEqual(self._graph.get_vertex(vertex).previous.key, expected_result_from_t[vertex][0])
+            self.assertEqual(self._graph.get_vertex(vertex).distance, expected_result_from_t[vertex][1])
+
     def test_bfs(self):
         '''Testing Breadth first search'''
         expected_result_from_t = {'t': 0, 'u': 1, 'v': 1, 'w': 2, 'x': 2, 'y': 1, 'z': 2}
