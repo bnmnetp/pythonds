@@ -1,9 +1,9 @@
 '''
-Testing the Hash Table module
+Testing the Sorting algorithms
 Roman Yasinovskyy, 2017
 '''
 
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import unittest
 from random import randint
@@ -54,9 +54,5 @@ class TestSortingMethods(unittest.TestCase):
         heap_sort(self._lst_to_sort)
         self.assertEqual(self._lst_to_sort, self._test_lst)
 
-    def tearDown(self):
-        '''Tearing down'''
-        pass
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

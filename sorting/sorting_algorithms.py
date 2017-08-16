@@ -1,6 +1,6 @@
 '''
 Bradley N. Miller, David L. Ranum
-Introduction to Data Structures and Algorithms in Python
+Problem Solving with Algorithms and Data Structures using Python
 Copyright 2005
 Updated by Roman Yasinovskyy, 2017
 '''
@@ -10,16 +10,16 @@ import heapq
 
 def bubble_sort(lst):
     '''Bubble sort'''
-    for i in range(len(lst)-1, 0, -1):
+    for i in range(len(lst) - 1, 0, -1):
         for j in range(i):
-            if lst[j] > lst[j+1]:
-                lst[j], lst[j+1] = lst[j+1], lst[j]
+            if lst[j] > lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
 
 
 def select_sort(lst):
     '''Selection sort'''
     for i in range(len(lst)):
-        min_idx = len(lst)-1
+        min_idx = len(lst) - 1
         for j in range(i, len(lst)):
             if lst[j] < lst[min_idx]:
                 min_idx = j
@@ -44,11 +44,11 @@ def shell_sort(lst):
     sublist_count = len(lst) // 3
     while sublist_count > 0:
         for pos_start in range(sublist_count):
-            gap_insert_sort(lst, pos_start, sublist_count)
+            _gap_insert_sort(lst, pos_start, sublist_count)
         sublist_count = sublist_count // 2
 
 
-def gap_insert_sort(lst, start, gap):
+def _gap_insert_sort(lst, start, gap):
     '''Shell sort helper function'''
     for i in range(start + gap, len(lst), gap):
         cur_val = lst[i]
@@ -94,18 +94,18 @@ def merge_sort(lst):
 
 def quick_sort(lst):
     '''Quick sort'''
-    quick_sort_help(lst, 0, len(lst)-1)
+    _quick_sort_help(lst, 0, len(lst) - 1)
 
 
-def quick_sort_help(lst, mark_l, mark_r):
+def _quick_sort_help(lst, mark_l, mark_r):
     '''Quick sort helper'''
     if mark_l < mark_r:
-        split = quick_sort_part(lst, mark_l, mark_r)
-        quick_sort_help(lst, mark_l, split-1)
-        quick_sort_help(lst, split+1, mark_r)
+        split = _quick_sort_part(lst, mark_l, mark_r)
+        _quick_sort_help(lst, mark_l, split - 1)
+        _quick_sort_help(lst, split + 1, mark_r)
 
 
-def quick_sort_part(lst, mark_l, mark_r):
+def _quick_sort_part(lst, mark_l, mark_r):
     '''Quick sort partition'''
     pivot_val = lst[mark_l]
     mark_l_cur = mark_l + 1
