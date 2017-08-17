@@ -1,6 +1,6 @@
 '''
 Bradley N. Miller, David L. Ranum
-Introduction to Data Structures and Algorithms in Python
+Problem Solving with Algorithms and Data Structures using Python
 Copyright 2005
 Updated by Roman Yasinovskyy, 2017
 '''
@@ -94,12 +94,12 @@ class Vertex:
     closing_time = property(get_closing_time, set_closing_time)
 
     def __str__(self):
-        return str(self._key) + \
-                ":color " + self._color + \
-                ":discovery_time " + str(self._discovery_time) + \
-                ":closing_time " + str(self._closing_time) + \
-                ":distance " + str(self._distance) + \
-                ":previous \n\t[" + str(self._previous) + "]\n"
+        return '{:^8}|{:^8}|{:^8}|{:^8}|{:^8}| {}'.format(self._key,
+                                                          self._color,
+                                                          self._distance,
+                                                          self._discovery_time,
+                                                          self._closing_time,
+                                                          self._previous)
 
 
 class Graph:

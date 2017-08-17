@@ -1,10 +1,9 @@
 '''
-Testing the BinaryTree module
+Testing the Graph module
 Roman Yasinovskyy, 2017
-See https://stackoverflow.com/a/31281467 for testing output
 '''
 
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import unittest
 from unittest.mock import patch
@@ -12,9 +11,8 @@ from io import StringIO
 from adjacency_graph import Graph
 
 
-class TestAdjacencyGraphMethods(unittest.TestCase):
-    '''Testing the Binary Heap module'''
-
+class TestGraphMethods(unittest.TestCase):
+    '''Testing the Graph module'''
     def setUp(self):
         '''Setting up'''
         self._graph = Graph()
@@ -33,11 +31,12 @@ class TestAdjacencyGraphMethods(unittest.TestCase):
 
     def test_vertex_str(self):
         '''Testing vertex str() method'''
-        with patch('sys.stdout', new=StringIO()) as output:
-            for vertex in self._graph:
-                print(vertex.key, end=' ')
-        self.assertEqual(sorted(output.getvalue().strip().split()),
-                         ['t', 'u', 'v', 'w', 'x', 'y', 'z'])
+        self._graph.reset_distances(255)
+        # print('{:^8}|{:^8}|{:^8}|{:^8}|{:^8}| {}'.format('key','color', 'distance', 'discovrd', 'closed', 'previous'))
+        for vertex in self._graph:
+            with patch('sys.stdout', new=StringIO()) as output:
+                print(vertex)
+            self.assertEqual(output.getvalue().strip(), vertex.key + '    | white  |  255   |   0    |   0    | None')
 
     def test_traverse(self):
         '''Testing graph traversal output'''
@@ -47,7 +46,7 @@ class TestAdjacencyGraphMethods(unittest.TestCase):
                                   'x': [['t', 'v', 'x'], 7],
                                   'y': [['t', 'y'], 7],
                                   'z': [['t', 'v', 'x', 'z'], 15]
-                                 }
+                                  }
         self._graph.reset_distances()
         start_vertex = 't'
         self._graph.dijkstra(self._graph.get_vertex(start_vertex))
@@ -68,7 +67,7 @@ class TestAdjacencyGraphMethods(unittest.TestCase):
                                   'x': ('v', 7),
                                   'y': ('t', 7),
                                   'z': ('x', 15)
-                                 }
+                                  }
         self._graph.reset_distances()
         start_vertex = 't'
         self._graph.dijkstra(self._graph.get_vertex(start_vertex))
@@ -84,7 +83,7 @@ class TestAdjacencyGraphMethods(unittest.TestCase):
                                   'x': ('v', 7),
                                   'y': ('t', 7),
                                   'z': ('x', 15)
-                                 }
+                                  }
         self._graph.reset_distances()
         start_vertex = 't'
         self._graph.bellman_ford(self._graph.get_vertex(start_vertex))
@@ -110,7 +109,7 @@ class TestAdjacencyGraphMethods(unittest.TestCase):
                                   'x': ('v', 3),
                                   'y': ('x', 6),
                                   'z': ('x', 8)
-                                 }
+                                  }
         self._graph.reset_distances(255)
         start_vertex = 't'
         self._graph.prim(self._graph.get_vertex(start_vertex))
@@ -128,15 +127,11 @@ class TestAdjacencyGraphMethods(unittest.TestCase):
 
     def test_dfs(self):
         '''Testing Depth first search'''
-        # Come up with a better test
+        # TODO: Come up with a more robust test
         self._graph.dfs()
         for vertex in self._graph:
             if vertex.discovery_time == 1:
                 self.assertEqual(vertex.closing_time, 14)
 
-    def tearDown(self):
-        '''Tearing down'''
-        del self._graph
-
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()
