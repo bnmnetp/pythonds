@@ -1,5 +1,8 @@
-from .trees import BinaryTree, AVLTree, BinarySearchTree, BinHeap, BinaryTree
+'''
+pythonds import statement
+'''
+from .trees import BinaryTree, AVLTree, BinarySearchTree, BinaryHeap, PriorityQueue
 from .basic import Stack, Queue, Deque
-from .graphs import Graph, Vertex, PriorityQueue
+from .graphs import Graph, Vertex
 
-__ALL__ = [Stack, Queue, Deque, Graph, Vertex, PriorityQueue, BinaryTree, AVLTree, BinarySearchTree, BinHeap, BinaryTree]
+__all__ = ['Stack', 'Queue', 'Deque', 'Graph', 'Vertex', 'BinaryTree', 'AVLTree', 'BinarySearchTree', 'BinaryHeap', 'BinaryTree', 'PriorityQueue']
