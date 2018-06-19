@@ -8,7 +8,7 @@ Roman Yasinovskyy, 2017
 import unittest
 from unittest.mock import patch
 from io import StringIO
-from adjacency_graph import Graph
+from graphs.adjacency_graph import Graph
 
 
 class TestGraphMethods(unittest.TestCase):

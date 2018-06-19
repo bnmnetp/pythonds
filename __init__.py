@@ -1,8 +1,11 @@
 '''
 pythonds import statement
 '''
-from .trees import BinaryTree, AVLTree, BinarySearchTree, BinaryHeap, PriorityQueue
-from .basic import Stack, Queue, Deque
-from .graphs import Graph, Vertex
+name = "pythonds3"
 
-__all__ = ['Stack', 'Queue', 'Deque', 'Graph', 'Vertex', 'BinaryTree', 'AVLTree', 'BinarySearchTree', 'BinaryHeap', 'BinaryTree', 'PriorityQueue']
+from basic import Stack, Queue, Deque
+from graphs import Graph, Vertex
+from searching import HashTable
+from trees import BinaryTree, AVLTree, BinarySearchTree, BinaryHeap, PriorityQueue
+
+__all__ = ['Stack', 'Queue', 'Deque', 'Graph', 'Vertex', 'HashTable', 'BinaryTree', 'AVLTree', 'BinarySearchTree', 'BinaryHeap', 'BinaryTree', 'PriorityQueue']

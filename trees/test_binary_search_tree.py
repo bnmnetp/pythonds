@@ -8,7 +8,7 @@ Roman Yasinovskyy, 2017
 import unittest
 from unittest.mock import patch
 from io import StringIO
-from binary_search_tree import BinarySearchTree, BinaryTreeNode
+from trees.binary_search_tree import BinarySearchTree, BinaryTreeNode
 
 
 class TestBinarySearchTreeMethods(unittest.TestCase):

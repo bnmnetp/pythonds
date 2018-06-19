@@ -7,7 +7,7 @@ Roman Yasinovskyy, 2017
 
 import random
 import unittest
-from hash_table import HashTable
+from searching.hash_table import HashTable
 
 
 class TestHashMapMethods(unittest.TestCase):

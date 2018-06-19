@@ -1,10 +1,10 @@
 '''
 pythonds.basic import statement
 '''
-from .stack import Stack
-from .queue import Queue
-from .deque import Deque
-from .linked_list import OrderedList
-from .linked_list import UnorderedList
+from basic.stack import Stack
+from basic.queue import Queue
+from basic.deque import Deque
+from basic.linked_list import OrderedList
+from basic.linked_list import UnorderedList
 
 __all__ = ["Stack", "Queue", "Deque", "OrderedList", "UnorderedList"]

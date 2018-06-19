@@ -5,7 +5,7 @@ Copyright 2005
 Updated by Roman Yasinovskyy, 2017
 '''
 
-from binary_heap import BinaryHeap
+from trees.binary_heap import BinaryHeap
 
 
 class PriorityQueue(BinaryHeap):

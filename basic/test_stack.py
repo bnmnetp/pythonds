@@ -6,7 +6,7 @@ Roman Yasinovskyy, 2017
 #!/usr/bin/python3
 
 import unittest
-from stack import Stack
+from basic.stack import Stack
 
 
 class TestStackMethods(unittest.TestCase):

@@ -1,7 +1,7 @@
-# pythonds
+# pythonds3
 Data Structures package for Problem Solving with Algorithms and Data Structures using Python
 
-The package is a supplement to [Problem Solving with Algorithms and Data Structures using Python](http://interactivepython.org/runestone/static/pythonds/). It contains implementations of basic data structures, searching and sorting algorithms, trees, and graphs. Some implementation details are intentionally left out and readers are encouraged to complete them on their own. Unit tests are provided for your convenience, in case you want to change anything in the implementation.
+The package is a supplement to [Problem Solving with Algorithms and Data Structures using Python](https://runestone.academy/runestone/static/pythonds/index.html). It contains implementations of basic data structures, searching and sorting algorithms, trees, and graphs. Some implementation details are intentionally left out and readers are encouraged to complete them on their own. Unit tests are provided for your convenience, in case you want to change anything in the implementation.
 
 ## Object-oriented programming
  - Typical class implementation

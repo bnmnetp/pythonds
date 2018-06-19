@@ -9,7 +9,7 @@ import random
 import unittest
 from unittest.mock import patch
 from io import StringIO
-from linked_list import LinkedListNode, LinkedList, UnorderedList, OrderedList
+from basic.linked_list import LinkedListNode, LinkedList, UnorderedList, OrderedList
 
 
 class TestLinkedListMethods(unittest.TestCase):
