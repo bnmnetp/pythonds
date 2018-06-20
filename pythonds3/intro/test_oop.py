@@ -8,7 +8,7 @@ Roman Yasinovskyy, 2017
 import unittest
 from unittest.mock import patch
 from io import StringIO
-from intro.oop import Fraction
+from pythonds3.intro.oop import Fraction
 
 
 class TestOOPMethods(unittest.TestCase):

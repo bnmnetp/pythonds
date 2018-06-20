@@ -3,9 +3,9 @@ pythonds import statement
 '''
 name = "pythonds3"
 
-from basic import Stack, Queue, Deque
-from graphs import Graph, Vertex
-from searching import HashTable
-from trees import BinaryTree, AVLTree, BinarySearchTree, BinaryHeap, PriorityQueue
+from pythonds3.basic import Stack, Queue, Deque
+from pythonds3.graphs import Graph, Vertex
+from pythonds3.searching import HashTable
+from pythonds3.trees import BinaryTree, AVLTree, BinarySearchTree, BinaryHeap, PriorityQueue
 
 __all__ = ['Stack', 'Queue', 'Deque', 'Graph', 'Vertex', 'HashTable', 'BinaryTree', 'AVLTree', 'BinarySearchTree', 'BinaryHeap', 'BinaryTree', 'PriorityQueue']

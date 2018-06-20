@@ -5,7 +5,7 @@ Copyright 2005, 2010
 Updated by Roman Yasinovskyy, 2017
 '''
 
-from trees.binary_search_tree import BinarySearchTree, BinaryTreeNode
+from pythonds3.trees.binary_search_tree import BinarySearchTree, BinaryTreeNode
 
 
 class AVLTreeNode(BinaryTreeNode):

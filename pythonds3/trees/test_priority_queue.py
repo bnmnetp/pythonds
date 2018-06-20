@@ -8,7 +8,7 @@ Roman Yasinovskyy, 2017
 import unittest
 from unittest.mock import patch
 from io import StringIO
-from trees.priority_queue import PriorityQueue
+from pythonds3.trees.priority_queue import PriorityQueue
 
 
 class TestPriorityQueueMethods(unittest.TestCase):

@@ -6,7 +6,7 @@ Roman Yasinovskyy, 2017
 #!/usr/bin/python3
 
 import unittest
-from basic.queue import Queue
+from pythonds3.basic.queue import Queue
 
 
 class TestQueueMethods(unittest.TestCase):

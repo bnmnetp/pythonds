@@ -1,7 +1,7 @@
 '''
-pythonds.graphs import statement
+pythonds3.graphs import statement
 '''
-from graphs.adjacency_graph import Graph
-from graphs.adjacency_graph import Vertex
+from pythonds3.graphs.adjacency_graph import Graph
+from pythonds3.graphs.adjacency_graph import Vertex
 
 __all__ = ["Graph"]

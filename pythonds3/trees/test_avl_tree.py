@@ -6,7 +6,7 @@ Roman Yasinovskyy, 2017
 #!/usr/bin/python3
 
 import unittest
-from trees.avl_tree import AVLTree
+from pythonds3.trees.avl_tree import AVLTree
 
 
 class TestBinarySearchTreeMethods(unittest.TestCase):

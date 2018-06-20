@@ -1,6 +1,6 @@
 '''
-pythonds.search import statement
+pythonds3.search import statement
 '''
-from searching.hash_table import HashTable
+from pythonds3.searching.hash_table import HashTable
 
 __all__ = ["HashTable"]

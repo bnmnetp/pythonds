@@ -8,7 +8,7 @@ Roman Yasinovskyy, 2017
 import unittest
 from unittest.mock import patch
 from io import StringIO
-from trees.binary_heap import BinaryHeap
+from pythonds3.trees.binary_heap import BinaryHeap
 
 
 class TestBinaryHeapMethods(unittest.TestCase):

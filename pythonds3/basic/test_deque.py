@@ -6,7 +6,7 @@ Roman Yasinovskyy, 2017
 #!/usr/bin/python3
 
 import unittest
-from basic.deque import Deque
+from pythonds3.basic.deque import Deque
 
 
 class TestDequeMethods(unittest.TestCase):
