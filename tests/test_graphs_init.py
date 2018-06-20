@@ -4,7 +4,7 @@ Roman Yasinovskyy, 2017
 '''
 
 import unittest
-from graphs import Graph
+from pythonds3.graphs import Graph
 
 
 class TestGraphsInit(unittest.TestCase):

@@ -6,7 +6,10 @@ Roman Yasinovskyy, 2017
 #!/usr/bin/python3
 
 import unittest
-from trees import BinaryHeap, BinaryTree, BinarySearchTree, AVLTree
+from pythonds3.trees import BinaryHeap
+from pythonds3.trees import BinaryTree
+from pythonds3.trees import BinarySearchTree
+from pythonds3.trees import AVLTree
 
 
 class TestTreesInit(unittest.TestCase):

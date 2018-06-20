@@ -6,7 +6,11 @@ Roman Yasinovskyy, 2017
 #!/usr/bin/python3
 
 import unittest
-from basic import Deque, OrderedList, Queue, Stack, UnorderedList
+from pythonds3.basic import Deque
+from pythonds3.basic import OrderedList
+from pythonds3.basic import Queue
+from pythonds3.basic import Stack
+from pythonds3.basic import UnorderedList
 
 
 class TestBasicsInit(unittest.TestCase):
