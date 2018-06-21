@@ -16,7 +16,7 @@ class TestGraphMethods(unittest.TestCase):
     def setUp(self):
         '''Setting up'''
         self._graph = Graph()
-        filename = 'graphs/adjacency_graph.txt'
+        filename = 'tests/graphs/test_adjacency_graph.txt'
         with open(filename, 'r') as input_file:
             for raw_line in input_file:
                 line = raw_line.split()

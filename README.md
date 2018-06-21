@@ -38,5 +38,5 @@ The package is a supplement to [Problem Solving with Algorithms and Data Structu
  - Breadth first search
  - Depth first search
  - Dijkstra's shortest path algorithm
- - Bellman-Ford sortest path algorithm
+ - Bellman-Ford shortest path algorithm
  - Prim's spanning tree algorithm
