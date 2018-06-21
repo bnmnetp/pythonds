@@ -22,10 +22,10 @@ The package is a supplement to [Problem Solving with Algorithms and Data Structu
  - Bubble sort
  - Selection sort
  - Insertion sort
- - Shell sort
+ - Shellsort
  - Merge sort
- - Quick sort
- - Heap sort
+ - Quicksort
+ - Heapsort
 
 ## Trees
  - Binary tree
