@@ -6,9 +6,12 @@
 
 ## Introduction to OOP
 
-### Class Fraction
 ```python
 >>> import pythonds3.intro as intro
+```
+
+### Class Fraction
+```python
 >>> f1 = intro.Fraction(2, 3)
 >>> f1
 Fraction(2, 3)
@@ -32,9 +35,13 @@ Fraction(4, 3)
 
 ## Basic Data Structures
 
-### Stack
 ```python
 >>> import pythonds3.basic as bds
+>>> 
+```
+
+### Stack
+```python
 >>> s = bds.Stack()
 >>> s.is_empty()
 True
@@ -59,7 +66,6 @@ False
 
 ### Queue
 ```python
->>> import pythonds3.basic as bds
 >>> q = bds.Queue()
 >>> q.is_empty()
 True
@@ -80,7 +86,6 @@ False
 
 ### Deque
 ```python
->>> import pythonds3.basic as bds
 >>> dq = bds.Deque()
 >>> dq.is_empty()
 True
@@ -106,7 +111,6 @@ False
 
 ### Unordered Linked List
 ```python
->>> import pythonds3.basic as bds
 >>> ull = bds.UnorderedList()
 >>> ull.is_empty()
 True
@@ -136,7 +140,6 @@ False
 
 ### Ordered Linked List
 ```python
->>> import pythonds3.basic as bds
 >>> oll = bds.OrderedList()
 >>> oll.is_empty()
 True
@@ -158,9 +161,12 @@ False
 
 ## Searching
 
-### Class HashTable
 ```python
 >>> import pythonds3.searching as search
+```
+
+### Class HashTable
+```python
 >>> ht = search.HashTable(4)
 >>> len(ht)
 0
@@ -181,9 +187,13 @@ False
 
 ## Sorting
 
-### Bubble sort
 ```python
 >>> import pythonds3.sorting as sorta
+>>> 
+```
+
+### Bubble sort
+```python
 >>> lst = [30, 40, 20, 50, 10]
 >>> lst
 [30, 40, 20, 50, 10]
@@ -195,7 +205,6 @@ False
 
 ### Selection sort
 ```python
->>> import pythonds3.sorting as sorta
 >>> lst = [30, 40, 20, 50, 10]
 >>> lst
 [30, 40, 20, 50, 10]
@@ -207,7 +216,6 @@ False
 
 ### Insertion sort
 ```python
->>> import pythonds3.sorting as sorta
 >>> lst = [30, 40, 20, 50, 10]
 >>> lst
 [30, 40, 20, 50, 10]
@@ -219,7 +227,6 @@ False
 
 ### Shellsort
 ```python
->>> import pythonds3.sorting as sorta
 >>> lst = [30, 40, 20, 50, 10]
 >>> lst
 [30, 40, 20, 50, 10]
@@ -231,7 +238,6 @@ False
 
 ### Merge sort
 ```python
->>> import pythonds3.sorting as sorta
 >>> lst = [30, 40, 20, 50, 10]
 >>> lst
 [30, 40, 20, 50, 10]
@@ -243,7 +249,6 @@ False
 
 ### Quicksort
 ```python
->>> import pythonds3.sorting as sorta
 >>> lst = [30, 40, 20, 50, 10]
 >>> lst
 [30, 40, 20, 50, 10]
@@ -255,7 +260,6 @@ False
 
 ### Heapsort
 ```python
->>> import pythonds3.sorting as sorta
 >>> lst = [30, 40, 20, 50, 10]
 >>> lst
 [30, 40, 20, 50, 10]
@@ -267,9 +271,13 @@ False
 
 ## Trees
 
-### Binary Tree
 ```python
 >>> import pythonds3.trees as trees
+>>> 
+```
+
+### Binary Tree
+```python
 >>> bt = trees.BinaryTree('A')
 >>> bt.root
 'A'
@@ -298,7 +306,6 @@ B C A
 
 ### Binary Search Tree
 ```python
->>> import pythonds3.trees as trees
 >>> bst = trees.BinarySearchTree()
 >>> bst[0] = 'Aardvark'
 >>> bst[1] = 'Cheetah'
@@ -323,7 +330,6 @@ True
 
 ### AVL Tree
 ```python
->>> import pythonds3.trees as trees
 >>> avlt = trees.AVLTree()
 >>> avlt[0] = 'Aardvark'
 >>> avlt[1] = 'Beaver'
@@ -343,7 +349,6 @@ True
 
 ### Binary Heap
 ```python
->>> import pythonds3.trees as trees
 >>> bh = trees.BinaryHeap()
 >>> bh.insert(30)
 >>> bh.insert(40)
@@ -361,14 +366,61 @@ True
 
 ## Graphs
 
+```python
+>>> import pythonds3.graphs as graphs
+>>> g = graphs.Graph()
+>>> g.add_edge('a', 'b', 3)
+>>> g.add_edge('a', 'e', 1)
+>>> g.add_edge('b', 'a', 3)
+>>> g.add_edge('b', 'c', 5)
+>>> g.add_edge('b', 'e', 4)
+>>> g.add_edge('c', 'b', 5)
+>>> g.add_edge('c', 'd', 2)
+>>> g.add_edge('c', 'e', 6)
+>>> g.add_edge('d', 'c', 2)
+>>> g.add_edge('d', 'e', 7)
+>>> g.add_edge('e', 'a', 1)
+>>> g.add_edge('e', 'b', 4)
+>>> g.add_edge('e', 'c', 6)
+>>> g.add_edge('e', 'd', 7)
+>>> vertex_a = g.get_vertex('a')
+>>> vertex_d = g.get_vertex('d')
+>>> 
+```
+
+
 ### Breadth-first search
 ```python
+>>> g.reset_distances()
+>>> g.bfs(vertex_a)
+>>> g.traverse('a', 'd')
+'Path from a to d (2): a e d'
+>>> 
 ```
 
 ### Depth-first search
 ```python
+>>> g.reset_distances()
+>>> g.dfs()
+>>> g.traverse('a', 'd')
+'Path from a to d (9223372036854775807): a b c d'
+>>> 
 ```
 
 ### Dijkstra's algorithm
 ```python
+>>> g.reset_distances()
+>>> g.dijkstra(vertex_a)
+>>> g.traverse('a', 'd')
+'Path from a to d (8): a e d'
+>>> 
+```
+
+### Bellman-Ford algorithm
+```python
+>>> g.reset_distances()
+>>> g.bellman_ford(vertex_a)
+>>> g.traverse('a', 'd')
+'Path from a to d (8): a e d'
+>>> 
 ```
