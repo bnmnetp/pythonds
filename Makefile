@@ -13,6 +13,7 @@ package:
 # Remove old package
 clean:
 	rm -rf dist/ build/ pythonds3.egg-info/
+	find . -name "__pycache__" -type d -exec rm -rf "{}" \;
 
 # Upload to PyPi
 upload:
