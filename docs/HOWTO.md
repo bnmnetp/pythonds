@@ -1,6 +1,6 @@
 # Install
 
-```> python -m pip install pythonds3```
+```> python3 -m pip install pythonds3```
 
 # Use
 
