@@ -5,6 +5,10 @@ Roman Yasinovskyy, 2017
 
 #!/usr/bin/python3
 
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.join(os.path.dirname(__file__), '..'), '..')))
+
 import unittest
 from pythonds3.basic.queue import Queue
 
