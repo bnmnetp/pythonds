@@ -5,7 +5,9 @@ Roman Yasinovskyy, 2017
 
 #!/usr/bin/python3
 
-import unittest
+import sys, os, pytest
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.join(os.path.dirname(__file__), '..'), '..')))
+
 from random import randint
 from pythonds3.sorting.sorting_algorithms import bubble_sort
 from pythonds3.sorting.sorting_algorithms import select_sort
@@ -16,49 +18,50 @@ from pythonds3.sorting.sorting_algorithms import quick_sort
 from pythonds3.sorting.sorting_algorithms import heap_sort
 
 
-class TestSortingMethods(unittest.TestCase):
+class TestSortingMethods:
     '''Testing the sorting algorithms'''
 
-    def setUp(self):
+    @pytest.fixture(scope = 'function', autouse = True)
+    def setup_class(cls):
         '''Setting up'''
-        self._lst_to_sort = [randint(100, 999) for _ in range(100)]
-        self._test_lst = self._lst_to_sort[:]
-        self._test_lst.sort()
+        cls.lst_to_sort = [randint(100, 999) for _ in range(100)]
+        cls.test_lst = cls.lst_to_sort[:]
+        cls.test_lst.sort()
 
     def test_bubble_sort(self):
         '''Testing BubbleSort'''
-        bubble_sort(self._lst_to_sort)
-        self.assertEqual(self._lst_to_sort, self._test_lst)
+        bubble_sort(self.lst_to_sort)
+        assert self.lst_to_sort == self.test_lst
 
     def test_select_sort(self):
         '''Testing Selection Sort'''
-        select_sort(self._lst_to_sort)
-        self.assertEqual(self._lst_to_sort, self._test_lst)
+        select_sort(self.lst_to_sort)
+        assert self.lst_to_sort == self.test_lst
 
     def test_insert_sort(self):
         '''Testing Insertion Sort'''
-        insert_sort(self._lst_to_sort)
-        self.assertEqual(self._lst_to_sort, self._test_lst)
+        insert_sort(self.lst_to_sort)
+        assert self.lst_to_sort == self.test_lst
 
     def test_shell_sort(self):
         '''Testing Shell Sort'''
-        shell_sort(self._lst_to_sort)
-        self.assertEqual(self._lst_to_sort, self._test_lst)
+        shell_sort(self.lst_to_sort)
+        assert self.lst_to_sort == self.test_lst
 
     def test_merge_sort(self):
         '''Testing MergeSort'''
-        merge_sort(self._lst_to_sort)
-        self.assertEqual(self._lst_to_sort, self._test_lst)
+        merge_sort(self.lst_to_sort)
+        assert self.lst_to_sort == self.test_lst
 
     def test_quick_sort(self):
         '''Testing QuickSort'''
-        quick_sort(self._lst_to_sort)
-        self.assertEqual(self._lst_to_sort, self._test_lst)
+        quick_sort(self.lst_to_sort)
+        assert self.lst_to_sort == self.test_lst
 
     def test_heap_sort(self):
         '''Testing Heap Sort'''
-        heap_sort(self._lst_to_sort)
-        self.assertEqual(self._lst_to_sort, self._test_lst)
+        heap_sort(self.lst_to_sort)
+        assert self.lst_to_sort == self.test_lst
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()
