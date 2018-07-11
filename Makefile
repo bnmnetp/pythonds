@@ -1,6 +1,7 @@
 # Parameters to control Makefile operation
 PROJECT=pythonds3
-SRC_DIR=pythonds
+SRC_DIR=pythonds3
+DOC_DIR=docs
 TEST_DIR=tests
 
 # Default
@@ -8,12 +9,12 @@ all: package
 
 # Make a package
 package:
-	python setup.py sdist bdist_wheel
+	python3 setup.py sdist bdist_wheel
 
 # Remove old package
 clean:
 	rm -rf dist/ build/ pythonds3.egg-info/
-	find . -name "__pycache__" -type d -exec rm -rf "{}" \;
+	find . -name "__pycache__" -type d -prune -exec rm -rf "{}" \;
 
 # Upload to PyPi
 upload:
@@ -23,5 +24,9 @@ upload:
 upload_test:
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
+# Autodiscover and run tests
 test:
-	python3 tests/test_basic_init.py
+	pytest $(TEST_DIR)
+
+# Don't display instructions while cleaning
+.SILENT: clean
