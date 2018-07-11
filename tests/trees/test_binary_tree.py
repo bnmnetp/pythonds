@@ -5,133 +5,134 @@ Roman Yasinovskyy, 2017
 
 #!/usr/bin/python3
 
-import unittest
-from unittest.mock import patch
-from io import StringIO
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.join(os.path.dirname(__file__), '..'), '..')))
+
+import pytest
 from pythonds3.trees.binary_tree import BinaryTree
 
 
-class TestBinaryTreeMethods(unittest.TestCase):
-    '''Testing the Binary Tree module'''
-
-    def setUp(self):
+class TestBinaryTreeMethods:
+    
+    @pytest.fixture(scope = 'function', autouse = True)
+    def setup_class(cls):
         '''Setting up'''
-        self._tree = BinaryTree('A')
+        cls.tree = BinaryTree('A')
 
     def test_get_root_val(self):
         '''Testing get_root_val() method'''
-        self.assertEqual(self._tree.get_root_val(), 'A')
+        assert self.tree.get_root_val() == 'A'
 
     def test_is_leaf(self):
         '''Testing is_leaf() method'''
-        self.assertTrue(self._tree.is_leaf())
+        assert self.tree.is_leaf()
 
     def test_insert_left(self):
         '''Testing insert_left() method'''
-        self.assertEqual(self._tree.height(), 0)
-        self._tree.insert_left('B')
-        self.assertEqual(self._tree.height(), 1)
+        assert self.tree.height() == 0
+        self.tree.insert_left('B')
+        assert self.tree.height() == 1
 
     def test_insert_right(self):
         '''Testing insert_right() method'''
-        self.assertEqual(self._tree.height(), 0)
-        self._tree.insert_right('C')
-        self.assertEqual(self._tree.height(), 1)
+        assert self.tree.height() == 0
+        self.tree.insert_right('C')
+        assert self.tree.height() == 1
 
     def test_get_child_left(self):
         '''Testing get_child_left() method'''
-        self._tree.insert_left('B')
-        self.assertEqual(self._tree.get_child_left().get_root_val(), 'B')
+        self.tree.insert_left('B')
+        assert self.tree.get_child_left().get_root_val() == 'B'
 
     def test_get_child_right(self):
         '''Testing get_child_right() method'''
-        self._tree.insert_right('C')
-        self.assertEqual(self._tree.get_child_right().get_root_val(), 'C')
+        self.tree.insert_right('C')
+        assert self.tree.get_child_right().get_root_val() == 'C'
 
     def test_height(self):
         '''Testing height() method'''
-        self.assertEqual(self._tree.height(), 0)
-        self._tree.insert_left('B')
-        self.assertEqual(self._tree.height(), 1)
-        self._tree.insert_right('C')
-        self.assertEqual(self._tree.height(), 1)
-        self._tree.get_child_left().insert_left('D')
-        self.assertEqual(self._tree.height(), 2)
+        assert self.tree.height() == 0
+        self.tree.insert_left('B')
+        assert self.tree.height() == 1
+        self.tree.insert_right('C')
+        assert self.tree.height() == 1
+        self.tree.get_child_left().insert_left('D')
+        assert self.tree.height() == 2
 
     def test_size(self):
         '''Testing count_nodes() method'''
-        self.assertEqual(self._tree.size(), 1)
-        self.assertEqual(len(self._tree), 1)
-        self._tree.insert_left('B')
-        self.assertEqual(self._tree.size(), 2)
-        self._tree.insert_right('C')
-        self.assertEqual(self._tree.size(), 3)
-        self._tree.get_child_left().insert_left('D')
-        self.assertEqual(self._tree.size(), 4)
-        self.assertEqual(len(self._tree), 4)
+        assert self.tree.size() == 1
+        assert len(self.tree) == 1
+        self.tree.insert_left('B')
+        assert self.tree.size() == 2
+        self.tree.insert_right('C')
+        assert self.tree.size() == 3
+        self.tree.get_child_left().insert_left('D')
+        assert self.tree.size() == 4
+        assert len(self.tree) == 4
 
-    def test_preorder(self):
+    def test_preorder(self, capsys):
         '''Testing preorder() method'''
-        self._tree.insert_left('B')
-        self._tree.insert_right('C')
-        self._tree.get_child_left().insert_left('D')
-        self._tree.get_child_left().insert_right('E')
-        self._tree.get_child_right().insert_left('F')
-        self._tree.get_child_right().insert_right('G')
+        self.tree.insert_left('B')
+        self.tree.insert_right('C')
+        self.tree.get_child_left().insert_left('D')
+        self.tree.get_child_left().insert_right('E')
+        self.tree.get_child_right().insert_left('F')
+        self.tree.get_child_right().insert_right('G')
 
-        with patch('sys.stdout', new=StringIO()) as output:
-            self._tree.preorder()
-        self.assertEqual(output.getvalue().strip(), 'A B D E C F G')
+        self.tree.preorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == 'A B D E C F G'
 
-    def test_inorder(self):
+    def test_inorder(self, capsys):
         '''Testing inorder() method'''
-        self._tree.insert_left('B')
-        self._tree.insert_right('C')
-        self._tree.get_child_left().insert_left('D')
-        self._tree.get_child_left().insert_right('E')
-        self._tree.get_child_right().insert_left('F')
-        self._tree.get_child_right().insert_right('G')
+        self.tree.insert_left('B')
+        self.tree.insert_right('C')
+        self.tree.get_child_left().insert_left('D')
+        self.tree.get_child_left().insert_right('E')
+        self.tree.get_child_right().insert_left('F')
+        self.tree.get_child_right().insert_right('G')
 
-        with patch('sys.stdout', new=StringIO()) as output:
-            self._tree.inorder()
-        self.assertEqual(output.getvalue().strip(), 'D B E A F C G')
+        self.tree.inorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == 'D B E A F C G'
 
-    def test_postorder(self):
+    def test_postorder(self, capsys):
         '''Testing postorder() method'''
-        self._tree.insert_left('B')
-        self._tree.insert_right('C')
-        self._tree.get_child_left().insert_left('D')
-        self._tree.get_child_left().insert_right('E')
-        self._tree.get_child_right().insert_left('F')
-        self._tree.get_child_right().insert_right('G')
+        self.tree.insert_left('B')
+        self.tree.insert_right('C')
+        self.tree.get_child_left().insert_left('D')
+        self.tree.get_child_left().insert_right('E')
+        self.tree.get_child_right().insert_left('F')
+        self.tree.get_child_right().insert_right('G')
 
-        with patch('sys.stdout', new=StringIO()) as output:
-            self._tree.postorder()
-        self.assertEqual(output.getvalue().strip(), 'D E B F G C A')
+        self.tree.postorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == 'D E B F G C A'
 
-    def test_print_exp(self):
+    def test_print_exp(self, capsys):
         '''Testing print_exp() method'''
-        self._tree = BinaryTree('*')
-        self._tree.insert_left('+')
-        left_subtree = self._tree.get_child_left()
+        self.tree = BinaryTree('*')
+        self.tree.insert_left('+')
+        left_subtree = self.tree.get_child_left()
         left_subtree.insert_left(1)
         left_subtree.insert_right(5)
-        self._tree.insert_right(7)
+        self.tree.insert_right(7)
 
-        with patch('sys.stdout', new=StringIO()) as output:
-            self._tree.print_exp()
-        self.assertEqual(output.getvalue().strip(), '( ( 1 + 5 ) * 7 )')
+        self.tree.print_exp()
+        out, err = capsys.readouterr()
+        assert out.strip() == '( ( 1 + 5 ) * 7 )'
 
     def test_postorder_eval(self):
         '''Testing postorder_eval() method'''
-        self._tree = BinaryTree('*')
-        self._tree.insert_left('+')
-        left_subtree = self._tree.get_child_left()
+        self.tree = BinaryTree('*')
+        self.tree.insert_left('+')
+        left_subtree = self.tree.get_child_left()
         left_subtree.insert_left(1)
         left_subtree.insert_right(5)
-        self._tree.insert_right(7)
+        self.tree.insert_right(7)
 
-        self.assertEqual(self._tree.postorder_eval(), 42)
+        assert self.tree.postorder_eval() == 42
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()
