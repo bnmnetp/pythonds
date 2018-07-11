@@ -1,0 +1,13 @@
+{
+  "tests/graphs/test_adjacency_graph.py::TestGraphMethods::test_bellman_ford": true,
+  "tests/graphs/test_adjacency_graph.py::TestGraphMethods::test_bellman_ford_error": true,
+  "tests/graphs/test_adjacency_graph.py::TestGraphMethods::test_bfs": true,
+  "tests/graphs/test_adjacency_graph.py::TestGraphMethods::test_dfs": true,
+  "tests/graphs/test_adjacency_graph.py::TestGraphMethods::test_dijkstra": true,
+  "tests/graphs/test_adjacency_graph.py::TestGraphMethods::test_len": true,
+  "tests/graphs/test_adjacency_graph.py::TestGraphMethods::test_prim": true,
+  "tests/graphs/test_adjacency_graph.py::TestGraphMethods::test_traverse": true,
+  "tests/graphs/test_adjacency_graph.py::TestGraphMethods::test_vertex_str": true,
+  "tests/test_basic_init.py::TestBasicsInit::()::test_is_empty": true,
+  "tests/test_trees_init.py::test_len": true
+}

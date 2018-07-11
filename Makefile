@@ -22,3 +22,6 @@ upload:
 # Upload to TestPyPi
 upload_test:
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+test:
+	python3 tests/test_basic_init.py

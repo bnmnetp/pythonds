@@ -5,29 +5,29 @@ Roman Yasinovskyy, 2017
 
 #!/usr/bin/python3
 
-import unittest
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+import pytest
 from pythonds3.trees import BinaryHeap
 from pythonds3.trees import BinaryTree
 from pythonds3.trees import BinarySearchTree
 from pythonds3.trees import AVLTree
 
+trees = {'binary':BinaryTree(42), 'binary heap':BinaryHeap(), 'binary search': BinarySearchTree(), 'avl':AVLTree()}
 
-class TestTreesInit(unittest.TestCase):
-    '''Testing the trees __init__ file'''
-
-    def setUp(self):
-        '''Setting up'''
-        self._binary_tree = BinaryTree(42)
-        self._binary_heap = BinaryHeap()
-        self._binary_search_tree = BinarySearchTree()
-        self._avl_tree = AVLTree()
-
-    def test_len(self):
-        '''Testing len() method'''
-        self.assertEqual(len(self._binary_tree), 1)
-        self.assertEqual(len(self._binary_heap), 0)
-        self.assertEqual(len(self._binary_search_tree), 0)
-        self.assertEqual(len(self._avl_tree), 0)
+# Setup
+@pytest.fixture(params=trees)
+def set_up(request):
+    return trees[request.param]
+    
+# Length of a new instance of Trees should be 0 (equivalent to empty)
+# Exception is Binarary Tree -- that should be 1
+def test_len(set_up):
+    if isinstance(set_up, BinaryTree):
+        assert len(set_up) == 1
+    else:
+        assert len(set_up) == 0
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()

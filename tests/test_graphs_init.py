@@ -2,20 +2,25 @@
 Testing the graphs __init__ file
 Roman Yasinovskyy, 2017
 '''
+#!/usr/bin/python3
 
-import unittest
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+import pytest
 from pythonds3.graphs import Graph
 
+# Setup
+@pytest.fixture()
+def set_up():
+    '''Setting up'''
+    graph = Graph()
+    return graph
 
-class TestGraphsInit(unittest.TestCase):
-    '''Testing the graphs __init__ file'''
-    def setUp(self):
-        '''Setting up'''
-        self._graph = Graph()
-
-    def test_len(self):
-        '''Testing len() method'''
-        self.assertEqual(len(self._graph), 0)
+# Length of a new instance of Graph should be 0 (equivalent to empty)
+def test_len(set_up):
+    '''Testing len() method'''
+    assert len(set_up) == 0
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()
