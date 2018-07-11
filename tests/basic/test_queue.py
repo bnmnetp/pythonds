@@ -5,43 +5,42 @@ Roman Yasinovskyy, 2017
 
 #!/usr/bin/python3
 
-import os
-import sys
+import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.join(os.path.dirname(__file__), '..'), '..')))
 
-import unittest
+import pytest
 from pythonds3.basic.queue import Queue
 
 
-class TestQueueMethods(unittest.TestCase):
-    '''Testing the Queue module'''
+class TestQueueMethods:
 
-    def setUp(self):
+    @pytest.fixture(scope = 'function', autouse = True)
+    def setup_class(cls):
         '''Setting up'''
-        self._queue = Queue()
+        cls.queue = Queue()
 
     def test_is_empty(self):
         '''Testing is_empty() method'''
-        self.assertTrue(self._queue.is_empty())
-        self._queue.enqueue(42)
-        self.assertFalse(self._queue.is_empty())
+        assert self.queue.is_empty()
+        self.queue.enqueue(42)
+        assert not self.queue.is_empty()
 
     def test_size(self):
         '''Testing size() method'''
-        self.assertEqual(self._queue.size(), 0)
-        self._queue.enqueue(42)
-        self.assertEqual(self._queue.size(), 1)
+        assert self.queue.size() == 0
+        self.queue.enqueue(42)
+        assert self.queue.size() == 1
 
     def test_enqueue(self):
         '''Testing enqueue() method'''
-        self._queue.enqueue(42)
-        self.assertEqual(self._queue.size(), 1)
+        self.queue.enqueue(42)
+        assert self.queue.size() == 1
 
     def test_dequeue(self):
         '''Testing dequeue() method'''
-        self._queue.enqueue(42)
-        self.assertEqual(self._queue.dequeue(), 42)
-        self.assertTrue(self._queue.is_empty())
+        self.queue.enqueue(42)
+        assert self.queue.dequeue() == 42
+        assert self.queue.is_empty()
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()
