@@ -155,8 +155,10 @@ class OrderedList(LinkedList):
 
     def remove(self, value):
         '''Remove a node with a specific value'''
+        # This is an exercise
         pass
 
     def search(self, value):
         '''Search for a node with a specific value'''
+        # This is an exercise        
         pass
