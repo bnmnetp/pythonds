@@ -14,9 +14,9 @@ import pytest
 from pythonds3.searching.hash_table import HashTable
 
 
-class TestHashMapMethods(unittest.TestCase):
+class TestHashMapMethods:
 
-    @pytest.fixture(scope = 'function', autouse = true)
+    @pytest.fixture(scope = 'function', autouse = True)
     def setup_class(cls):
         '''Setting up'''
         cls.hash_table = HashTable()
@@ -28,7 +28,7 @@ class TestHashMapMethods(unittest.TestCase):
     def test_hashmap_size(self):
         '''Testing hash map size() method'''
         assert self.hash_table.size() == 0
-        assert len(self._hash_table) == 0
+        assert len(self.hash_table) == 0
 
     def test_hashmap_contains(self):
         '''Testing hash map __contains__() method'''
@@ -36,8 +36,8 @@ class TestHashMapMethods(unittest.TestCase):
                  (31, 'cow'), (44, 'goat'), (55, 'pig'), (20, 'chicken')]
         for item in items:
             self.hash_table[item[0]] = item[1]
-        assert 55 in self._hash_table
-        assert 56 in self._hash_table
+        assert 55 in self.hash_table
+        assert 56 not in self.hash_table
 
     def test_hashmap_put(self):
         '''Testing hash map put() method'''
@@ -49,11 +49,12 @@ class TestHashMapMethods(unittest.TestCase):
 
     def test_hashmap_put_error(self):
         '''Testing hash map put() method exception'''
-        with pytest.raises(Exception):#as excinfo:
+        with pytest.raises(Exception) as excinfo:
             for key in range(42):
                 self.hash_table[key] = random.random()
+        exception_msg = excinfo.value.args[0]
+        assert exception_msg == "Hash Table is full"
         
-
     def test_hashmap_get(self):
         '''Testing hash map get() method'''
         items = [(54, 'cat'), (26, 'dog'), (93, 'lion'), (17, 'tiger'), (77, 'bird'),
@@ -69,9 +70,11 @@ class TestHashMapMethods(unittest.TestCase):
                  (31, 'cow'), (44, 'goat'), (55, 'pig'), (20, 'chicken')]
         for item in items:
             self.hash_table[item[0]] = item[1]
-        with pytest.raises(KeyError):
-            self.hash_table.get(*[1]) #huh
-        #self.assertRaises(KeyError, self._hash_table.get, *[1])
+        key = 1
+        with pytest.raises(KeyError) as excinfo:
+            self.hash_table.get(key)
+        exception_msg = excinfo.value.args[0]
+        assert exception_msg == "{} is not in the table".format(key)
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()
