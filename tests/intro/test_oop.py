@@ -45,7 +45,7 @@ class TestOOPMethods:
         exception_msg = excinfo.value.args[0]
         assert exception_msg == 'Numerator and denominator must be integers'
     
-    # Fails because you cannot create a fraction with a float as denominator")
+    # Fails because you cannot create a fraction with a float as denominator
     def test_init_denom_error(self):
         '''Testing TypeError'''
         with pytest.raises(TypeError) as excinfo:
@@ -53,7 +53,7 @@ class TestOOPMethods:
         exception_msg = excinfo.value.args[0]
         assert exception_msg == 'Numerator and denominator must be integers'
                 
-    # Fails because you cannot create a fraction with str as denominator")
+    # Fails because you cannot create a fraction with str as denominator
     def test_init_denom_error_2(self):
         '''Testing TypeError'''
         with pytest.raises(TypeError) as excinfo:
