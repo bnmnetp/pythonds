@@ -5,19 +5,20 @@ Roman Yasinovskyy, 2017
 
 #!/usr/bin/python3
 
-import unittest
-from unittest.mock import patch
-from io import StringIO
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.join(os.path.dirname(__file__), '..'), '..')))
+
+import pytest
 from pythonds3.trees.binary_search_tree import BinarySearchTree
 from pythonds3.trees.binary_search_tree import BinaryTreeNode
 
 
-class TestBinarySearchTreeMethods(unittest.TestCase):
-    '''Testing the Binary Search Tree module'''
-
-    def setUp(self):
+class TestBinarySearchTreeMethods:
+    
+    @pytest.fixture(scope = 'function', autouse = True)
+    def setup_class(cls):
         '''Setting up'''
-        self.bst = BinarySearchTree()
+        cls.bst = BinarySearchTree()
 
     def test_getput(self):
         '''Testing get() and put() methods'''
@@ -28,21 +29,21 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(85, 'd')
         self.bst.put(15, 'e')
         self.bst.put(45, 'f')
-        self.assertEqual(self.bst.get(50), 'a')
-        self.assertEqual(self.bst.get(45), 'f')
-        self.assertEqual(self.bst.get(85), 'd')
-        self.assertEqual(self.bst.get(10), 'b')
-        self.assertEqual(self.bst.root.key, 50)
-        self.assertEqual(self.bst.root.value, 'a')
-        self.assertEqual(self.bst.root.child_left.key, 10)
-        self.assertEqual(self.bst.root.child_right.key, 70)
-        self.assertEqual(self.bst.root.child_left.key, 10)
-        self.assertEqual(self.bst.root.child_right.key, 70)
+        assert self.bst.get(50) == 'a'
+        assert self.bst.get(45) == 'f'
+        assert self.bst.get(85) == 'd'
+        assert self.bst.get(10) == 'b'
+        assert self.bst.root.key == 50
+        assert self.bst.root.value == 'a'
+        assert self.bst.root.child_left.key == 10
+        assert self.bst.root.child_right.key == 70
+        assert self.bst.root.child_left.key == 10
+        assert self.bst.root.child_right.key == 70
 
     def test_getput_oper(self):
         '''Testing get and put operations'''
         self.bst[25] = 'g'
-        self.assertEqual(self.bst[25], 'g')
+        assert self.bst[25] == 'g'
 
     def test_find_successor(self):
         '''Testing find_successor() method'''
@@ -53,9 +54,9 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         x.put(2, 'd')
         x.put(8, 'e')
         x.put(9, 'f')
-        self.assertEqual(x.root.child_left.child_left.find_successor().key, 6)
-        self.assertEqual(x.root.child_left.child_right.find_successor().key, 9)
-        self.assertEqual(x.root.child_left.child_right.child_right.find_successor().key, 10)
+        assert x.root.child_left.child_left.find_successor().key == 6
+        assert x.root.child_left.child_right.find_successor().key == 9
+        assert x.root.child_left.child_right.child_right.find_successor().key == 10
 
     def test_len(self):
         '''Testing __len__() and length() methods'''
@@ -66,10 +67,10 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(85, 'd')
         self.bst.put(15, 'e')
         self.bst.put(45, 'f')
-        self.assertEqual(self.bst.size(), 7)
-        self.assertEqual(len(self.bst), 7)
+        assert self.bst.size() == 7
+        assert len(self.bst) == 7
 
-    def test_preorder(self):
+    def test_preorder(self, capsys):
         '''Testing preorder traversal'''
         self.bst.put(50, 'a')
         self.bst.put(10, 'b')
@@ -80,11 +81,11 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(45, 'f')
         self.bst.put(5, 'g')
 
-        with patch('sys.stdout', new=StringIO()) as output:
-            self.bst.preorder()
-        self.assertEqual(output.getvalue().strip(), '50 10 5 30 15 45 70 85')
+        self.bst.preorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == '50 10 5 30 15 45 70 85'
 
-    def test_inorder(self):
+    def test_inorder(self, capsys):
         '''Testing inorder traversal'''
         self.bst.put(50, 'a')
         self.bst.put(10, 'b')
@@ -95,11 +96,11 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(45, 'f')
         self.bst.put(5, 'g')
 
-        with patch('sys.stdout', new=StringIO()) as output:
-            self.bst.inorder()
-        self.assertEqual(output.getvalue().strip(), '5 10 15 30 45 50 70 85')
+        self.bst.inorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == '5 10 15 30 45 50 70 85'
 
-    def test_postorder(self):
+    def test_postorder(self, capsys):
         '''Testing postorder traversal'''
         self.bst.put(50, 'a')
         self.bst.put(10, 'b')
@@ -110,11 +111,11 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(45, 'f')
         self.bst.put(5, 'g')
 
-        with patch('sys.stdout', new=StringIO()) as output:
-            self.bst.postorder()
-        self.assertEqual(output.getvalue().strip(), '5 15 45 30 10 85 70 50')
+        self.bst.postorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == '5 15 45 30 10 85 70 50'
 
-    def test_delete(self):
+    def test_delete(self, capsys):
         '''Testing delete() method'''
         self.bst.put(50, 'a')
         self.bst.put(10, 'b')
@@ -125,77 +126,77 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(45, 'f')
         self.bst.put(5, 'g')
 
-        with patch('sys.stdout', new=StringIO()) as output:
-            self.bst.inorder()
-        self.assertEqual(output.getvalue().strip(), '5 10 15 30 45 50 70 85')
+        self.bst.inorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == '5 10 15 30 45 50 70 85'
 
-        self.assertTrue(10 in self.bst)
+        assert 10 in self.bst
         self.bst.delete(10)
-        self.assertFalse(10 in self.bst)
+        assert 10 not in self.bst
 
-        with patch('sys.stdout', new=StringIO()) as output:
-            self.bst.inorder()
-        self.assertEqual(output.getvalue().strip(), '5 15 30 45 50 70 85')
+        self.bst.inorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == '5 15 30 45 50 70 85'
 
-        self.assertEqual(self.bst.root.child_left.key, 15)
-        self.assertEqual(self.bst.root.child_left.parent, self.bst.root)
-        self.assertEqual(self.bst.root.child_left.child_right.parent, self.bst.root.child_left)
-        self.assertEqual(self.bst.get(30), 'd')
+        assert self.bst.root.child_left.key == 15
+        assert self.bst.root.child_left.parent == self.bst.root
+        assert self.bst.root.child_left.child_right.parent == self.bst.root.child_left
+        assert self.bst.get(30) == 'd'
 
         del self.bst[15]
-        with patch('sys.stdout', new=StringIO()) as output:
-            self.bst.inorder()
-        self.assertEqual(output.getvalue().strip(), '5 30 45 50 70 85')
+        self.bst.inorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == '5 30 45 50 70 85'
 
-        self.assertEqual(self.bst.root.child_left.key, 30)
-        self.assertEqual(self.bst.root.child_left.child_right.key, 45)
-        self.assertEqual(self.bst.root.child_left.child_right.parent, self.bst.root.child_left)
+        assert self.bst.root.child_left.key == 30
+        assert self.bst.root.child_left.child_right.key == 45
+        assert self.bst.root.child_left.child_right.parent == self.bst.root.child_left
         self.bst.delete(70)
-        with patch('sys.stdout', new=StringIO()) as output:
-            self.bst.inorder()
-        self.assertEqual(output.getvalue().strip(), '5 30 45 50 85')
-        self.assertTrue(85 in self.bst)
-        self.assertEqual(self.bst.get(30), 'd')
+        self.bst.inorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == '5 30 45 50 85'
+        assert 85 in self.bst
+        assert self.bst.get(30) == 'd'
 
-        with patch('sys.stdout', new=StringIO()) as output:
-            print(self.bst.root.key)
-        self.assertEqual(output.getvalue().strip(), '50')
-        with patch('sys.stdout', new=StringIO()) as output:
-            print(self.bst.root.child_left.key)
-        self.assertEqual(output.getvalue().strip(), '30')
-        with patch('sys.stdout', new=StringIO()) as output:
-            print(self.bst.root.child_left.child_left.key)
-        self.assertEqual(output.getvalue().strip(), '5')
-        with patch('sys.stdout', new=StringIO()) as output:
-            print(self.bst.root.child_left.child_right.key)
-        self.assertEqual(output.getvalue().strip(), '45')
-        with patch('sys.stdout', new=StringIO()) as output:
-            print(self.bst.root.child_right.key)
-        self.assertEqual(output.getvalue().strip(), '85')
+        print(self.bst.root.key)
+        out, err = capsys.readouterr()
+        assert out.strip() == '50'
+        print(self.bst.root.child_left.key)
+        out, err = capsys.readouterr()
+        assert out.strip(), '30'
+        print(self.bst.root.child_left.child_left.key)
+        out, err = capsys.readouterr()
+        assert out.strip() == '5'
+        print(self.bst.root.child_left.child_right.key)
+        out, err = capsys.readouterr()        
+        assert out.strip() == '45'
+        print(self.bst.root.child_right.key)
+        out, err = capsys.readouterr()        
+        assert out.strip() == '85'
         self.bst.delete(50)
-        self.assertEqual(self.bst.root.key, 85)
-        self.assertEqual(self.bst.root.child_left.key, 30)
-        self.assertFalse(self.bst.root.child_right)
-        self.assertEqual(self.bst.root.child_left.child_left.key, 5)
-        self.assertEqual(self.bst.root.child_left.child_right.key, 45)
-        self.assertEqual(self.bst.root.child_left.child_left.parent, self.bst.root.child_left)
-        self.assertEqual(self.bst.root.child_left.child_right.parent, self.bst.root.child_left)
-        with patch('sys.stdout', new=StringIO()) as output:
-            self.bst.inorder()
-        self.assertEqual(output.getvalue().strip(), '5 30 45 85')
+        assert self.bst.root.key == 85
+        assert self.bst.root.child_left.key == 30
+        assert not self.bst.root.child_right
+        assert self.bst.root.child_left.child_left.key == 5
+        assert self.bst.root.child_left.child_right.key == 45
+        assert self.bst.root.child_left.child_left.parent == self.bst.root.child_left
+        assert self.bst.root.child_left.child_right.parent == self.bst.root.child_left
+        self.bst.inorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == '5 30 45 85'
         del self.bst[45]
-        self.assertEqual(self.bst.root.child_left.key, 30)
+        assert self.bst.root.child_left.key == 30
         del self.bst[85]
-        self.assertEqual(self.bst.root.key, 30)
-        self.assertEqual(self.bst.root.child_left.parent.key, self.bst.root.key)
+        assert self.bst.root.key == 30
+        assert self.bst.root.child_left.parent.key == self.bst.root.key
         del self.bst[30]
-        self.assertEqual(self.bst.root.key, 5)
-        with patch('sys.stdout', new=StringIO()) as output:
-            self.bst.inorder()
-        self.assertEqual(output.getvalue().strip(), '5')
-        self.assertEqual(self.bst.root.key, 5)
+        assert self.bst.root.key == 5
+        self.bst.inorder()
+        out, err = capsys.readouterr()
+        assert out.strip() == '5'
+        assert self.bst.root.key == 5
         self.bst.delete(5)
-        self.assertFalse(self.bst.root)
+        assert not self.bst.root
 
     def test_delete_2(self):
         '''Testing delete() method again'''
@@ -205,17 +206,17 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(11, 'd')
         self.bst.put(22, 'd')
         self.bst.delete(10)
-        self.assertEqual(self.bst.root.child_left.key, 11)
-        self.assertEqual(self.bst.root.child_left.parent, self.bst.root)
-        self.assertEqual(self.bst.root.child_right.key, 24)
+        assert self.bst.root.child_left.key == 11
+        assert self.bst.root.child_left.parent == self.bst.root
+        assert self.bst.root.child_right.key == 24
         self.bst.delete(24)
-        self.assertEqual(self.bst.root.child_right.key, 22)
-        self.assertEqual(self.bst.root.child_right.parent, self.bst.root)
+        assert self.bst.root.child_right.key == 22
+        assert self.bst.root.child_right.parent == self.bst.root
         self.bst.delete(22)
         self.bst.delete(21)
-        self.assertEqual(self.bst.root.key, 11)
-        self.assertFalse(self.bst.root.child_left)
-        self.assertFalse(self.bst.root.child_right)
+        assert self.bst.root.key == 11
+        assert not self.bst.root.child_left
+        assert not self.bst.root.child_right
 
     def test_large_tree(self):
         '''Testing a large random tree'''
@@ -236,17 +237,17 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         for number in random_list:
             min_node = self.bst.root.find_min()
             if min_node:
-                self.assertEqual(min_node.key, sorted_list[0])
+                assert min_node.key == sorted_list[0]
             root_pos = sorted_list.index(self.bst.root.key)
             successor = self.bst.root.find_successor()
             if successor:
-                self.assertEqual(successor.key, sorted_list[root_pos + 1])
+                assert successor.key == sorted_list[root_pos + 1]
             else:
-                self.assertFalse(self.bst.root.child_right)
+                assert not self.bst.root.child_right
             self.bst.delete(number)
             sorted_list.remove(number)
 
-        self.assertFalse(self.bst.root)
+        assert not self.bst.root
 
     def test_iter(self):
         '''Testing iterator'''
@@ -265,7 +266,7 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
 
         i = 0
         for j in self.bst:
-            self.assertEqual(j, sorted_list[i])
+            assert j == sorted_list[i]
             i += 1
 
     '''The following exercises all of the branches in deleting a node with one child'''
@@ -277,10 +278,10 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(1, 1)
         self.bst.put(6, 6)
         self.bst.delete(7)
-        self.assertEqual(self.bst.root.child_left.key, 5)
-        self.assertEqual(self.bst.root, self.bst.root.child_left.parent)
-        self.assertEqual(self.bst.root.child_left.child_left.key, 1)
-        self.assertEqual(self.bst.root.child_left.child_right.key, 6)
+        assert self.bst.root.child_left.key == 5
+        assert self.bst.root == self.bst.root.child_left.parent
+        assert self.bst.root.child_left.child_left.key == 1
+        assert self.bst.root.child_left.child_right.key == 6
 
     def test_delete_case_2(self):
         '''Testing delete() method'''
@@ -290,10 +291,10 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(11, 11)
         self.bst.put(13, 13)
         self.bst.delete(15)
-        self.assertEqual(self.bst.root.child_right.key, 12)
-        self.assertEqual(self.bst.root.child_right.parent, self.bst.root)
-        self.assertEqual(self.bst.root.child_right.child_left.key, 11)
-        self.assertEqual(self.bst.root.child_right.child_right.key, 13)
+        assert self.bst.root.child_right.key == 12
+        assert self.bst.root.child_right.parent == self.bst.root
+        assert self.bst.root.child_right.child_left.key == 11
+        assert self.bst.root.child_right.child_right.key == 13
 
     def test_delete_case_3(self):
         '''Testing delete() method'''
@@ -303,10 +304,10 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(7, 7)
         self.bst.put(9, 9)
         self.bst.delete(6)
-        self.assertEqual(self.bst.root.child_left.key, 8)
-        self.assertEqual(self.bst.root.child_left.parent, self.bst.root)
-        self.assertEqual(self.bst.root.child_left.child_left.key, 7)
-        self.assertEqual(self.bst.root.child_left.child_right.key, 9)
+        assert self.bst.root.child_left.key == 8
+        assert self.bst.root.child_left.parent == self.bst.root
+        assert self.bst.root.child_left.child_left.key == 7
+        assert self.bst.root.child_left.child_right.key == 9
 
     def test_delete_case_4(self):
         '''Testing delete() method'''
@@ -316,10 +317,10 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(17, 17)
         self.bst.put(22, 22)
         self.bst.delete(15)
-        self.assertEqual(self.bst.root.child_right.key, 20)
-        self.assertEqual(self.bst.root.child_right.parent, self.bst.root)
-        self.assertEqual(self.bst.root.child_right.child_right.key, 22)
-        self.assertEqual(self.bst.root.child_right.child_left.key, 17)
+        assert self.bst.root.child_right.key == 20
+        assert self.bst.root.child_right.parent == self.bst.root
+        assert self.bst.root.child_right.child_right.key == 22
+        assert self.bst.root.child_right.child_left.key == 17
 
     def test_delete_case_5(self):
         '''Testing delete() method'''
@@ -328,11 +329,11 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(17, 17)
         self.bst.put(22, 22)
         self.bst.delete(10)
-        self.assertEqual(self.bst.root.key, 20)
-        self.assertEqual(self.bst.root.child_left.parent, self.bst.root)
-        self.assertEqual(self.bst.root.child_right.parent, self.bst.root)
-        self.assertEqual(self.bst.root.child_left.key, 17)
-        self.assertEqual(self.bst.root.child_right.key, 22)
+        assert self.bst.root.key == 20
+        assert self.bst.root.child_left.parent == self.bst.root
+        assert self.bst.root.child_right.parent == self.bst.root
+        assert self.bst.root.child_left.key == 17
+        assert self.bst.root.child_right.key == 22
 
     def test_delete_case_6(self):
         '''Testing delete() method'''
@@ -341,20 +342,24 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(1, 1)
         self.bst.put(7, 7)
         self.bst.delete(10)
-        self.assertEqual(self.bst.root.key, 5)
-        self.assertEqual(self.bst.root.child_left.parent, self.bst.root)
-        self.assertEqual(self.bst.root.child_right.parent, self.bst.root)
-        self.assertEqual(self.bst.root.child_left.key, 1)
-        self.assertEqual(self.bst.root.child_right.key, 7)
+        assert self.bst.root.key == 5
+        assert self.bst.root.child_left.parent == self.bst.root
+        assert self.bst.root.child_right.parent == self.bst.root
+        assert self.bst.root.child_left.key == 1
+        assert self.bst.root.child_right.key == 7
 
     def test_delete_error(self):
         '''Testing erreneous delete'''
         self.bst.put(10, 10)
-        with self.assertRaises(KeyError):
+        with pytest.raises(KeyError) as excinfo:
             self.bst.delete(5)
+        exception_msg = excinfo.value.args[0]
+        assert exception_msg == "Error, key not in tree"
         self.bst.delete(10)
-        with self.assertRaises(KeyError):
+        with pytest.raises(KeyError) as excinfo:
             self.bst.delete(10)
+        exception_msg = excinfo.value.args[0]
+        assert exception_msg == "Error, key not in tree"        
 
     def test_clear(self):
         '''Testing clear() method'''
@@ -365,9 +370,9 @@ class TestBinarySearchTreeMethods(unittest.TestCase):
         self.bst.put(85, 'd')
         self.bst.put(15, 'e')
         self.bst.put(45, 'f')
-        self.assertEqual(len(self.bst), 7)
+        assert len(self.bst) == 7
         self.bst.clear()
-        self.assertEqual(len(self.bst), 0)
+        assert len(self.bst) == 0
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()
