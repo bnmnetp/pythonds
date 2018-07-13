@@ -1,7 +1,7 @@
-#pytest
+# pytest
 In order to use pytest, you should have a basic knowledge of Python as well as how to use your machine’s command line; the commands here were run on a Linux machine.
 
-##How to get pytest:
+## How to get pytest:
 
 	We will be using pip3 so make sure your version of pip is up to date.
 	Create a virtual environment, if you don’t have one already, and activate it. Here the virtual environment is called “pythonds3”, but you can name it whatever you like:
@@ -13,7 +13,7 @@ In order to use pytest, you should have a basic knowledge of Python as well as h
 	Use deactivate to exit your virtual environment.
 
 
-##How to use pytest:
+## How to use pytest:
 
 In your terminal window, the basic command for running pytest is, simply:
 	pytest
