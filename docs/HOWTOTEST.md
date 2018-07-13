@@ -17,9 +17,9 @@ Use `deactivate` to exit your virtual environment.
   
 In your terminal window, the basic command for running pytest is, simply, `pytest`.  
 Using this command will run all tests in the current directory and all its subdirectories which follow pytest’s naming convention:  
-	- Test files should be named test_\<something\>.py or \<somthing\>_test.py  
-	- Test methods and functions should be named test_\<something\>.  
-	- Test classes should be named Test\<Something\>.  
+	* [Test files should be named test_\<something\>.py or \<somthing\>_test.py]  
+	* [Test methods and functions should be named test_\<something\>.  
+	* [Test classes should be named Test\<Something\>.]  
 All the provided tests already follow this naming convention and therefore should run properly.  
   
 *Selecting Tests*  
