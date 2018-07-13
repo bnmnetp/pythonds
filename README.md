@@ -15,7 +15,7 @@ The package is a supplement to [Problem Solving with Algorithms and Data Structu
  - Ordered linked list
  - Unordered linked list
 
-## Searhing
+## Searching
  - Hash Table
  
 ## Sorting
