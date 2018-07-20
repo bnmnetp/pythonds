@@ -6,7 +6,7 @@ Roman Yasinovskyy, 2017
 #!/usr/bin/python3
 
 import sys, os, pytest
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.join(os.path.dirname(__file__), '..'), '..')))
+sys.path.insert(0, os.path.abspath('../..'))
 
 from random import randint
 from pythonds3.sorting.sorting_algorithms import bubble_sort
@@ -64,4 +64,4 @@ class TestSortingMethods:
         assert self.lst_to_sort == self.test_lst
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(['test_sorting_algorithms.py'])

@@ -7,7 +7,8 @@ Roman Yasinovskyy, 2017
 
 # Specifies the absolute path to the pythonds3 module
 import sys, os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+#sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath('..'))
 
 import pytest
 from pythonds3.basic import Deque
@@ -29,4 +30,4 @@ def test_is_empty(set_up):
     assert set_up.is_empty()
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(['test_basic_init.py'])

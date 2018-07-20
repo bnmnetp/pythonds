@@ -6,7 +6,14 @@ Roman Yasinovskyy, 2017
 #!/usr/bin/python3
 
 import sys, os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.join(os.path.dirname(__file__), '..'), '..')))
+sys.path.insert(0, os.path.abspath('../..'))
+print(sys.path)
+
+if '/pythonds3' in sys.path[0]:
+    filepath = os.path.abspath('../../..')
+else:
+    filepath = sys.path[0]
+print(filepath)
 
 import pytest
 from pythonds3.graphs.adjacency_graph import Graph
@@ -18,7 +25,7 @@ class TestGraphMethods:
     def setup_class(cls):
         '''Setting up'''
         cls.graph = Graph()
-        filename = 'test_adjacency_graph.txt'
+        filename = filepath + '/pythonds3/tests/graphs/test_adjacency_graph.txt'
         with open(filename, 'r') as input_file:
             for raw_line in input_file:
                 line = raw_line.split()
@@ -137,4 +144,4 @@ class TestGraphMethods:
                 assert vertex.closing_time == 14
         
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(['test_adjacency_graph.py'])
