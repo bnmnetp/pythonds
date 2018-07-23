@@ -6,7 +6,7 @@ Roman Yasinovskyy, 2017
 #!/usr/bin/python3
 
 import sys, os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.join(os.path.dirname(__file__), '..'), '..')))
+sys.path.insert(0, os.path.abspath('../..'))
 
 import pytest
 from pythonds3.trees.binary_tree import BinaryTree
@@ -135,4 +135,4 @@ class TestBinaryTreeMethods:
         assert self.tree.postorder_eval() == 42
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(['test_binary_tree.py'])

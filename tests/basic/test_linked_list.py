@@ -6,7 +6,8 @@ Roman Yasinovskyy, 2017
 #!/usr/bin/python3
 
 import sys, os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.join(os.path.dirname(__file__), '..'), '..')))
+sys.path.insert(0, os.path.abspath('../..'))
+
 
 import random
 import pytest
@@ -36,11 +37,11 @@ class TestLinkedListMethods:
         out, err = capsys.readouterr()
         assert out.strip() == '42'
         
-    @pytest.mark.xfail(reason="can't instantiate abstract class LinkedList")
+    #xfail tests are expected to fail; should see a lowercase 'x' in output
+    @pytest.mark.xfail(reason="TypeError: can't instantiate LinkedList (abstract)")
     def test_linked_list_fail(self):
         '''Testing abstract linked list class'''
-        with pytest.raises(TypeError):
-            LinkedList()
+        LinkedList()
         
     def test_ordered_list_add(self):
         '''Testing unordered list add method'''
@@ -51,6 +52,7 @@ class TestLinkedListMethods:
             test_lst.insert(0, item)
         assert str(self.list_ordered) == str(sorted(test_lst))
 
+    #Remove the following decorator once remove is implemented
     @pytest.mark.xfail(reason="remove() is an exercise")
     def test_ordered_list_remove(self):
         '''Testing ordered list remove method'''
@@ -61,18 +63,17 @@ class TestLinkedListMethods:
             test_lst.insert(0, item)
         assert str(self.list_ordered) == str(sorted(test_lst))
         
-        with pytest.raises(AssertionError):
-            self.list_ordered.remove(test_lst[0])
-            test_lst.remove(test_lst[0])
-            assert str(self.list_ordered) == str(sorted(test_lst))
+        self.list_ordered.remove(test_lst[0])
+        test_lst.remove(test_lst[0])
+        assert str(self.list_ordered) == str(sorted(test_lst))
+    
+        self.list_ordered.remove(test_lst[5])
+        test_lst.remove(test_lst[5])
+        assert str(self.list_ordered) == str(sorted(test_lst))
         
-            self.list_ordered.remove(test_lst[5])
-            test_lst.remove(test_lst[5])
-            assert str(self.list_ordered) == str(sorted(test_lst))
-            
-            self.list_ordered.remove(test_lst[-1])
-            test_lst.remove(test_lst[-1])
-            assert str(self.list_ordered) == str(sorted(test_lst))
+        self.list_ordered.remove(test_lst[-1])
+        test_lst.remove(test_lst[-1])
+        assert str(self.list_ordered) == str(sorted(test_lst))
 
     # remove() is an exercise, so this test is expected to fail only AFTER 
     # remove() is implemented.
@@ -83,8 +84,8 @@ class TestLinkedListMethods:
         '''Testing ordered list remove method exception'''
         for _ in range(10):
             self.list_ordered.add(random.randint(1, 10))
-        with pytest.raises(ValueError):
-            self.list_ordered.remove(42)
+        #This should raise a ValueError        
+        self.list_ordered.remove(42)
 
     # Switch the following decorators once search() is implemented
     @pytest.mark.skip(reason="Only expected to fail AFTER search() is written")
@@ -99,8 +100,8 @@ class TestLinkedListMethods:
         assert self.list_ordered.search(test_lst[0])
         assert self.list_ordered.search(test_lst[5])
         assert self.list_ordered.search(test_lst[-1])
-        with pytest.raises(AssertionError):
-            assert self.list_ordered.search(42)
+        #This should raise an AssertionError
+        assert self.list_ordered.search(42)
 
     def test_unordered_list_add(self):
         '''Testing unordered list add method'''
@@ -129,7 +130,7 @@ class TestLinkedListMethods:
         test_lst.remove(test_lst[-1])
         assert str(self.list_unordered) == str(test_lst)
 
-    @pytest.mark.xfail(reason="ValueError raised when value not in list")
+    #This test should fail due to a ValueError raised when value not in list
     def test_unordered_list_remove_err(self):
         '''Testing unordered list remove method exception'''
         for _ in range(10):
@@ -140,7 +141,7 @@ class TestLinkedListMethods:
         exception_msg = excinfo.value.args[0]
         assert exception_msg == "{} is not in the list".format(value)
 
-    @pytest.mark.xfail(reason="42 is not in the list")
+    #This test should fail because 42 is not in the list
     def test_unordered_list_search(self):
         '''Testing unordered list search method'''
         test_lst = []
@@ -165,4 +166,4 @@ class TestLinkedListMethods:
         assert out.strip() == '[{}, {}]'.format(str_value, int_value)
 
 if __name__ == '__main__':
-    pytest.main()
+    pytest.main(['test_linked_list.py'])
