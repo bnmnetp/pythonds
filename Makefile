@@ -7,6 +7,10 @@ TEST_DIR=tests
 # Default
 all: package
 
+# Initialize the environment
+init:
+	pipenv install
+
 # Make a package
 package:
 	python3 setup.py sdist bdist_wheel
@@ -26,7 +30,7 @@ upload_test:
 
 # Autodiscover and run tests
 test:
-	pytest $(TEST_DIR)
+	pytest
 
 # Don't display instructions while cleaning
-.SILENT: clean
+.SILENT: clean init test
