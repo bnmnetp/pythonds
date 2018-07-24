@@ -1,12 +1,15 @@
 '''
 Testing the OOP module
 Roman Yasinovskyy, 2017
+Karina E. Hoff, 2018
 '''
 
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
-import sys, os
-sys.path.insert(0, os.path.abspath('../..'))
+# Specifies the absolute path to the pythonds3 module
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
 from pythonds3.intro.oop import Fraction
@@ -14,12 +17,12 @@ from pythonds3.intro.oop import Fraction
 
 class TestOOPMethods:
     
-    @pytest.fixture(scope = 'function', autouse = True)
-    def setup_class(cls):
+    @pytest.fixture(autouse=True)
+    def setup_class(self):
         '''Setting up'''
-        cls.frac1 = Fraction(1, 3)
-        cls.frac2 = Fraction(4, 6)
-        cls.frac3 = Fraction(6, 4)
+        self.frac1 = Fraction(1, 3)
+        self.frac2 = Fraction(4, 6)
+        self.frac3 = Fraction(6, 4)
 
     def test_init(self):
         '''Testing init'''

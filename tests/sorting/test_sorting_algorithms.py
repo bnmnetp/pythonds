@@ -1,13 +1,17 @@
 '''
 Testing the Sorting algorithms
 Roman Yasinovskyy, 2017
+Karina E. Hoff, 2018
 '''
 
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
-import sys, os, pytest
-sys.path.insert(0, os.path.abspath('../..'))
+# Specifies the absolute path to the pythonds3 module
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+import pytest
 from random import randint
 from pythonds3.sorting.sorting_algorithms import bubble_sort
 from pythonds3.sorting.sorting_algorithms import select_sort
@@ -21,12 +25,12 @@ from pythonds3.sorting.sorting_algorithms import heap_sort
 class TestSortingMethods:
     '''Testing the sorting algorithms'''
 
-    @pytest.fixture(scope = 'function', autouse = True)
-    def setup_class(cls):
+    @pytest.fixture(autouse=True)
+    def setup_class(self):
         '''Setting up'''
-        cls.lst_to_sort = [randint(100, 999) for _ in range(100)]
-        cls.test_lst = cls.lst_to_sort[:]
-        cls.test_lst.sort()
+        self.lst_to_sort = [randint(100, 999) for _ in range(100)]
+        self.test_lst = self.lst_to_sort[:]
+        self.test_lst.sort()
 
     def test_bubble_sort(self):
         '''Testing BubbleSort'''

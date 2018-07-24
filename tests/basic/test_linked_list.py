@@ -1,13 +1,15 @@
 '''
 Testing the Linked List module
 Roman Yasinovskyy, 2017
+Karina E. Hoff, 2018
 '''
 
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
-import sys, os
-sys.path.insert(0, os.path.abspath('../..'))
-
+# Specifies the absolute path to the pythonds3 module
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import random
 import pytest
@@ -19,12 +21,12 @@ from pythonds3.basic.linked_list import UnorderedList
 
 class TestLinkedListMethods:
 
-    @pytest.fixture(scope = 'function', autouse = True)
-    def setup_class(cls):
+    @pytest.fixture(autouse=True)
+    def setup_class(self):
         '''Setting up'''
-        cls.node = LinkedListNode(42)
-        cls.list_ordered = OrderedList()
-        cls.list_unordered = UnorderedList()
+        self.node = LinkedListNode(42)
+        self.list_ordered = OrderedList()
+        self.list_unordered = UnorderedList()
 
     def test_node_init(self):
         '''Testing node __init__ method'''

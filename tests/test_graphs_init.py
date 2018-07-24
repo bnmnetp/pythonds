@@ -1,12 +1,15 @@
 '''
 Testing the graphs __init__ file
 Roman Yasinovskyy, 2017
+Karina E. Hoff, 2018
 '''
-#!/usr/bin/python3
 
-import sys, os
-#sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-sys.path.insert(0, os.path.abspath('..'))
+#!/usr/bin/env python3
+
+# Specifies the absolute path to the pythonds3 module
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
 from pythonds3.graphs import Graph

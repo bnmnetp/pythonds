@@ -1,12 +1,15 @@
 '''
 Testing the Queue module
 Roman Yasinovskyy, 2017
+Karina E. Hoff, 2018
 '''
 
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
-import sys, os
-sys.path.insert(0, os.path.abspath('../..'))
+# Specifies the absolute path to the pythonds3 module
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
 from pythonds3.basic.queue import Queue
@@ -14,10 +17,10 @@ from pythonds3.basic.queue import Queue
 
 class TestQueueMethods:
 
-    @pytest.fixture(scope = 'function', autouse = True)
-    def setup_class(cls):
+    @pytest.fixture(autouse=True)
+    def setup_class(self):
         '''Setting up'''
-        cls.queue = Queue()
+        self.queue = Queue()
 
     def test_is_empty(self):
         '''Testing is_empty() method'''

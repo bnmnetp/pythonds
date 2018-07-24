@@ -1,25 +1,28 @@
 '''
 Testing the Hash Table module
 Roman Yasinovskyy, 2017
+Karina E. Hoff, 2018
 '''
 
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
-import sys, os
-sys.path.insert(0, os.path.abspath('../..'))
+# Specifies the absolute path to the pythonds3 module
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import random
 import pytest
+import random
 
 from pythonds3.searching.hash_table import HashTable
 
 
 class TestHashMapMethods:
 
-    @pytest.fixture(scope = 'function', autouse = True)
-    def setup_class(cls):
+    @pytest.fixture(autouse=True)
+    def setup_class(self):
         '''Setting up'''
-        cls.hash_table = HashTable()
+        self.hash_table = HashTable()
 
     def test_hashmap_is_empty(self):
         '''Testing hash map is_empty() method'''

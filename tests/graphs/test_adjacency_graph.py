@@ -1,38 +1,33 @@
 '''
 Testing the Graph module
 Roman Yasinovskyy, 2017
+Karina E. Hoff, 2018
 '''
 
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
-import sys, os
-sys.path.insert(0, os.path.abspath('../..'))
-print(sys.path)
-
-if '/pythonds3' in sys.path[0]:
-    filepath = os.path.abspath('../../..')
-else:
-    filepath = sys.path[0]
-print(filepath)
+# Specifies the absolute path to the pythonds3 module
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
 from pythonds3.graphs.adjacency_graph import Graph
 
 
 class TestGraphMethods:
-    
-    @pytest.fixture(scope = 'function', autouse = True)
-    def setup_class(cls):
+    @pytest.fixture(autouse=True)
+    def setup_class(self):
         '''Setting up'''
-        cls.graph = Graph()
-        filename = filepath + '/pythonds3/tests/graphs/test_adjacency_graph.txt'
+        self.graph = Graph()
+        filename = 'tests/graphs/test_adjacency_graph.txt'
         with open(filename, 'r') as input_file:
             for raw_line in input_file:
                 line = raw_line.split()
                 if len(line) == 1:
                     src = line[0]
                 elif len(line) == 2:
-                    cls.graph.add_edge(src, line[0], int(line[1]))
+                    self.graph.add_edge(src, line[0], int(line[1]))
 
     def test_len(self):
         '''Testing len() method'''
@@ -100,16 +95,17 @@ class TestGraphMethods:
             assert self.graph.get_vertex(vertex).previous.key == expected_result_from_t[vertex][0]
             assert self.graph.get_vertex(vertex).distance == expected_result_from_t[vertex][1]
 
-    @pytest.mark.xfailure(reason="")
+    @pytest.mark.xfailure(reason="Negative path detected")
     def test_bellman_ford_error(self):
         '''Testing Bellman-Ford shortest path algorithm exception'''
-        self.graph.add_edge('t', 'u', -2)
-        self.graph.add_edge('u', 'v', -3)
-        self.graph.add_edge('v', 't', -4)
-        self.graph.reset_distances()
+        self.err_graph = Graph()
+        self.err_graph.add_edge('t', 'u', -2)
+        self.err_graph.add_edge('u', 'v', -3)
+        self.err_graph.add_edge('v', 't', -4)
+        self.err_graph.reset_distances()
         start_vertex = 't'
         with pytest.raises(ValueError):
-            self.graph.bellman_ford(self.graph.get_vertex(start_vertex))
+            self.err_graph.bellman_ford(self.err_graph.get_vertex(start_vertex))
 
     def test_prim(self):
         '''Testing Prim's spanning tree algorithm'''

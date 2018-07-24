@@ -1,12 +1,15 @@
 '''
 Testing the Binary Heap module
 Roman Yasinovskyy, 2017
+Karina E. Hoff, 2018
 '''
 
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
-import sys, os
-sys.path.insert(0, os.path.abspath('../..'))
+# Specifies the absolute path to the pythonds3 module
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
 from pythonds3.trees.binary_heap import BinaryHeap
@@ -14,15 +17,15 @@ from pythonds3.trees.binary_heap import BinaryHeap
 
 class TestBinaryHeapMethods:
     
-    @pytest.fixture(scope = 'function', autouse = True)
-    def setup_class(cls):
+    @pytest.fixture(autouse=True)
+    def setup_class(self):
         '''Setting up'''
-        cls.heap = BinaryHeap()
-        cls.heap.insert((5, 'a'))
-        cls.heap.insert((9, 'd'))
-        cls.heap.insert((1, 'x'))
-        cls.heap.insert((2, 'y'))
-        cls.heap.insert((3, 'z'))
+        self.heap = BinaryHeap()
+        self.heap.insert((5, 'a'))
+        self.heap.insert((9, 'd'))
+        self.heap.insert((1, 'x'))
+        self.heap.insert((2, 'y'))
+        self.heap.insert((3, 'z'))
 
     def test_contains(self):
         '''Testing __contains__ method'''
