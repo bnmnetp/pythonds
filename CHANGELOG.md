@@ -6,6 +6,29 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## 3.0.1 - 2018-07-25
+
+This version adds examples of usage and updates tests.
+
+### Added
+- HOWTO explaining the usage of this package.
+- HOWTO-DEV with the development guidelines.
+
+### Changed
+- Tests for all algorithms and data structures are using pytest.
+
+### Deprecated
+- N/A
+
+### Removed
+- N/A
+
+### Fixed
+- N/A
+
+### Security
+- N/A
+
 ## 3.0.0 - 2018-06-20
 
 Initial release.
@@ -47,4 +70,4 @@ The changes between *pythonds* and *pythonds3* are as follows:
 ### Security
 - Not all exceptions are handled properly.
 
-[Unreleased]: https://github.com/yasinovskyy/pythonds3/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/yasinovskyy/pythonds3/compare/v3.0.1...HEAD
