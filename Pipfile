@@ -5,6 +5,7 @@ url = "https://pypi.org/simple"
 
 [packages]
 pytest = "*"
+twine = "*"
 
 [requires]
 python_version = "3.5"
