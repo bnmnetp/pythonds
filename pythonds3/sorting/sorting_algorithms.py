@@ -1,15 +1,16 @@
-'''
+#!/usr/bin/env python3
+"""
 Bradley N. Miller, David L. Ranum
 Problem Solving with Algorithms and Data Structures using Python
 Copyright 2005
 Updated by Roman Yasinovskyy, 2017
-'''
+"""
 
 import heapq
 
 
 def bubble_sort(lst):
-    '''Bubble sort'''
+    """Bubble sort"""
     for i in range(len(lst) - 1, 0, -1):
         for j in range(i):
             if lst[j] > lst[j + 1]:
@@ -17,8 +18,8 @@ def bubble_sort(lst):
 
 
 def select_sort(lst):
-    '''Selection sort'''
-    for i in range(len(lst)):
+    """Selection sort"""
+    for i, item in enumerate(lst):
         min_idx = len(lst) - 1
         for j in range(i, len(lst)):
             if lst[j] < lst[min_idx]:
@@ -28,7 +29,7 @@ def select_sort(lst):
 
 
 def insert_sort(lst):
-    '''Insertion sort'''
+    """Insertion sort"""
     for i in range(1, len(lst)):
         cur_val = lst[i]
         cur_pos = i
@@ -40,7 +41,7 @@ def insert_sort(lst):
 
 
 def shell_sort(lst):
-    '''Shell sort'''
+    """Shell sort"""
     sublist_count = len(lst) // 3
     while sublist_count > 0:
         for pos_start in range(sublist_count):
@@ -49,7 +50,7 @@ def shell_sort(lst):
 
 
 def _gap_insert_sort(lst, start, gap):
-    '''Shell sort helper function'''
+    """Shell sort helper function"""
     for i in range(start + gap, len(lst), gap):
         cur_val = lst[i]
         cur_pos = i
@@ -60,7 +61,7 @@ def _gap_insert_sort(lst, start, gap):
 
 
 def merge_sort(lst):
-    '''Merge sort'''
+    """Merge sort"""
     if len(lst) > 1:
         mid = len(lst) // 2
         left_half = lst[:mid]
@@ -93,12 +94,12 @@ def merge_sort(lst):
 
 
 def quick_sort(lst):
-    '''Quick sort'''
+    """Quick sort"""
     _quick_sort_help(lst, 0, len(lst) - 1)
 
 
 def _quick_sort_help(lst, mark_l, mark_r):
-    '''Quick sort helper'''
+    """Quick sort helper"""
     if mark_l < mark_r:
         split = _quick_sort_part(lst, mark_l, mark_r)
         _quick_sort_help(lst, mark_l, split - 1)
@@ -106,7 +107,7 @@ def _quick_sort_help(lst, mark_l, mark_r):
 
 
 def _quick_sort_part(lst, mark_l, mark_r):
-    '''Quick sort partition'''
+    """Quick sort partition"""
     pivot_val = lst[mark_l]
     mark_l_cur = mark_l + 1
     mark_r_cur = mark_r
@@ -127,7 +128,7 @@ def _quick_sort_part(lst, mark_l, mark_r):
 
 
 def heap_sort(lst):
-    '''Heap sort'''
+    """Heap sort"""
     res = []
     heapq.heapify(lst)
     while lst:

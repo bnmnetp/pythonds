@@ -6,6 +6,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## 3.0.2 - 2019-01-10
+
+This version follows **pylint** recommendations and uses **black** to format code.
+
+### Added
+- Shebang line to all source files
+
+### Changed
+- Source formatting using **black**
+
+### Deprecated
+- N/A
+
+### Removed
+- Some code as recommended by **pylint**
+
+### Fixed
+- N/A
+
+### Security
+- N/A
+
 ## 3.0.1 - 2018-07-25
 
 This version adds examples of usage and updates tests.
@@ -70,4 +92,4 @@ The changes between *pythonds* and *pythonds3* are as follows:
 ### Security
 - Not all exceptions are handled properly.
 
-[Unreleased]: https://github.com/yasinovskyy/pythonds3/compare/v3.0.1...HEAD
+[Unreleased]: https://github.com/yasinovskyy/pythonds3/compare/v3.0.2...HEAD

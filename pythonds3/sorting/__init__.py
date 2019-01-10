@@ -1,6 +1,6 @@
-'''
+"""
 pythonds3.sorting import statement
-'''
+"""
 from pythonds3.sorting.sorting_algorithms import bubble_sort
 from pythonds3.sorting.sorting_algorithms import select_sort
 from pythonds3.sorting.sorting_algorithms import insert_sort

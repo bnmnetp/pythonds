@@ -1,6 +1,6 @@
-'''
+"""
 pythonds3.basic import statement
-'''
+"""
 from pythonds3.basic.stack import Stack
 from pythonds3.basic.queue import Queue
 from pythonds3.basic.deque import Deque
