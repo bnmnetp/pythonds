@@ -27,7 +27,7 @@ class BinaryTree:
             t = BinaryTree(newNode)
 
         if self.leftChild is not None:
-            t.left = self.leftChild
+            t.leftChild = self.leftChild
 
         self.leftChild = t
 
@@ -38,7 +38,7 @@ class BinaryTree:
             t = BinaryTree(newNode)
 
         if self.rightChild is not None:
-            t.right = self.rightChild
+            t.rightChild = self.rightChild
         self.rightChild = t
 
     def isLeaf(self):
