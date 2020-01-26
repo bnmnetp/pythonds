@@ -136,7 +136,6 @@ def heap_sort(lst):
     res = []
     heapq.heapify(lst)
     while lst:
-        res.append(lst.pop(0))
-        heapq.heapify(lst)
+        res.append(heapq.heappop(lst))
     for i in res:
         lst.append(i)
