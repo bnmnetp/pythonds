@@ -6,6 +6,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## 3.0.3 - 2020-01-26
+
+This version fixes various bugs and performance issues found during the book review.
+
+### Added
+- N/A
+
+### Changed
+- Implementation of Bubble, Merge, and Heap sorting algorithms
+
+### Deprecated
+- N/A
+
+### Removed
+- N/A
+
+### Fixed
+- N/A
+
+### Security
+- N/A
+
 ## 3.0.2 - 2019-01-10
 
 This version follows **pylint** recommendations and uses **black** to format code.
