@@ -78,7 +78,7 @@ def merge_sort(lst):
         j = 0
         k = 0
         while i < len(left_half) and j < len(right_half):
-            if left_half[i] < right_half[j]:
+            if left_half[i] <= right_half[j]:
                 lst[k] = left_half[i]
                 i = i + 1
             else:
