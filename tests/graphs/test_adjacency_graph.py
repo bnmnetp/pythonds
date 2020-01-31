@@ -113,7 +113,6 @@ class TestGraphMethods:
                 == expected_result_from_t[vertex][1]
             )
 
-    @pytest.mark.xfailure(reason="Negative path detected")
     def test_bellman_ford_error(self):
         """Testing Bellman-Ford shortest path algorithm exception"""
         self.err_graph = Graph()
