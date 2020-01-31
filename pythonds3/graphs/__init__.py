@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 pythonds3.graphs import statement
 """
