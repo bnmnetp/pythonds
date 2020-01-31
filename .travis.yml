@@ -6,3 +6,5 @@ install:
   - python3 -m pip install -r requirements-dev.txt
 script:
   - python3 -m pytest tests
+after_success:
+  - codecov
