@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## 3.0.3 - 2020-01-26
+## 3.0.3 - 2020-01-31
 
 This version fixes various bugs and performance issues found during the book review.
 
@@ -17,7 +17,7 @@ This version fixes various bugs and performance issues found during the book rev
 - Implementation of Bubble, Merge, and Heap sorting algorithms
 
 ### Deprecated
-- N/A
+- Tree and Graph methods will be renamed for better alignment with the textbook
 
 ### Removed
 - N/A
@@ -114,4 +114,4 @@ The changes between *pythonds* and *pythonds3* are as follows:
 ### Security
 - Not all exceptions are handled properly.
 
-[Unreleased]: https://github.com/yasinovskyy/pythonds3/compare/v3.0.2...HEAD
+[Unreleased]: https://github.com/yasinovskyy/pythonds3/compare/v3.0.3...HEAD

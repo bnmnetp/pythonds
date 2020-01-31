@@ -4,11 +4,12 @@ name = "pypi"
 url = "https://pypi.org/simple"
 
 [packages]
-pytest = "*"
-twine = "*"
 
 [requires]
-python_version = "3.5"
+python_version = "3.6"
 
 [dev-packages]
+black = "*"
 pylint = "*"
+pytest = "*"
+twine = "*"

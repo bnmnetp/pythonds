@@ -14,8 +14,8 @@ setuptools.setup(
     url="https://github.com/yasinovskyy/pythonds3",
     packages=setuptools.find_packages(),
     license="GPLv3+",
-    platforms=['OS Independent'],
-    keywords = ['Education', 'Algorithms', 'Data Structures', 'Python', 'Stack', 'Queue', 'Tree', 'Graph'],
+    platforms=["OS Independent"],
+    keywords = ["Education", "Algorithms", "Data Structures", "Python", "Stack", "Queue", "Tree", "Graph"],
     classifiers=(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
