@@ -5,6 +5,8 @@ python:
 install:
   - python3 -m pip install -r requirements-dev.txt
 script:
-  - python3 -m pytest tests
+  - coverage run -m pytest
 after_success:
-  - codecov
+  - bash <(curl -s https://codecov.io/bash)
+
+
