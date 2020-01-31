@@ -26,25 +26,27 @@ This project can be used to demonstrate new features of Python (type hints, f-st
 
 1. Setup the virtual environment
 
-    There are no external dependencies in the code, but the package uses pytest for testing and pylint for linting.
+    There are no external dependencies in the code, but the package uses *pytest* for testing, *flake8* for linting, and *black* for formatting.
 
     `make init`
 
     or 
 
-    `pipenv install`
+    `python3 -m venv .venv`
 
-    `pipenv shell`
+    `source .venv/bin/activate`
+
+    `python3 -m pip install -r requirements-dev.txt`
 
 # Testing
 
-This project uses pytest framework. In order to use pytest, you must have a basic knowledge of Python and command line interface.  
+This project uses *pytest* framework. In order to use pytest, you must have a basic knowledge of Python and command line interface.  
   
 ## Getting pytest
 
-pytest is installed when you install and activate the virtual environment. You can also install it using `pip`.
+pytest is installed when you activate the virtual environment and install dependencies. You can also install it using `pip`.
 
-`python -m pip install -U pytest`
+`python3 -m pip install -U pytest`
 
 ## Using pytest
   

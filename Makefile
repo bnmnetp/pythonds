@@ -9,8 +9,7 @@ all: package
 
 # Initialize the environment
 init:
-	python3 -m pip install pipenv
-	pipenv install -e
+	python3 -m pip install -r requirements-dev.txt
 
 # Make a package
 package:
@@ -31,7 +30,7 @@ upload_test:
 
 # Autodiscover and run tests
 test:
-	python3 -m pytest tests
+	python3 -m pytest $TEST_DIR
 
 # Don't display instructions while cleaning
 .SILENT: clean init test
