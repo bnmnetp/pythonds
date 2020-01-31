@@ -1,10 +1,10 @@
+#!/usr/bin/env python3
 """
 Testing the Priority Queue module
 Roman Yasinovskyy, 2017
 Karina E. Hoff, 2018
 """
 
-#!/usr/bin/env python3
 
 # Specifies the absolute path to the pythonds3 module
 import os
