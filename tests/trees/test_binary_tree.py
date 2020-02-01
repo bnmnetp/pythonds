@@ -42,15 +42,15 @@ class TestBinaryTreeMethods:
         self.tree.insert_right("C")
         assert self.tree.height() == 1
 
-    def test_get_child_left(self):
-        """Testing get_child_left() method"""
+    def test_get_left_child(self):
+        """Testing get_left_child() method"""
         self.tree.insert_left("B")
-        assert self.tree.get_child_left().get_root_val() == "B"
+        assert self.tree.get_left_child().get_root_val() == "B"
 
-    def test_get_child_right(self):
-        """Testing get_child_right() method"""
+    def test_get_right_child(self):
+        """Testing get_right_child() method"""
         self.tree.insert_right("C")
-        assert self.tree.get_child_right().get_root_val() == "C"
+        assert self.tree.get_right_child().get_root_val() == "C"
 
     def test_height(self):
         """Testing height() method"""
@@ -59,7 +59,7 @@ class TestBinaryTreeMethods:
         assert self.tree.height() == 1
         self.tree.insert_right("C")
         assert self.tree.height() == 1
-        self.tree.get_child_left().insert_left("D")
+        self.tree.get_left_child().insert_left("D")
         assert self.tree.height() == 2
 
     def test_size(self):
@@ -70,7 +70,7 @@ class TestBinaryTreeMethods:
         assert self.tree.size() == 2
         self.tree.insert_right("C")
         assert self.tree.size() == 3
-        self.tree.get_child_left().insert_left("D")
+        self.tree.get_left_child().insert_left("D")
         assert self.tree.size() == 4
         assert len(self.tree) == 4
 
@@ -78,10 +78,10 @@ class TestBinaryTreeMethods:
         """Testing preorder() method"""
         self.tree.insert_left("B")
         self.tree.insert_right("C")
-        self.tree.get_child_left().insert_left("D")
-        self.tree.get_child_left().insert_right("E")
-        self.tree.get_child_right().insert_left("F")
-        self.tree.get_child_right().insert_right("G")
+        self.tree.get_left_child().insert_left("D")
+        self.tree.get_left_child().insert_right("E")
+        self.tree.get_right_child().insert_left("F")
+        self.tree.get_right_child().insert_right("G")
 
         self.tree.preorder()
         out, err = capsys.readouterr()
@@ -91,10 +91,10 @@ class TestBinaryTreeMethods:
         """Testing inorder() method"""
         self.tree.insert_left("B")
         self.tree.insert_right("C")
-        self.tree.get_child_left().insert_left("D")
-        self.tree.get_child_left().insert_right("E")
-        self.tree.get_child_right().insert_left("F")
-        self.tree.get_child_right().insert_right("G")
+        self.tree.get_left_child().insert_left("D")
+        self.tree.get_left_child().insert_right("E")
+        self.tree.get_right_child().insert_left("F")
+        self.tree.get_right_child().insert_right("G")
 
         self.tree.inorder()
         out, err = capsys.readouterr()
@@ -104,10 +104,10 @@ class TestBinaryTreeMethods:
         """Testing postorder() method"""
         self.tree.insert_left("B")
         self.tree.insert_right("C")
-        self.tree.get_child_left().insert_left("D")
-        self.tree.get_child_left().insert_right("E")
-        self.tree.get_child_right().insert_left("F")
-        self.tree.get_child_right().insert_right("G")
+        self.tree.get_left_child().insert_left("D")
+        self.tree.get_left_child().insert_right("E")
+        self.tree.get_right_child().insert_left("F")
+        self.tree.get_right_child().insert_right("G")
 
         self.tree.postorder()
         out, err = capsys.readouterr()
@@ -117,7 +117,7 @@ class TestBinaryTreeMethods:
         """Testing print_exp() method"""
         self.tree = BinaryTree("*")
         self.tree.insert_left("+")
-        left_subtree = self.tree.get_child_left()
+        left_subtree = self.tree.get_left_child()
         left_subtree.insert_left(1)
         left_subtree.insert_right(5)
         self.tree.insert_right(7)
@@ -130,7 +130,7 @@ class TestBinaryTreeMethods:
         """Testing postorder_eval() method"""
         self.tree = BinaryTree("*")
         self.tree.insert_left("+")
-        left_subtree = self.tree.get_child_left()
+        left_subtree = self.tree.get_left_child()
         left_subtree.insert_left(1)
         left_subtree.insert_right(5)
         self.tree.insert_right(7)

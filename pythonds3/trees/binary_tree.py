@@ -21,8 +21,8 @@ class BinaryTree:
     def __init__(self, key):
         """Create new tree"""
         self._key = key
-        self._child_left = None
-        self._child_right = None
+        self._left_child = None
+        self._right_child = None
 
     def get_root_val(self):
         """Get root key value"""
@@ -34,29 +34,29 @@ class BinaryTree:
 
     root = property(get_root_val, set_root_val)
 
-    def get_child_left(self):
+    def get_left_child(self):
         """Get left child"""
-        return self._child_left
+        return self._left_child
 
-    def set_child_left(self, node):
+    def set_left_child(self, node):
         """Set left child"""
-        self._child_left = node
+        self._left_child = node
 
-    child_left = property(get_child_left, set_child_left)
+    left_child = property(get_left_child, set_left_child)
 
-    def get_child_right(self):
+    def get_right_child(self):
         """Get right child"""
-        return self._child_right
+        return self._right_child
 
-    def set_child_right(self, node):
+    def set_right_child(self, node):
         """Set right child"""
-        self._child_right = node
+        self._right_child = node
 
-    child_right = property(get_child_right, set_child_right)
+    right_child = property(get_right_child, set_right_child)
 
     def is_leaf(self):
         """Check if a node is leaf"""
-        return (not self._child_left) and (not self._child_right)
+        return (not self._left_child) and (not self._right_child)
 
     def insert_left(self, new_node):
         """Insert left subtree"""
@@ -65,10 +65,10 @@ class BinaryTree:
         else:
             new_subtree = BinaryTree(new_node)
 
-        if self._child_left:
-            new_subtree.set_child_left(self._child_left)
+        if self._left_child:
+            new_subtree.set_left_child(self._left_child)
 
-        self._child_left = new_subtree
+        self._left_child = new_subtree
 
     def insert_right(self, new_node):
         """Insert right subtree"""
@@ -77,42 +77,42 @@ class BinaryTree:
         else:
             new_subtree = BinaryTree(new_node)
 
-        if self._child_right:
-            new_subtree.set_child_right(self._child_right)
-        self._child_right = new_subtree
+        if self._right_child:
+            new_subtree.set_right_child(self._right_child)
+        self._right_child = new_subtree
 
     def preorder(self):
         """Pre-order tree traversal"""
         print(self._key, end=" ")
-        if self._child_left:
-            self._child_left.preorder()
-        if self._child_right:
-            self._child_right.preorder()
+        if self._left_child:
+            self._left_child.preorder()
+        if self._right_child:
+            self._right_child.preorder()
 
     def inorder(self):
         """In-order tree traversal"""
-        if self._child_left:
-            self._child_left.inorder()
+        if self._left_child:
+            self._left_child.inorder()
         print(self._key, end=" ")
-        if self._child_right:
-            self._child_right.inorder()
+        if self._right_child:
+            self._right_child.inorder()
 
     def postorder(self):
         """Post-order tree traversal"""
-        if self._child_left:
-            self._child_left.postorder()
-        if self._child_right:
-            self._child_right.postorder()
+        if self._left_child:
+            self._left_child.postorder()
+        if self._right_child:
+            self._right_child.postorder()
         print(self._key, end=" ")
 
     def print_exp(self):
         """Print an expression"""
-        if self._child_left:
+        if self._left_child:
             print("(", end=" ")
-            self._child_left.print_exp()
+            self._left_child.print_exp()
         print(self._key, end=" ")
-        if self._child_right:
-            self._child_right.print_exp()
+        if self._right_child:
+            self._right_child.print_exp()
             print(")", end=" ")
 
     def postorder_eval(self):
@@ -125,10 +125,10 @@ class BinaryTree:
         }
         result_1 = None
         result_2 = None
-        if self._child_left:
-            result_1 = self._child_left.postorder_eval()
-        if self._child_right:
-            result_2 = self._child_right.postorder_eval()
+        if self._left_child:
+            result_1 = self._left_child.postorder_eval()
+        if self._right_child:
+            result_2 = self._right_child.postorder_eval()
         if result_1 and result_2:
             return operations[self._key](result_1, result_2)
         return self._key
@@ -137,13 +137,13 @@ class BinaryTree:
         """Height of a tree"""
         if not self._key:
             return -1
-        if self._child_left:
-            height_left = self._child_left.height()
+        if self._left_child:
+            height_left = self._left_child.height()
         else:
             height_left = -1
 
-        if self._child_right:
-            height_right = self._child_right.height()
+        if self._right_child:
+            height_right = self._right_child.height()
         else:
             height_right = -1
 
@@ -157,13 +157,13 @@ class BinaryTree:
         """Count nodes in a tree"""
         if not self._key:
             return 0
-        if self._child_left:
-            children_left = self._child_left.size()
+        if self._left_child:
+            children_left = self._left_child.size()
         else:
             children_left = 0
 
-        if self._child_right:
-            children_right = self._child_right.size()
+        if self._right_child:
+            children_right = self._right_child.size()
         else:
             children_right = 0
 
