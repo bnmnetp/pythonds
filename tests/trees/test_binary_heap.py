@@ -27,10 +27,9 @@ class TestBinaryHeapMethods:
         self.heap.insert((2, "y"))
         self.heap.insert((3, "z"))
 
-    def test_contains(self):
-        """Testing __contains__ method"""
-        assert (5, "a") in self.heap
-        assert (65, "b") not in self.heap
+    def test_get_min(self):
+        """Testing get_min method"""
+        assert self.heap.get_min() == (1, "x")
 
     def test_insert(self):
         """Test insert() method"""

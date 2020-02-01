@@ -56,6 +56,10 @@ class BinaryHeap:
             if show_details:
                 print(self._heap)
 
+    def get_min(self):
+        """Return the smallest item on the heap"""
+        return self._heap[0]
+
     def insert(self, item):
         """Add a new item"""
         self._heap.append(item)
@@ -79,7 +83,3 @@ class BinaryHeap:
     def __str__(self):
         """Heap as a string"""
         return str(self._heap)
-
-    def __contains__(self, item):
-        """__contains__in method override"""
-        return item in self._heap
