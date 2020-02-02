@@ -13,6 +13,7 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import pytest
+import random
 from pythonds3.trees.binary_search_tree import BinarySearchTree
 from pythonds3.trees.binary_search_tree import BinaryTreeNode
 
@@ -38,10 +39,10 @@ class TestBinarySearchTreeMethods:
         assert self.bst.get(10) == "b"
         assert self.bst.root.key == 50
         assert self.bst.root.value == "a"
-        assert self.bst.root.child_left.key == 10
-        assert self.bst.root.child_right.key == 70
-        assert self.bst.root.child_left.key == 10
-        assert self.bst.root.child_right.key == 70
+        assert self.bst.root.left_child.key == 10
+        assert self.bst.root.right_child.key == 70
+        assert self.bst.root.left_child.key == 10
+        assert self.bst.root.right_child.key == 70
 
     def test_getput_oper(self):
         """Testing get and put operations"""
@@ -57,12 +58,12 @@ class TestBinarySearchTreeMethods:
         x.put(2, "d")
         x.put(8, "e")
         x.put(9, "f")
-        assert x.root.child_left.child_left.find_successor().key == 6
-        assert x.root.child_left.child_right.find_successor().key == 9
-        assert x.root.child_left.child_right.child_right.find_successor().key == 10
+        assert x.root.left_child.left_child.find_successor().key == 6
+        assert x.root.left_child.right_child.find_successor().key == 9
+        assert x.root.left_child.right_child.right_child.find_successor().key == 10
 
     def test_len(self):
-        """Testing __len__() and length() methods"""
+        """Testing __len__() and size() methods"""
         self.bst.put(50, "a")
         self.bst.put(10, "b")
         self.bst.put(70, "c")
@@ -141,9 +142,9 @@ class TestBinarySearchTreeMethods:
         out, err = capsys.readouterr()
         assert out.strip() == "5 15 30 45 50 70 85"
 
-        assert self.bst.root.child_left.key == 15
-        assert self.bst.root.child_left.parent == self.bst.root
-        assert self.bst.root.child_left.child_right.parent == self.bst.root.child_left
+        assert self.bst.root.left_child.key == 15
+        assert self.bst.root.left_child.parent == self.bst.root
+        assert self.bst.root.left_child.right_child.parent == self.bst.root.left_child
         assert self.bst.get(30) == "d"
 
         del self.bst[15]
@@ -151,9 +152,9 @@ class TestBinarySearchTreeMethods:
         out, err = capsys.readouterr()
         assert out.strip() == "5 30 45 50 70 85"
 
-        assert self.bst.root.child_left.key == 30
-        assert self.bst.root.child_left.child_right.key == 45
-        assert self.bst.root.child_left.child_right.parent == self.bst.root.child_left
+        assert self.bst.root.left_child.key == 30
+        assert self.bst.root.left_child.right_child.key == 45
+        assert self.bst.root.left_child.right_child.parent == self.bst.root.left_child
         self.bst.delete(70)
         self.bst.inorder()
         out, err = capsys.readouterr()
@@ -164,34 +165,34 @@ class TestBinarySearchTreeMethods:
         print(self.bst.root.key)
         out, err = capsys.readouterr()
         assert out.strip() == "50"
-        print(self.bst.root.child_left.key)
+        print(self.bst.root.left_child.key)
         out, err = capsys.readouterr()
         assert out.strip(), "30"
-        print(self.bst.root.child_left.child_left.key)
+        print(self.bst.root.left_child.left_child.key)
         out, err = capsys.readouterr()
         assert out.strip() == "5"
-        print(self.bst.root.child_left.child_right.key)
+        print(self.bst.root.left_child.right_child.key)
         out, err = capsys.readouterr()
         assert out.strip() == "45"
-        print(self.bst.root.child_right.key)
+        print(self.bst.root.right_child.key)
         out, err = capsys.readouterr()
         assert out.strip() == "85"
         self.bst.delete(50)
         assert self.bst.root.key == 85
-        assert self.bst.root.child_left.key == 30
-        assert not self.bst.root.child_right
-        assert self.bst.root.child_left.child_left.key == 5
-        assert self.bst.root.child_left.child_right.key == 45
-        assert self.bst.root.child_left.child_left.parent == self.bst.root.child_left
-        assert self.bst.root.child_left.child_right.parent == self.bst.root.child_left
+        assert self.bst.root.left_child.key == 30
+        assert not self.bst.root.right_child
+        assert self.bst.root.left_child.left_child.key == 5
+        assert self.bst.root.left_child.right_child.key == 45
+        assert self.bst.root.left_child.left_child.parent == self.bst.root.left_child
+        assert self.bst.root.left_child.right_child.parent == self.bst.root.left_child
         self.bst.inorder()
         out, err = capsys.readouterr()
         assert out.strip() == "5 30 45 85"
         del self.bst[45]
-        assert self.bst.root.child_left.key == 30
+        assert self.bst.root.left_child.key == 30
         del self.bst[85]
         assert self.bst.root.key == 30
-        assert self.bst.root.child_left.parent.key == self.bst.root.key
+        assert self.bst.root.left_child.parent.key == self.bst.root.key
         del self.bst[30]
         assert self.bst.root.key == 5
         self.bst.inorder()
@@ -209,35 +210,24 @@ class TestBinarySearchTreeMethods:
         self.bst.put(11, "d")
         self.bst.put(22, "d")
         self.bst.delete(10)
-        assert self.bst.root.child_left.key == 11
-        assert self.bst.root.child_left.parent == self.bst.root
-        assert self.bst.root.child_right.key == 24
+        assert self.bst.root.left_child.key == 11
+        assert self.bst.root.left_child.parent == self.bst.root
+        assert self.bst.root.right_child.key == 24
         self.bst.delete(24)
-        assert self.bst.root.child_right.key == 22
-        assert self.bst.root.child_right.parent == self.bst.root
+        assert self.bst.root.right_child.key == 22
+        assert self.bst.root.right_child.parent == self.bst.root
         self.bst.delete(22)
         self.bst.delete(21)
         assert self.bst.root.key == 11
-        assert not self.bst.root.child_left
-        assert not self.bst.root.child_right
+        assert not self.bst.root.left_child
+        assert not self.bst.root.right_child
 
     def test_large_tree(self):
         """Testing a large random tree"""
-        import random
-
-        i = 0
-        random_list = []
-        while i < 10000:
-            nrand = random.randrange(1, 10000000)
-            if nrand not in random_list:
-                random_list.append(nrand)
-                i += 1
-        # print(random_list)
+        random_list = random.sample(range(1, 1_000_000), 1_000)
         for number in random_list:
             self.bst.put(number, number)
-        sorted_list = random_list[:]
-        sorted_list.sort()
-        random.shuffle(random_list)
+        sorted_list = sorted(random_list)
         for number in random_list:
             min_node = self.bst.root.find_min()
             if min_node:
@@ -247,7 +237,7 @@ class TestBinarySearchTreeMethods:
             if successor:
                 assert successor.key == sorted_list[root_pos + 1]
             else:
-                assert not self.bst.root.child_right
+                assert not self.bst.root.right_child
             self.bst.delete(number)
             sorted_list.remove(number)
 
@@ -257,17 +247,10 @@ class TestBinarySearchTreeMethods:
         """Testing iterator"""
         import random
 
-        i = 0
-        random_list = []
-        while i < 100:
-            nrand = random.randrange(1, 10000)
-            if nrand not in random_list:
-                random_list.append(nrand)
-                i += 1
+        random_list = random.sample(range(1, 1_000_000), 100)
         for n in random_list:
             self.bst.put(n, n)
-        sorted_list = random_list[:]
-        sorted_list.sort()
+        sorted_list = sorted(random_list)
 
         i = 0
         for j in self.bst:
@@ -284,10 +267,10 @@ class TestBinarySearchTreeMethods:
         self.bst.put(1, 1)
         self.bst.put(6, 6)
         self.bst.delete(7)
-        assert self.bst.root.child_left.key == 5
-        assert self.bst.root == self.bst.root.child_left.parent
-        assert self.bst.root.child_left.child_left.key == 1
-        assert self.bst.root.child_left.child_right.key == 6
+        assert self.bst.root.left_child.key == 5
+        assert self.bst.root == self.bst.root.left_child.parent
+        assert self.bst.root.left_child.left_child.key == 1
+        assert self.bst.root.left_child.right_child.key == 6
 
     def test_delete_case_2(self):
         """Testing delete() method"""
@@ -297,10 +280,10 @@ class TestBinarySearchTreeMethods:
         self.bst.put(11, 11)
         self.bst.put(13, 13)
         self.bst.delete(15)
-        assert self.bst.root.child_right.key == 12
-        assert self.bst.root.child_right.parent == self.bst.root
-        assert self.bst.root.child_right.child_left.key == 11
-        assert self.bst.root.child_right.child_right.key == 13
+        assert self.bst.root.right_child.key == 12
+        assert self.bst.root.right_child.parent == self.bst.root
+        assert self.bst.root.right_child.left_child.key == 11
+        assert self.bst.root.right_child.right_child.key == 13
 
     def test_delete_case_3(self):
         """Testing delete() method"""
@@ -310,10 +293,10 @@ class TestBinarySearchTreeMethods:
         self.bst.put(7, 7)
         self.bst.put(9, 9)
         self.bst.delete(6)
-        assert self.bst.root.child_left.key == 8
-        assert self.bst.root.child_left.parent == self.bst.root
-        assert self.bst.root.child_left.child_left.key == 7
-        assert self.bst.root.child_left.child_right.key == 9
+        assert self.bst.root.left_child.key == 8
+        assert self.bst.root.left_child.parent == self.bst.root
+        assert self.bst.root.left_child.left_child.key == 7
+        assert self.bst.root.left_child.right_child.key == 9
 
     def test_delete_case_4(self):
         """Testing delete() method"""
@@ -323,10 +306,10 @@ class TestBinarySearchTreeMethods:
         self.bst.put(17, 17)
         self.bst.put(22, 22)
         self.bst.delete(15)
-        assert self.bst.root.child_right.key == 20
-        assert self.bst.root.child_right.parent == self.bst.root
-        assert self.bst.root.child_right.child_right.key == 22
-        assert self.bst.root.child_right.child_left.key == 17
+        assert self.bst.root.right_child.key == 20
+        assert self.bst.root.right_child.parent == self.bst.root
+        assert self.bst.root.right_child.right_child.key == 22
+        assert self.bst.root.right_child.left_child.key == 17
 
     def test_delete_case_5(self):
         """Testing delete() method"""
@@ -336,10 +319,10 @@ class TestBinarySearchTreeMethods:
         self.bst.put(22, 22)
         self.bst.delete(10)
         assert self.bst.root.key == 20
-        assert self.bst.root.child_left.parent == self.bst.root
-        assert self.bst.root.child_right.parent == self.bst.root
-        assert self.bst.root.child_left.key == 17
-        assert self.bst.root.child_right.key == 22
+        assert self.bst.root.left_child.parent == self.bst.root
+        assert self.bst.root.right_child.parent == self.bst.root
+        assert self.bst.root.left_child.key == 17
+        assert self.bst.root.right_child.key == 22
 
     def test_delete_case_6(self):
         """Testing delete() method"""
@@ -349,10 +332,10 @@ class TestBinarySearchTreeMethods:
         self.bst.put(7, 7)
         self.bst.delete(10)
         assert self.bst.root.key == 5
-        assert self.bst.root.child_left.parent == self.bst.root
-        assert self.bst.root.child_right.parent == self.bst.root
-        assert self.bst.root.child_left.key == 1
-        assert self.bst.root.child_right.key == 7
+        assert self.bst.root.left_child.parent == self.bst.root
+        assert self.bst.root.right_child.parent == self.bst.root
+        assert self.bst.root.left_child.key == 1
+        assert self.bst.root.right_child.key == 7
 
     def test_delete_error(self):
         """Testing erreneous delete"""
