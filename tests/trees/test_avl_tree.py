@@ -67,11 +67,11 @@ class TestBalancedBinarySearchTreeMethods:
         self.avl_tree.put(60, "e")
         self.avl_tree.put(43, "f")
         assert self.avl_tree.root.key == 45
-        assert self.avl_tree.root.child_left.key == 40
-        assert self.avl_tree.root.child_right.key == 50
+        assert self.avl_tree.root.left_child.key == 40
+        assert self.avl_tree.root.right_child.key == 50
         assert self.avl_tree.root.balance_factor == 0
-        assert self.avl_tree.root.child_left.balance_factor == 0
-        assert self.avl_tree.root.child_right.balance_factor == -1
+        assert self.avl_tree.root.left_child.balance_factor == 0
+        assert self.avl_tree.root.right_child.balance_factor == -1
 
     def test_auto_5(self):
         """Testing case 5"""
@@ -82,11 +82,11 @@ class TestBalancedBinarySearchTreeMethods:
         self.avl_tree.put(35, "e")
         self.avl_tree.put(37, "f")
         assert self.avl_tree.root.key == 35
-        assert self.avl_tree.root.child_left.key == 30
-        assert self.avl_tree.root.child_right.key == 40
+        assert self.avl_tree.root.left_child.key == 30
+        assert self.avl_tree.root.right_child.key == 40
         assert self.avl_tree.root.balance_factor == 0
-        assert self.avl_tree.root.child_left.balance_factor == 1
-        assert self.avl_tree.root.child_right.balance_factor == 0
+        assert self.avl_tree.root.left_child.balance_factor == 1
+        assert self.avl_tree.root.right_child.balance_factor == 0
 
 
 if __name__ == "__main__":
