@@ -1,6 +1,6 @@
 # pythonds3
 
-[![Build Status](https://travis-ci.com/yasinovskyy/pythonds3.svg?branch=master)](https://travis-ci.com/yasinovskyy/pythonds3) [![codecov](https://codecov.io/gh/yasinovskyy/pythonds3/branch/master/graph/badge.svg)](https://codecov.io/gh/yasinovskyy/pythonds3)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Supported Python versions](https://img.shields.io/pypi/pyversions/pythonds3)](https://img.shields.io/pypi/pyversions/pythonds3) [![PyPI version](https://badge.fury.io/py/pythonds3.svg)](https://badge.fury.io/py/pythonds3) [![Build Status](https://travis-ci.com/yasinovskyy/pythonds3.svg?branch=master)](https://travis-ci.com/yasinovskyy/pythonds3) [![codecov](https://codecov.io/gh/yasinovskyy/pythonds3/branch/master/graph/badge.svg)](https://codecov.io/gh/yasinovskyy/pythonds3)
 
 Data Structures package for *Problem Solving with Algorithms and Data Structures using Python* by Brad Miller and David Ranum.
 
