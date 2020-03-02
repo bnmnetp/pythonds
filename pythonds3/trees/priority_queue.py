@@ -11,17 +11,24 @@ from pythonds3.trees.binary_heap import BinaryHeap
 
 class PriorityQueue(BinaryHeap):
     """
-    This implementation of binary heap takes (key, value) pairs where key signifies priority
-    We will assume that the keys are all comparable.
+    This implementation of binary heap takes (priority, key) pairs
+    We will assume that the priorities are all comparable.
     """
 
-    def change_priority(self, new_priority, value):
+    def change_priority(self, search_key, new_priority):
         """Change the priority"""
-        key_to_move = 0
-        for i in range(len(self._heap)):
-            if self._heap[i][1] == value:
+        key_to_move = -1
+        for i, (priority, key) in enumerate(self._heap):
+            if key == search_key:
                 key_to_move = i
                 break
         if key_to_move > -1:
-            self._heap[key_to_move] = (new_priority, self._heap[key_to_move][1])
+            self._heap[key_to_move] = (new_priority, search_key)
             self._perc_up(key_to_move)
+
+    def __contains__(self, search_key):
+        """Find a key in the queue"""
+        for priority, key in self._heap:
+            if key == search_key:
+                return True
+        return False
