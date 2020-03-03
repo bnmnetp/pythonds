@@ -32,10 +32,15 @@ class TestPriorityQueueMethods:
         assert self.priority_queue.delete() == (2, "x")
         assert self.priority_queue.delete() == (3, "y")
 
-    def test_decrease_key(self):
-        """Testing decrease_key() method"""
-        self.priority_queue.change_priority(1, "d")
+    def test_change_priority(self):
+        """Testing change_priority() method"""
+        self.priority_queue.change_priority("d", 1)
         assert self.priority_queue.delete() == (1, "d")
+
+    def test_contains(self):
+        """Testing contains() method"""
+        assert "a" in self.priority_queue
+        assert "b" not in self.priority_queue
 
 
 if __name__ == "__main__":
