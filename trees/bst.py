@@ -164,8 +164,8 @@ class BinarySearchTree:
 
     def _postorder(self, tree):
         if tree:
-            self._postorder(tree.rightChild)
             self._postorder(tree.leftChild)
+            self._postorder(tree.rightChild)
             print(tree.key)            
 
     def preorder(self):
