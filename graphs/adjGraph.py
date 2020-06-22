@@ -6,13 +6,13 @@
 #
 
 import sys
-import os
 import unittest
 
 class Graph:
-    def __init__(self):
+    def __init__(self, udg=False):
         self.vertices = {}
         self.numVertices = 0
+        self.undirected = udg
         
     def addVertex(self,key):
         self.numVertices = self.numVertices + 1
@@ -35,7 +35,9 @@ class Graph:
             if t not in self.vertices:
                 nv = self.addVertex(t)
             self.vertices[f].addNeighbor(self.vertices[t],cost)
-    
+            if self.undirected:
+                self.vertices[t].addNeighbor(self.vertices[f],cost)
+
     def getVertices(self):
         return list(self.vertices.keys())
         
