@@ -1,3 +1,19 @@
 {
     "python.pythonPath": ".venv/bin/python3",
+    "cSpell.words": [
+        "codecov",
+        "deque",
+        "heapify",
+        "Heapsort",
+        "HOWTO",
+        "inorder",
+        "Mergesort",
+        "perc",
+        "pipenv",
+        "Preorder",
+        "pylint",
+        "pythonds",
+        "Ranum",
+        "venv"
+    ],
 }
