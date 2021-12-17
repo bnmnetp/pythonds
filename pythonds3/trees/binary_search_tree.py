@@ -7,10 +7,20 @@ Updated by Roman Yasinovskyy, 2017
 """
 
 
+from typing import Any, Iterator, Union
+
+
 class BinaryTreeNode:
     """Binary Tree Node class"""
 
-    def __init__(self, key, value, left=None, right=None, parent=None):
+    def __init__(
+        self,
+        key: Any,
+        value: Any,
+        left: Union["BinaryTreeNode", None] = None,
+        right: Union["BinaryTreeNode", None] = None,
+        parent: Union["BinaryTreeNode", None] = None,
+    ) -> None:
         """Create new Tree Node"""
         self._key = key
         self._value = value
@@ -18,81 +28,87 @@ class BinaryTreeNode:
         self._right_child = right
         self._parent = parent
 
-    def get_left_child(self):
+    def get_left_child(self) -> Union["BinaryTreeNode", None]:
         """Return the node's left child"""
         return self._left_child
 
-    def set_left_child(self, node):
+    def set_left_child(self, node) -> None:
         """Assign the node's left child"""
         self._left_child = node
 
     left_child = property(get_left_child, set_left_child)
 
-    def get_right_child(self):
+    def get_right_child(self) -> Union["BinaryTreeNode", None]:
         """Return the node's right child"""
         return self._right_child
 
-    def set_right_child(self, node):
+    def set_right_child(self, node) -> None:
         """Assign the node's right child"""
         self._right_child = node
 
     right_child = property(get_right_child, set_right_child)
 
-    def get_parent(self):
+    def get_parent(self) -> Union["BinaryTreeNode", None]:
         """Return the node's parent"""
         return self._parent
 
-    def set_parent(self, node):
+    def set_parent(self, node) -> None:
         """Assign the node's parent"""
         self._parent = node
 
     parent = property(get_parent, set_parent)
 
-    def is_left_child(self):
+    def is_left_child(self) -> bool:
         """Check if the node is a left child"""
-        return self._parent and self._parent.left_child == self
+        return self._parent is not None and self._parent.left_child == self
 
-    def is_right_child(self):
+    def is_right_child(self) -> bool:
         """Check if the node is a right child"""
-        return self._parent and self._parent.right_child == self
+        return self._parent is not None and self._parent.right_child == self
 
-    def is_root(self):
+    def is_root(self) -> bool:
         """Check if the node is a tree root"""
         return not self._parent
 
-    def is_leaf(self):
+    def is_leaf(self) -> bool:
         """Check if the node is a leaf"""
         return not (self._right_child or self._left_child)
 
-    def has_a_child(self):
+    def has_a_child(self) -> bool:
         """Check if the node has any child"""
-        return self._right_child or self._left_child
+        return self._right_child is not None or self._left_child is not None
 
-    def has_children(self):
+    def has_children(self) -> bool:
         """Check if the node has both children"""
-        return self._right_child and self._left_child
+        return self._right_child is not None and self._left_child is not None
 
-    def get_key(self):
+    def get_key(self) -> Any:
         """Get node key"""
         return self._key
 
-    def set_key(self, key):
+    def set_key(self, key) -> None:
         """Set node key"""
         self._key = key
 
     key = property(get_key, set_key)
 
-    def get_value(self):
+    def get_value(self) -> Any:
         """Get node value"""
         return self._value
 
-    def set_value(self, value):
+    def set_value(self, value) -> None:
         """Set node value"""
         self._value = value
 
     value = property(get_value, set_value)
 
-    def replace_value(self, key, value, left, right):
+    def replace_value(
+        self,
+        key: Any,
+        value: Any,
+        left: "BinaryTreeNode",
+        right: "BinaryTreeNode",
+    ) -> None:
         """Change node value"""
         self._key = key
         self._value = value
@@ -103,7 +119,7 @@ class BinaryTreeNode:
         if self.right_child:
             self._right_child.parent = self
 
-    def find_successor(self):
+    def find_successor(self) -> Union["BinaryTreeNode", None]:
         """Find the node's successor"""
         successor = None
         if self._right_child:
@@ -118,14 +134,14 @@ class BinaryTreeNode:
                     self._parent.right_child = self
         return successor
 
-    def find_min(self):
+    def find_min(self) -> "BinaryTreeNode":
         """Find the smallest node in the right subtree"""
         current = self
         while current.left_child:
             current = current.left_child
         return current
 
-    def splice_out(self):
+    def splice_out(self) -> None:
         """Splice out"""
         if self.is_leaf():
             if self.is_left_child():
@@ -146,7 +162,7 @@ class BinaryTreeNode:
                     self._parent.right_child = self._right_child
                 self._right_child.parent = self._parent
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator:
         """The standard inorder traversal of a binary tree"""
         if self:
             if self._left_child:
@@ -161,40 +177,40 @@ class BinaryTreeNode:
 class BinarySearchTree:
     """Binary search tree implementation"""
 
-    def __init__(self):
-        self._root = None
+    def __init__(self) -> None:
+        self._root: Union["BinaryTreeNode", None] = None
         self._size = 0
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Tree size"""
         return self._size
 
-    def size(self):
+    def size(self) -> int:
         """Tree size"""
         return self._size
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator:
         """Iterator"""
         return self._root.__iter__()
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: Any) -> Any:
         """[] getter operator override"""
         result = self.get(key)
         if result:
             return result
         raise KeyError("Error, key not in tree")
 
-    def get_root(self):
+    def get_root(self) -> Union["BinaryTreeNode", None]:
         """Get tree root"""
         return self._root
 
-    def set_root(self, node):
+    def set_root(self, node: "BinaryTreeNode") -> None:
         """Set tree root"""
         self._root = node
 
     root = property(get_root, set_root)
 
-    def get(self, key):
+    def get(self, key: Any) -> Union[Any, None]:
         """Retrieve a value by the key"""
         if self._root:
             result = self._get(key, self._root)
@@ -202,7 +218,9 @@ class BinarySearchTree:
                 return result.value
         return None
 
-    def _get(self, key, current_node):
+    def _get(
+        self, key: Any, current_node: "BinaryTreeNode"
+    ) -> Union["BinaryTreeNode", None]:
         """Retrieve a value by the key (helper function)"""
         if not current_node:
             return None
@@ -213,11 +231,11 @@ class BinarySearchTree:
         else:
             return self._get(key, current_node.right_child)
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key: Any, value: Any) -> None:
         """[] setter operator override"""
         self.put(key, value)
 
-    def put(self, key, value):
+    def put(self, key: Any, value: Any) -> None:
         """Add new node"""
         if self._root:
             self._put(key, value, self._root)
@@ -225,7 +243,7 @@ class BinarySearchTree:
             self._root = BinaryTreeNode(key, value)
         self._size = self._size + 1
 
-    def _put(self, key, value, current_node):
+    def _put(self, key: Any, value: Any, current_node: "BinaryTreeNode") -> None:
         """Add new node (helper function)"""
         if key < current_node.key:
             if current_node.left_child:
@@ -242,15 +260,15 @@ class BinarySearchTree:
                     key, value, parent=current_node
                 )
 
-    def __contains__(self, key):
+    def __contains__(self, key: Any) -> bool:
         """in operator override"""
         return bool(self._get(key, self._root))
 
-    def __delitem__(self, key):
+    def __delitem__(self, key: Any) -> None:
         """del operator override"""
         self.delete(key)
 
-    def delete(self, key):
+    def delete(self, key) -> None:
         """Remove a node by its key"""
         if self._size > 1:
             node_to_remove = self._get(key, self._root)
@@ -265,7 +283,7 @@ class BinarySearchTree:
         else:
             raise KeyError("Error, key not in tree")
 
-    def _delete(self, current_node):
+    def _delete(self, current_node: "BinaryTreeNode") -> None:
         """Remove a node by its key (helper function)"""
         if current_node.is_leaf():  # removing a leaf
             if current_node == current_node.parent.left_child:
@@ -307,40 +325,40 @@ class BinarySearchTree:
                         current_node.right_child.right_child,
                     )
 
-    def inorder(self):
+    def inorder(self) -> None:
         """In-order tree traversal"""
         self._inorder(self._root)
 
-    def _inorder(self, tree):
+    def _inorder(self, tree: "BinaryTreeNode") -> None:
         """In-order tree traversal (helper function)"""
         if tree:
             self._inorder(tree.left_child)
             print(tree.key, end=" ")
             self._inorder(tree.right_child)
 
-    def postorder(self):
+    def postorder(self) -> None:
         """Post-order tree traversal"""
         self._postorder(self._root)
 
-    def _postorder(self, tree):
+    def _postorder(self, tree: "BinaryTreeNode") -> None:
         """Post-order tree traversal (helper function)"""
         if tree:
             self._postorder(tree.left_child)
             self._postorder(tree.right_child)
             print(tree.key, end=" ")
 
-    def preorder(self):
+    def preorder(self) -> None:
         """Pre-order tree traversal"""
         self._preorder(self._root)
 
-    def _preorder(self, tree):
+    def _preorder(self, tree: "BinaryTreeNode") -> None:
         """Pre-order tree traversal (helper function)"""
         if tree:
             print(tree.key, end=" ")
             self._preorder(tree.left_child)
             self._preorder(tree.right_child)
 
-    def clear(self):
+    def clear(self) -> None:
         """Remove all nodes"""
         while self._root:
             self.delete(self._root.key)

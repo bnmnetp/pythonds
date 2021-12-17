@@ -6,25 +6,32 @@ Copyright 2005, 2010
 Updated by Roman Yasinovskyy, 2017
 """
 
-from pythonds3.trees.binary_search_tree import BinarySearchTree
-from pythonds3.trees.binary_search_tree import BinaryTreeNode
+from typing import Any, Union
+
+from pythonds3.trees.binary_search_tree import BinarySearchTree, BinaryTreeNode
 
 
 class AVLTreeNode(BinaryTreeNode):
     """AVL Tree Node"""
 
     def __init__(
-        self, key, val, balance_factor, left=None, right=None, parent=None
-    ):
+        self,
+        key: Any,
+        val: Any,
+        balance_factor: int,
+        left: Union["AVLTreeNode", None] = None,
+        right: Union["AVLTreeNode", None] = None,
+        parent: Union["AVLTreeNode", None] = None,
+    ) -> None:
         """Create an AVL tree node"""
         BinaryTreeNode.__init__(self, key, val, left, right, parent)
         self._balance_factor = balance_factor
 
-    def get_balance_factor(self):
+    def get_balance_factor(self) -> int:
         """Get the node balance factor"""
         return self._balance_factor
 
-    def set_balance_factor(self, value):
+    def set_balance_factor(self, value: int) -> None:
         """Set the node balance factor"""
         self._balance_factor = value
 
@@ -34,11 +41,11 @@ class AVLTreeNode(BinaryTreeNode):
 class AVLTree(BinarySearchTree):
     """AVL tree implementation"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create a new AVL tree"""
         BinarySearchTree.__init__(self)
 
-    def put(self, key, value):
+    def put(self, key: Any, value: Any) -> None:
         """Add new node"""
         if self._root:
             self._put(key, value, self._root)
@@ -46,7 +53,7 @@ class AVLTree(BinarySearchTree):
             self._root = AVLTreeNode(key, value, 0)
         self._size = self._size + 1
 
-    def _put(self, key, value, current_node):
+    def _put(self, key: Any, value: Any, current_node) -> None:
         """Add a new node to the tree (helper function)"""
         if key < current_node.key:
             if current_node.left_child:
@@ -65,7 +72,7 @@ class AVLTree(BinarySearchTree):
                 )
                 self.update_balance(current_node.right_child)
 
-    def update_balance(self, node):
+    def update_balance(self, node: "AVLTreeNode") -> None:
         """Update the tree balance"""
         if node.balance_factor > 1 or node.balance_factor < -1:
             self.rebalance(node)
@@ -79,7 +86,7 @@ class AVLTree(BinarySearchTree):
             if node.parent.balance_factor != 0:
                 self.update_balance(node.parent)
 
-    def rebalance(self, node):
+    def rebalance(self, node: "AVLTreeNode") -> None:
         """Rebalance the tree"""
         if node.balance_factor < 0:
             if node.right_child.balance_factor > 0:
@@ -98,7 +105,7 @@ class AVLTree(BinarySearchTree):
                 # single right
                 self.rotate_right(node)
 
-    def rotate_left(self, rotation_root):
+    def rotate_left(self, rotation_root: "AVLTreeNode") -> None:
         """Left rotation"""
         new_root = rotation_root.right_child
         rotation_root.right_child = new_root.left_child
@@ -121,7 +128,7 @@ class AVLTree(BinarySearchTree):
             new_root.balance_factor + 1 + max(rotation_root.balance_factor, 0)
         )
 
-    def rotate_right(self, rotation_root):
+    def rotate_right(self, rotation_root: "AVLTreeNode") -> None:
         """Right rotation"""
         new_root = rotation_root.left_child
         rotation_root.left_child = new_root.right_child

@@ -6,6 +6,7 @@ Copyright 2005
 Updated by Roman Yasinovskyy, 2017
 """
 
+from typing import Any
 from pythonds3.trees.binary_heap import BinaryHeap
 
 
@@ -15,10 +16,10 @@ class PriorityQueue(BinaryHeap):
     We will assume that the priorities are all comparable.
     """
 
-    def change_priority(self, search_key, new_priority):
+    def change_priority(self, search_key: Any, new_priority: Any) -> None:
         """Change the priority"""
         key_to_move = -1
-        for i, (priority, key) in enumerate(self._heap):
+        for i, (_, key) in enumerate(self._heap):
             if key == search_key:
                 key_to_move = i
                 break
@@ -26,9 +27,9 @@ class PriorityQueue(BinaryHeap):
             self._heap[key_to_move] = (new_priority, search_key)
             self._perc_up(key_to_move)
 
-    def __contains__(self, search_key):
+    def __contains__(self, search_key: Any) -> bool:
         """Find a key in the queue"""
-        for priority, key in self._heap:
+        for _, key in self._heap:
             if key == search_key:
                 return True
         return False

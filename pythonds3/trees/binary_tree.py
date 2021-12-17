@@ -7,6 +7,7 @@ Updated by Roman Yasinovskyy, 2017
 """
 
 import operator
+from typing import Any, Union
 
 
 class BinaryTree:
@@ -15,16 +16,16 @@ class BinaryTree:
     Using links and Nodes approach.
 
     Modified to allow for trees to be constructed from other trees
-    rather than always creating a new tree in the insert_feft or insert_right
+    rather than always creating a new tree in the insert_left or insert_right
     """
 
-    def __init__(self, key):
+    def __init__(self, key: Any) -> None:
         """Create new tree"""
         self._key = key
-        self._left_child = None
-        self._right_child = None
+        self._left_child: Union["BinaryTree", None] = None
+        self._right_child: Union["BinaryTree", None] = None
 
-    def get_root_val(self):
+    def get_root_val(self) -> Any:
         """Get root key value"""
         return self._key
 
@@ -34,31 +35,31 @@ class BinaryTree:
 
     root = property(get_root_val, set_root_val)
 
-    def get_left_child(self):
+    def get_left_child(self) -> Union["BinaryTree", None]:
         """Get left child"""
         return self._left_child
 
-    def set_left_child(self, node):
+    def set_left_child(self, node) -> None:
         """Set left child"""
         self._left_child = node
 
     left_child = property(get_left_child, set_left_child)
 
-    def get_right_child(self):
+    def get_right_child(self) -> Union["BinaryTree", None]:
         """Get right child"""
         return self._right_child
 
-    def set_right_child(self, node):
+    def set_right_child(self, node) -> None:
         """Set right child"""
         self._right_child = node
 
     right_child = property(get_right_child, set_right_child)
 
-    def is_leaf(self):
+    def is_leaf(self) -> bool:
         """Check if a node is leaf"""
         return (not self._left_child) and (not self._right_child)
 
-    def insert_left(self, new_node):
+    def insert_left(self, new_node: Any) -> None:
         """Insert left subtree"""
         if isinstance(new_node, BinaryTree):
             new_subtree = new_node
@@ -70,7 +71,7 @@ class BinaryTree:
 
         self._left_child = new_subtree
 
-    def insert_right(self, new_node):
+    def insert_right(self, new_node: Any) -> None:
         """Insert right subtree"""
         if isinstance(new_node, BinaryTree):
             new_subtree = new_node
@@ -81,7 +82,7 @@ class BinaryTree:
             new_subtree.set_right_child(self._right_child)
         self._right_child = new_subtree
 
-    def preorder(self):
+    def preorder(self) -> None:
         """Pre-order tree traversal"""
         print(self._key, end=" ")
         if self._left_child:
@@ -89,7 +90,7 @@ class BinaryTree:
         if self._right_child:
             self._right_child.preorder()
 
-    def inorder(self):
+    def inorder(self) -> None:
         """In-order tree traversal"""
         if self._left_child:
             self._left_child.inorder()
@@ -97,7 +98,7 @@ class BinaryTree:
         if self._right_child:
             self._right_child.inorder()
 
-    def postorder(self):
+    def postorder(self) -> None:
         """Post-order tree traversal"""
         if self._left_child:
             self._left_child.postorder()
@@ -105,7 +106,7 @@ class BinaryTree:
             self._right_child.postorder()
         print(self._key, end=" ")
 
-    def print_exp(self):
+    def print_exp(self) -> None:
         """Print an expression"""
         if self._left_child:
             print("(", end=" ")
@@ -115,7 +116,7 @@ class BinaryTree:
             self._right_child.print_exp()
             print(")", end=" ")
 
-    def postorder_eval(self):
+    def postorder_eval(self) -> Any:
         """Postorder evaluation"""
         operations = {
             "+": operator.add,
@@ -133,7 +134,7 @@ class BinaryTree:
             return operations[self._key](result_1, result_2)
         return self._key
 
-    def height(self):
+    def height(self) -> int:
         """Height of a tree"""
         if not self._key:
             return -1
@@ -149,11 +150,11 @@ class BinaryTree:
 
         return 1 + max(height_left, height_right)
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Size of a tree"""
         return self.size()
 
-    def size(self):
+    def size(self) -> int:
         """Count nodes in a tree"""
         if not self._key:
             return 0
