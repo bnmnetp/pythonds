@@ -30,7 +30,7 @@ upload_test:
 
 # Autodiscover and run tests
 test:
-	python3 -m pytest $TEST_DIR
+	python3 -m pytest $(TEST_DIR)
 
 # Don't display instructions while cleaning
 .SILENT: clean init test
