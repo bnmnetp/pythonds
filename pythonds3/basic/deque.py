@@ -13,19 +13,19 @@ from typing import Any
 class Deque:
     """Dequeue implementation using a list"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create new deque"""
-        self._items = []
+        self._items: list[Any] = []
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         """Check if the deque is empty"""
         return not bool(self._items)
 
-    def add_front(self, item: Any):
+    def add_front(self, item: Any) -> None:
         """Add an item to the front of the deque"""
         self._items.append(item)
 
-    def add_rear(self, item: Any):
+    def add_rear(self, item: Any) -> None:
         """Add an item to the rear of the deque"""
         self._items.insert(0, item)
 
