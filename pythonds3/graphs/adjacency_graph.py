@@ -8,36 +8,37 @@ Updated by Roman Yasinovskyy, 2017
 
 import heapq
 import sys
+from typing import Any, Iterator, Union
 
 
 class Vertex:
     """Graph vertex class"""
 
-    def __init__(self, key):
+    def __init__(self, key: Any) -> None:
         """Create new vertex"""
         self._key = key
-        self._neighbors = {}
+        self._neighbors: dict["Vertex", Union[int, None]] = {}
         self._color = "white"
         self._distance = sys.maxsize
         self._previous = None
         self._discovery_time = 0
         self._closing_time = 0
 
-    def __lt__(self, other):
+    def __lt__(self, other: "Vertex") -> bool:
         """Less than operator required for heapify"""
         return self.key < other.key
 
-    def get_key(self):
+    def get_key(self) -> Any:
         """Get vertex key"""
         return self._key
 
     key = property(get_key)
 
-    def get_neighbor(self, other):
+    def get_neighbor(self, other: "Vertex") -> Union[int, None]:
         """Get the distance (edge weight) to an adjacent node (neighbor)"""
         return self._neighbors.get(other, None)
 
-    def set_neighbor(self, other, weight=0):
+    def set_neighbor(self, other: "Vertex", weight: int = 0) -> None:
         """Set the distance (add an edge) to an adjacent node (neighbor)"""
         self._neighbors[other] = weight
 
@@ -45,100 +46,94 @@ class Vertex:
         """Get all adjacent nodes (neighbors)"""
         return self._neighbors.keys()
 
-    def get_color(self):
+    def get_color(self) -> str:
         """Get vertex color"""
         return self._color
 
-    def set_color(self, color):
+    def set_color(self, color: str) -> None:
         """Set vertex color"""
         self._color = color
 
     color = property(get_color, set_color)
 
-    def get_distance(self):
+    def get_distance(self) -> int:
         """Get distance"""
         return self._distance
 
-    def set_distance(self, distance):
+    def set_distance(self, distance: int) -> None:
         """Set distance"""
         self._distance = distance
 
     distance = property(get_distance, set_distance)
 
-    def get_previous(self):
+    def get_previous(self) -> Union["Vertex", None]:
         """Get previous"""
         return self._previous
 
-    def set_previous(self, previous):
+    def set_previous(self, previous: "Vertex") -> None:
         """Set previous"""
         self._previous = previous
 
     previous = property(get_previous, set_previous)
 
-    def get_discovery_time(self):
+    def get_discovery_time(self) -> int:
         """Get discovery time"""
         return self._discovery_time
 
-    def set_discovery_time(self, discovery_time):
+    def set_discovery_time(self, discovery_time: int) -> None:
         """Set discovery time"""
         self._discovery_time = discovery_time
 
     discovery_time = property(get_discovery_time, set_discovery_time)
 
-    def get_closing_time(self):
+    def get_closing_time(self) -> int:
         """Get closing time"""
         return self._closing_time
 
-    def set_closing_time(self, closing_time):
+    def set_closing_time(self, closing_time: int) -> None:
         """Set closing time"""
         self._closing_time = closing_time
 
     closing_time = property(get_closing_time, set_closing_time)
 
-    def __str__(self):
-        return "{:^8}|{:^8}|{:^8}|{:^8}|{:^8}| {}".format(
-            self._key,
-            self._color,
-            self._distance,
-            self._discovery_time,
-            self._closing_time,
-            self._previous,
-        )
+    def __str__(self) -> str:
+        return f"{self._key:^8}|{self._color:^8}|{self._distance:^8}|{self._discovery_time:^8}|{self._closing_time:^8}| {self._previous}"
 
 
 class Graph:
     """Graph as an adjacency matrix"""
 
-    def __init__(self):
-        self._vertices = {}
-        self._edges = {}
+    def __init__(self) -> None:
+        """Create a new graph"""
+        self._vertices: dict["Vertex", list] = {}
+        self._edges: dict[tuple["Vertex", "Vertex"], int] = {}
         self._time = 0
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator:
         """Iterator"""
         return iter(self._vertices.values())
 
-    def size(self):
+    def size(self) -> int:
         """Graph's size"""
         return len(self._vertices)
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Graph's size"""
         return len(self._vertices)
 
-    def __contains__(self, key):
+    def __contains__(self, key: Any) -> bool:
         """in operator override"""
         return key in self._vertices
 
-    def get_vertex(self, key):
+    def get_vertex(self, key: Any) -> Union["Vertex", None]:
         """Find the vertex in the graph named vert_key"""
         return self._vertices.get(key, None)
 
-    def set_vertex(self, key):
+    def set_vertex(self, key) -> None:
         """Add an instance of Vertex to the graph"""
         self._vertices[key] = Vertex(key)
 
-    def add_edge(self, from_vertex, to_vertex, weight=0):
+    def add_edge(self, from_vertex, to_vertex, weight: int = 0) -> None:
         """Add a weighted and directed edge to the graph"""
         if from_vertex not in self._vertices:
             self.set_vertex(from_vertex)
@@ -155,12 +150,12 @@ class Graph:
         """Return the list of all edges in the graph"""
         return self._edges.keys()
 
-    def reset_distances(self, default_distance=sys.maxsize):
+    def reset_distances(self, default_distance: int = sys.maxsize) -> None:
         """Reset distances to test Dijkstra's"""
         for vertex in self:
             vertex.distance = default_distance
 
-    def bfs(self, start):
+    def bfs(self, start: "Vertex") -> None:
         """Breadth First Search"""
         start.distance = 0
         start.previous = None
@@ -175,13 +170,13 @@ class Graph:
                     vert_queue.append(neigh)
             current_vert.color = "black"
 
-    def dfs(self):
+    def dfs(self) -> None:
         """Depth First search"""
         for vertex in self:
             if vertex.color == "white":
                 self.dfs_visit(vertex)
 
-    def dfs_visit(self, start):
+    def dfs_visit(self, start: "Vertex") -> None:
         """DFS helper function"""
         start.color = "gray"
         self._time = self._time + 1
@@ -194,7 +189,7 @@ class Graph:
         self._time = self._time + 1
         start.closing_time = self._time
 
-    def traverse(self, src, dst):
+    def traverse(self, src: "Vertex", dst: "Vertex") -> None:
         """Traverse a graph"""
         path = []
         current = self.get_vertex(dst)
@@ -202,18 +197,16 @@ class Graph:
             path.append(current)
             current = current.previous
         print(
-            "Path from {} to {} ({}): {}".format(
-                self.get_vertex(src).key,
-                self.get_vertex(dst).key,
-                self.get_vertex(dst).distance,
-                " ".join(vertex.key for vertex in reversed(path)),
-            )
+            f"Path from {self.get_vertex(src).key} "
+            + f"to {self.get_vertex(dst).key} "
+            + f"({self.get_vertex(dst).distance}): "
+            + f"{' '.join(vertex.key for vertex in reversed(path))}"
         )
 
-    def dijkstra(self, start):
+    def dijkstra(self, start: "Vertex") -> None:
         """Dijkstra's shortest path algorithm"""
         start.distance = 0
-        not_yet_visited = [[start.distance, start]]
+        not_yet_visited: list[list[Union[int, "Vertex"]]] = [[start.distance, start]]
         heapq.heapify(not_yet_visited)
         while not_yet_visited:
             current_vertex = heapq.heappop(not_yet_visited)[1]
@@ -235,7 +228,7 @@ class Graph:
                             not_yet_visited, [next_vertex.distance, next_vertex]
                         )
 
-    def bellman_ford(self, start):
+    def bellman_ford(self, start: "Vertex") -> None:
         """Bellman-Ford shortest path algorithm"""
         start.distance = 0
         for _ in range(len(self._vertices)):
@@ -255,7 +248,7 @@ class Graph:
             ):
                 raise ValueError("Graph contains a negative-weight cycle")
 
-    def prim(self, start):
+    def prim(self, start: "Vertex") -> None:
         """Prim's spanning tree algorithm"""
         start.distance = 0
         not_in_a_tree = [[vertex.distance, vertex] for vertex in self]
