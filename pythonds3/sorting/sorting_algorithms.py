@@ -7,9 +7,10 @@ Updated by Roman Yasinovskyy, 2017
 """
 
 import heapq
+from typing import Any
 
 
-def bubble_sort(lst):
+def bubble_sort(lst: list[Any]) -> None:
     """Bubble sort"""
     for i in range(len(lst) - 1, 0, -1):
         exchanges = False
@@ -21,20 +22,20 @@ def bubble_sort(lst):
             break
 
 
-def select_sort(lst):
+def select_sort(lst: list[Any]) -> None:
     """Selection sort"""
-    for i, item in enumerate(lst):
+    for i, _ in enumerate(lst):
         min_idx = len(lst) - 1
-        for j in range(i, len(lst)):
+        for j, _ in enumerate(lst[i:], i):
             if lst[j] < lst[min_idx]:
                 min_idx = j
         if min_idx != i:
             lst[min_idx], lst[i] = lst[i], lst[min_idx]
 
 
-def insert_sort(lst):
+def insert_sort(lst: list[Any]) -> None:
     """Insertion sort"""
-    for i in range(1, len(lst)):
+    for i, _ in enumerate(lst[1:], 1):
         cur_val = lst[i]
         cur_pos = i
 
@@ -44,7 +45,7 @@ def insert_sort(lst):
         lst[cur_pos] = cur_val
 
 
-def shell_sort(lst):
+def shell_sort(lst: list[Any]) -> None:
     """Shell sort"""
     sublist_count = len(lst) // 3
     while sublist_count > 0:
@@ -53,7 +54,7 @@ def shell_sort(lst):
         sublist_count = sublist_count // 2
 
 
-def _gap_insert_sort(lst, start, gap):
+def _gap_insert_sort(lst: list[Any], start: int, gap: int) -> None:
     """Shell sort helper function"""
     for i in range(start + gap, len(lst), gap):
         cur_val = lst[i]
@@ -64,7 +65,7 @@ def _gap_insert_sort(lst, start, gap):
         lst[cur_pos] = cur_val
 
 
-def merge_sort(lst):
+def merge_sort(lst: list[Any]) -> None:
     """Merge sort"""
     if len(lst) > 1:
         mid = len(lst) // 2
@@ -95,12 +96,12 @@ def merge_sort(lst):
             k = k + 1
 
 
-def quick_sort(lst):
+def quick_sort(lst: list[Any]) -> None:
     """Quick sort"""
     _quick_sort_help(lst, 0, len(lst) - 1)
 
 
-def _quick_sort_help(lst, mark_l, mark_r):
+def _quick_sort_help(lst: list[Any], mark_l: int, mark_r: int) -> None:
     """Quick sort helper"""
     if mark_l < mark_r:
         split = _quick_sort_part(lst, mark_l, mark_r)
@@ -108,7 +109,7 @@ def _quick_sort_help(lst, mark_l, mark_r):
         _quick_sort_help(lst, split + 1, mark_r)
 
 
-def _quick_sort_part(lst, mark_l, mark_r):
+def _quick_sort_part(lst: list[Any], mark_l: int, mark_r: int) -> int:
     """Quick sort partition"""
     pivot_val = lst[mark_l]
     mark_l_cur = mark_l + 1
@@ -129,7 +130,7 @@ def _quick_sort_part(lst, mark_l, mark_r):
     return mark_r_cur
 
 
-def heap_sort(lst):
+def heap_sort(lst: list[Any]) -> None:
     """Heap sort"""
     res = []
     heapq.heapify(lst)
