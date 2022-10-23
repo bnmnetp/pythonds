@@ -8,6 +8,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name="pythonds3",
     version="3.1.0",
+    python_requires=">3.9.0",
     author="Roman Yasinovskyy",
     author_email="yasinovskyy@gmail.com",
     description="Data Structures package for Problem Solving with Algorithms and Data Structures using Python",
